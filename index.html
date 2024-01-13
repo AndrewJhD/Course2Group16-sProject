@@ -14,10 +14,10 @@
     <header>
         <nav>
             <ul>
-                <li><a href="#">Home</a></li>
-                <li><a href="./topAudio.html"> Top Audio </a></li>
-                <li><a href="./browse.html"> Browse </a></li>
-                <li><a href="./aboutUs"> About Us </a></li>
+                <li><a class="menu" href="#">Home</a></li>
+                <li><a class="menu" href="./topAudio.html"> Top Audio </a></li>
+                <li><a class="menu" href="./browse.html"> Browse </a></li>
+                <li><a class="menu" href="./aboutUs"> About Us </a></li>
             </ul>
         </nav>
     </header>
@@ -50,8 +50,13 @@
                 <div> Picture 4 </div>
                 <div class="text"> Caption Text 4 </div>
             </div>
+
+            <!-- Next and previous buttons -->
+            <a class="previous" onclick="plusSlides(-1)">&#10094</a>
+            <a class="next" onclick="plusSlides(1)">&#10095</a>
         </div> 
         <br>
+        <!-- These are the dots that will indicate which slide you're currently on -->
         <div style="text-align:center">
             <span class="dot" onclick="currentSlide(1)"></span>
             <span class="dot" onclick="currentSlide(2)"></span>

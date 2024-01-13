@@ -3,11 +3,65 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Text to Speacher</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand&display=swap" rel="stylesheet">
+    <title>Sambas</title>
     <link rel="stylesheet" href="index.css">
     <script src="index.js"></script>
 </head>
 <body>
-    <p>This is placeholder text :D</p>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="./topAudio.html"> Top Audio </a></li>
+                <li><a href="./browse.html"> Browse </a></li>
+                <li><a href="./aboutUs"> About Us </a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section id="hero">
+            <h1>Why read when you can listen? Start your first transcription!</h1>
+        </section>
+        <div class="slideshowContainer">
+            <div class="mySlides">
+                <div class="slideNumber"> 1/4 </div>
+                <!-- add image source below -->
+                <div> Picture 1 </div>
+                <div class="text"> Caption Text 1 </div>
+            </div>
+            <div class="mySlides">
+                <div class="slideNumber"> 2/4 </div>
+                <!-- add image source below -->
+                <div> Picture 2 </div>
+                <div class="text"> Caption Text 2 </div>
+            </div>
+            <div class="mySlides">
+                <div class="slideNumber"> 3/4 </div>
+                <!-- add image source below -->
+                <div> Picture 3 </div>
+                <div class="text"> Caption Text 3 </div>
+            </div>
+            <div class="mySlides">
+                <div class="slideNumber"> 4/4 </div>
+                <!-- add image source below -->
+                <div> Picture 4 </div>
+                <div class="text"> Caption Text 4 </div>
+            </div>
+        </div> 
+        <br>
+        <div style="text-align:center">
+            <span class="dot" onclick="currentSlide(1)"></span>
+            <span class="dot" onclick="currentSlide(2)"></span>
+            <span class="dot" onclick="currentSlide(3)"></span>
+            <span class="dot" onclick="currentSlide(4)"></span>
+          </div>
+    </main>
+    <div id="fileDrop" ondrop="dropHandler(event)">
+        <span> Drag your file in here. </span>
+        <button id="chooseFile"> Choose File </button>
+    </div>
 </body>
 </html>

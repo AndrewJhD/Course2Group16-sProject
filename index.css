@@ -1,0 +1,40 @@
+header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Quicksand', sans-serif;
+}
+
+/* These are all just placeholder colors. We can look at changing them later */
+a {
+    font-size: 25px;
+}
+
+a:link {
+    color: black;
+}
+
+a:visited {
+    color: gray;
+}
+
+a:hover {
+    color: orange;
+}
+
+a:active {
+    color: red;
+    filter: brightness(150%);
+}
+
+nav ul {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+nav li {
+    display: inline;
+    padding-left: 30px;
+    padding-right: 30px;
+}

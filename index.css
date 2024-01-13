@@ -1,3 +1,4 @@
+/* Menu styling */
 header {
     display: flex;
     align-items: center;
@@ -5,26 +6,73 @@ header {
     font-family: 'Quicksand', sans-serif;
 }
 
-/* These are all just placeholder colors. We can look at changing them later */
-a {
+.menu {
     font-size: 25px;
+    text-decoration: none;
 }
 
-a:link {
+.menu::after {
+    content: '';
+    position: relative;
+    left: 50%;
+    top: 5px;
+    width: 0px;
+    height: 1px;
+    display: block;
+    background: darkblue;
+    transition: all 600ms;
+}
+
+.menu:link {
     color: black;
+    transition: 2s;
 }
 
-a:visited {
+.menu:visited {
     color: gray;
 }
 
-a:hover {
-    color: orange;
+.menu:hover {
+    color: darkblue;
 }
 
-a:active {
+.menu:hover::after {
+    width: 100%;
+    left: 0;
+}
+
+.menu:active {
     color: red;
     filter: brightness(150%);
+}
+
+/* Slideshow styling */
+.slideshow-container {
+    max-width: 1000px;
+    position: relative;
+    margin: auto;
+}
+
+.mySlides {
+    display: none;
+}
+
+.prev, .next {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    width: auto;
+}
+
+.next {
+    right: 0;
+}
+
+/* Start of body */
+#hero {
+    font-family: 'Quicksand', sans-serif;
+    font-size: 20px;
+    text-align: center;
 }
 
 nav ul {

@@ -1,52 +1,12 @@
-/* Menu styling */
-header {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: 'Quicksand', sans-serif;
-}
-
-.menu {
-    font-size: 25px;
-    text-decoration: none;
-}
-
-.menu::after {
-    content: '';
+/* Placeholder for log in button. I want to make it transparent and add some sort of art showing an outline of a person and maybe put a sign up button next to it */
+nav button {
+    cursor: pointer;
     position: relative;
-    left: 50%;
-    top: 5px;
-    width: 0px;
-    height: 1px;
-    display: block;
-    background: darkblue;
-    transition: all 600ms;
+    right: -200px;
+    font-size: 25px;
 }
 
-.menu:link {
-    color: black;
-    transition: 2s;
-}
-
-.menu:visited {
-    color: gray;
-}
-
-.menu:hover {
-    color: darkblue;
-}
-
-.menu:hover::after {
-    width: 100%;
-    left: 0;
-}
-
-.menu:active {
-    color: red;
-    filter: brightness(150%);
-}
-
-/* Slideshow styling */
+/* Start of the slide show container */
 .slideshow-container {
     max-width: 1000px;
     position: relative;
@@ -62,10 +22,20 @@ header {
     position: absolute;
     top: 50%;
     width: auto;
+    margin-top: -22px;
+    padding: 16px;
+    font-size: 25px;
+    transition: 0.6s ease;
+    border-radius: 0 3px 3px 0;
+    user-select: none;
 }
 
 .next {
     right: 0;
+}
+
+.prev:hover, .next:hover {
+    background-color: rgb(0, 0, 0, 0.8);
 }
 
 /* Start of body */
@@ -73,16 +43,4 @@ header {
     font-family: 'Quicksand', sans-serif;
     font-size: 20px;
     text-align: center;
-}
-
-nav ul {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-nav li {
-    display: inline;
-    padding-left: 30px;
-    padding-right: 30px;
 }

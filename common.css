@@ -1,0 +1,75 @@
+body {
+    background-color: #E1CAB2;
+}
+
+/* Menu styling */
+header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Quicksand', sans-serif;
+}
+
+
+nav ul {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+nav li {
+    display: inline;
+    padding-left: 30px;
+    padding-right: 30px;
+}
+
+/* Inserted a line to separate the menu from the body rather than using a solid block of color */
+#separator {
+    display: block;
+    content: " ";
+    position: relative;
+    height: 1px;
+    background-color: black;
+    margin: auto;
+    width: 90%
+}
+
+.menu {
+    font-size: 25px;
+    text-decoration: none;
+}
+
+.menu::after {
+    content: '';
+    position: relative;
+    left: 50%;
+    top: 5px;
+    width: 0px;
+    height: 1px;
+    display: block;
+    background: darkblue;
+    transition: all 600ms;
+}
+
+.menu:link {
+    color: black;
+    transition: 2s;
+}
+
+.menu:visited {
+    color: gray;
+}
+
+.menu:hover {
+    color: darkblue;
+}
+
+.menu:hover::after {
+    width: 100%;
+    left: 0;
+}
+
+.menu:active {
+    color: red;
+    filter: brightness(150%);
+}

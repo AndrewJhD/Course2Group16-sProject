@@ -1,5 +1,16 @@
+/* This will set the theme for the pages throughout */
+html {
+    --primary-color: #D8D1C7;
+    --primary-color-hover: #B34E19;
+
+    --secondary-color: gray;
+    --teritary-color: gray;
+    --quaternary-color: gray;
+
+}
+
 body {
-    background-color: #E1CAB2;
+    background-color: var(--primary-color);
 }
 
 /* Menu styling */
@@ -23,19 +34,8 @@ nav li {
     padding-right: 30px;
 }
 
-/* Inserted a line to separate the menu from the body rather than using a solid block of color */
-#separator {
-    display: block;
-    content: " ";
-    position: relative;
-    height: 1px;
-    background-color: black;
-    margin: auto;
-    width: 90%
-}
-
 .menu {
-    font-size: 25px;
+    font-size: 18px;
     text-decoration: none;
 }
 
@@ -47,13 +47,13 @@ nav li {
     width: 0px;
     height: 1px;
     display: block;
-    background: darkblue;
+    background: var(--primary-color-hover);
     transition: all 600ms;
 }
 
 .menu:link {
     color: black;
-    transition: 2s;
+    transition: 800ms;
 }
 
 .menu:visited {
@@ -61,7 +61,7 @@ nav li {
 }
 
 .menu:hover {
-    color: darkblue;
+    color: var(--primary-color-hover);
 }
 
 .menu:hover::after {

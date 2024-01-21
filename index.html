@@ -3,13 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sambas</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <body>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Quicksand&display=swap" rel="stylesheet">
-    <title>Sambas</title>
     <link rel="stylesheet" href="./common.css">
     <link rel="stylesheet" href="./index.css">
-    <script src="./index.js"></script>
 </head>
 <body>
     <header>
@@ -19,57 +20,23 @@
                 <li><a class="menu" href="./topAudio.html"> Top Audio </a></li>
                 <li><a class="menu" href="./browse.html"> Browse </a></li>
                 <li><a class="menu" href="./aboutUs.html"> About Us </a></li>
-                <button> Log In </button>
             </ul>
         </nav>
     </header>
     <br id="separator">
     <main>
-        <section id="hero">
-            <h1>Why read when you can listen? Start your first transcription!</h1>
-        </section>
-        <div class="slideshowContainer">
-            <div class="mySlides">
-                <div class="slideNumber"> 1/4 </div>
-                <!-- add image source below -->
-                <div style="width:100%"> Picture 1 </div>
-                <div class="text"> Caption Text 1 </div>
+        <div class="wrapper">
+            <div class="text" id="one">
+                <p>Minim nisi amet dolore laborum occaecat nisi culpa ex. Officia do voluptate dolor eu magna et. Ipsum duis reprehenderit est ipsum tempor quis.</p>
             </div>
-            <div class="mySlides">
-                <div class="slideNumber"> 2/4 </div>
-                <!-- add image source below -->
-                <div style="width:100%"> Picture 2 </div>
-                <div class="text"> Caption Text 2 </div>
-            </div>
-            <div class="mySlides">
-                <div class="slideNumber"> 3/4 </div>
-                <!-- add image source below -->
-                <div style="width:100%"> Picture 3 </div>
-                <div class="text"> Caption Text 3 </div>
-            </div>
-            <div class="mySlides">
-                <div class="slideNumber"> 4/4 </div>
-                <!-- add image source below -->
-                <div style="width:100%"> Picture 4 </div>
-                <div class="text"> Caption Text 4 </div>
-            </div>
-
-            <!-- Next and previous buttons -->
-            <a class="prev" onclick="plusSlides(-1)">&#10094</a>
-            <a class="next" onclick="plusSlides(1)">&#10095</a>
-        </div> 
-        <br>
-        <!-- These are the dots that will indicate which slide you're currently on -->
-        <div style="text-align:center">
-            <span class="dot" onclick="currentSlide(1)"></span>
-            <span class="dot" onclick="currentSlide(2)"></span>
-            <span class="dot" onclick="currentSlide(3)"></span>
-            <span class="dot" onclick="currentSlide(4)"></span>
-          </div>
+            <div class="text" id="two">two</div>
+            <div class="text" id="three">Three</div>
+            <div class="text" id="four">Four</div>
     </main>
-    <div id="fileDrop" ondrop="dropHandler(event)">
+    <!-- <div id="fileDrop" ondrop="dropHandler(event)">
         <span> Drag your file in here. </span>
         <button id="chooseFile"> Choose File </button>
-    </div>
+    </div> -->
+    <script src="./index.js"></script>
 </body>
 </html>

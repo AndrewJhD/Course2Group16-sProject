@@ -1,0 +1,85 @@
+html {
+    --primary-color: rgb(247, 244, 234);
+    --primary-color-hover: #9AD9DB;
+    
+    --secondary-color: gray;
+    --teritary-color: gray;
+    --quaternary-color: gray;
+    
+}
+
+/* Will be adding a pop up window with a form for registration */
+#logIn {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    position: absolute;
+    font-size: 25px;
+    font-family: "Quicksand", sans-serif;
+}
+
+#logIn:hover {
+    color: var(--primary-color-hover);
+    transition: 800ms;
+}
+
+/* Bento Box spotlight welcome */
+* {
+    box-sizing: border-box;
+  }
+  .wrapper {
+    max-width: 80%;
+    margin: 0 auto;
+  }
+  
+  .wrapper > div {
+    font-family: "Quicksand";
+    border: none;
+    border-radius: 30px;
+    background-color: white;
+    padding: 2em;
+    color: black;
+    min-width: 100%;
+    max-width: min-content;
+  }
+  
+  .wrapper {
+    display: grid;
+    grid-template-columns: repeat(4);
+    gap: 20px;
+    grid-auto-rows: minmax(120px, auto);
+  }
+
+  .text {
+  }
+
+  #one {
+    grid-column: 1 / 3;
+    grid-row: 1 / 3;
+  }
+  #two {
+    grid-column: 1;
+    grid-row: 3 / 5;
+  }
+  #three {
+    grid-column: 2;
+    grid-row: 3 / 5;
+  }
+  #four {
+    grid-column: 3;
+    grid-row: 1 / 5;
+  }
+
+#hero {
+    font-family: 'Quicksand', sans-serif;
+    font-size: 20px;
+    text-align: center;
+}
+
+#chooseFile {
+    cursor: pointer;
+    position: relative;
+    
+}
+
+  

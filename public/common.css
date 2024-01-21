@@ -1,0 +1,75 @@
+/* This will set the theme for the pages throughout */
+html {
+    --primary-color: #D8D1C7;
+    --primary-color-hover: #B34E19;
+
+    --secondary-color: gray;
+    --teritary-color: gray;
+    --quaternary-color: gray;
+
+}
+
+body {
+    background-color: var(--primary-color);
+}
+
+/* Menu styling */
+header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Quicksand', sans-serif;
+}
+
+
+nav ul {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+nav li {
+    display: inline;
+    padding-left: 30px;
+    padding-right: 30px;
+}
+
+.menu {
+    font-size: 18px;
+    text-decoration: none;
+}
+
+.menu::after {
+    content: '';
+    position: relative;
+    left: 50%;
+    top: 5px;
+    width: 0px;
+    height: 1px;
+    display: block;
+    background: var(--primary-color-hover);
+    transition: all 600ms;
+}
+
+.menu:link {
+    color: black;
+    transition: 800ms;
+}
+
+.menu:visited {
+    color: gray;
+}
+
+.menu:hover {
+    color: var(--primary-color-hover);
+}
+
+.menu:hover::after {
+    width: 100%;
+    left: 0;
+}
+
+.menu:active {
+    color: red;
+    filter: brightness(150%);
+}

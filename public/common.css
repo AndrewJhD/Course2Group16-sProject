@@ -1,7 +1,7 @@
 /* This will set the theme for the pages throughout */
 html {
     --primary-color: #D8D1C7;
-    --primary-color-hover: #B34E19;
+    --primary-color-hover: #9AD9DB;
 
     --secondary-color: gray;
     --teritary-color: gray;
@@ -23,6 +23,7 @@ header {
 
 
 nav ul {
+    position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -33,6 +34,7 @@ nav li {
     padding-left: 30px;
     padding-right: 30px;
 }
+
 
 .menu {
     font-size: 18px;
@@ -49,6 +51,44 @@ nav li {
     display: block;
     background: var(--primary-color-hover);
     transition: all 600ms;
+}
+
+.logIn {
+    position: relative;
+    left: 20%;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    font-family: "Quicksand", sans-serif;
+    font-size: 18px;
+    transition: 600ms;
+}
+
+/* This is all specifically for the log in and registration buttons */
+.logIn:hover {
+    color: var(--primary-color-hover);
+}
+
+.register {
+    position: relative;
+    left: 20%;
+    font-family: "Quicksand", sans-serif;
+    font-size: 18px;
+    margin-left: 10px;
+    border-radius: 30px;
+    border: 1px solid white;
+    background: linear-gradient(to left, white 50%, #9AD9DB 50%)right;
+    transition: 600ms ease-in;
+    background-size: 200%;
+    width: 25mm; 
+    height: 9mm;
+
+}
+
+.register:hover {
+    cursor: pointer;
+    background-position: left;
+    color: white;
 }
 
 .menu:link {
@@ -70,6 +110,14 @@ nav li {
 }
 
 .menu:active {
-    color: red;
+    color: white;
     filter: brightness(150%);
+}
+
+/* Footer styling */
+footer {
+    font-family: "Quicksand", sans-serif;
+    position: relative;
+    padding-top: 20px;
+    padding-left: 20px;
 }

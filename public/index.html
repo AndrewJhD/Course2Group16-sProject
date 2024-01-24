@@ -11,6 +11,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Quicksand&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./common.css">
     <link rel="stylesheet" href="./index.css">
+    <link rel="stylesheet" href="./login.css">
 </head>
 <body>
     <header>
@@ -20,7 +21,7 @@
                 <li><a class="menu" href="./topAudio.html">Top Audio</a></li>
                 <li><a class="menu" href="./browse.html">Browse</a></li>
                 <li><a class="menu" href="./aboutUs.html">About Us</a></li>
-                <button class="logIn">Sign In</button>
+                <button class="logIn" onclick="document.getElementById('loginButton').style.display='block'" style="width:auto;">Sign In</button>
                 <button class="register">Register</button>
             </ul>
         </nav>
@@ -57,6 +58,33 @@
             <input type="file" id="fileInput" name="file" accept=".docx">
             <button type="button"W>Upload and Convert</button>
         </form>
+
+        <div id="loginButton" class="modal">
+  
+            <form class="modal-content animate" action="javascript:submitform();" method="post">
+              <div class="imgcontainer">
+                <span onclick="document.getElementById('loginButton').style.display='none'" class="close" title="Close Modal">&times;</span>
+              </div>
+          
+              <div class="container">
+                <label for="email"><b>Email</b></label>
+                <input type="email" placeholder="Enter Email" name="email" required>
+          
+                <label for="psw"><b>Password</b></label>
+                <input type="password" placeholder="Enter Password" name="psw" required>
+                  
+                <button class="loginBtn" type="submit" >Login</button>
+                <label>
+                  <input type="checkbox" checked="checked" name="remember"> Remember me
+                </label>
+            </div>
+          
+              <div class="container" style="background-color:#f1f1f1">
+                <button type="button" onclick="document.getElementById('loginButton').style.display='none'" class="cancelbtn">Cancel</button>
+                <span class="psw">Forgot <a href="#">password?</a></span>
+              </div>
+            </form>
+          </div>
     </main>
     <!-- <div id="fileDrop" ondrop="dropHandler(event)">
         <span> Drag your file in here. </span>

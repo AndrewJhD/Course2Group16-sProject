@@ -1,10 +1,10 @@
 html {
-    --primary-color: rgb(247, 244, 234);
-    --primary-color-hover: #9AD9DB;
+  --primary-color: rgb(247, 244, 234);
+  --primary-color-hover: #9AD9DB;
     
-    --secondary-color: gray;
-    --teritary-color: gray;
-    --quaternary-color: gray;
+  --secondary-color: gray;
+  --teritary-color: gray;
+  --quaternary-color: gray;
     
 }
 

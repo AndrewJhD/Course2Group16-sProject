@@ -3,7 +3,6 @@ const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const app = express();
 const port = 3000;
-require("dotenv").config();
 const viewRoutes = require("./routes/viewRoutes");
 const apiRoutes = require("./routes/apiRoutes");
 

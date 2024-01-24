@@ -1,0 +1,85 @@
+/* Full-width input fields */
+input[type=email], input[type=password] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+
+.loginBtn {
+    background-color: #9CC9B1;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    font-size: 25px;
+}
+
+.cancelbtn {
+    width: auto;
+    padding: 10px 20px;
+    background-color: #E35A3E;
+}
+
+.container {
+    padding: 16px;
+}
+
+span.psw {
+    float: right;
+    padding-top: 16px;
+}
+
+/* Model (background) */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: (0,0,0);
+    background-color: rgba(0,0,0,0.4);
+    padding-top: 60 px;
+}
+
+/* Model content */
+.model-content {
+    background-color: white;
+    margin: 5% auto 15% auto;
+    border: 1px solid #888;
+    width: 75%;
+}
+
+/* Close button (x) */
+.close {
+    position: absolute;
+    right: 20px;
+    top: 0;
+    color: black;
+    font-size: 30px;
+    font-weight: bold;
+} 
+
+.close:hover,
+.close:focus {
+    color: darkgray;
+    cursor: pointer;
+}
+
+/* Changing styles for a smaller screen */
+@media screen and (max-width: 300px) {
+    span.psw {
+        display: block;
+        float: none;
+    }
+    .cancelbtn {
+        width: 100%;
+    }
+}

@@ -51,12 +51,19 @@
             <ul>Find it, upload it,</ul>
             <ul>Audiobookify it</ul>
         </div>
+
+        <form id="uploadForm">
+            <label for="fileInput">Select a file:</label>
+            <input type="file" id="fileInput" name="file" accept=".docx">
+            <button type="button"W>Upload and Convert</button>
+        </form>
     </main>
     <!-- <div id="fileDrop" ondrop="dropHandler(event)">
         <span> Drag your file in here. </span>
         <button id="chooseFile"> Choose File </button>
     </div> -->
-    <script src="./index.js"></script>
+    
+    <script type="module" src="./index.js"></script>
 </body>
-<footer contenteditable="">Copyright &copy; Sambas 2024</footer>
+<footer >Copyright &copy; Sambas 2024</footer>
 </html>

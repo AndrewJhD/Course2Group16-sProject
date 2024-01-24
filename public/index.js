@@ -1,7 +1,6 @@
   function ApiCall(fileInput) {
     const url = 'https://converter12.p.rapidapi.com/api/converter/1/FileConverter/Convert';
-    const apiKey = 'ab6b46a31fmsh1f25f693eb7e577p16be18jsnfae41224bd8d'; // Replace with your actual API key
-  
+    const apiKey = 'placeholder';
     const formData = new FormData();
     formData.append('file', fileInput.files[0]);
   

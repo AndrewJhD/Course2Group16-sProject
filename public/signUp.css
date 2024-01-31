@@ -1,0 +1,63 @@
+.signupBtn {
+    background-color: #9CC9B1;
+}
+
+.cancelBtn {
+    background-color: #E35A3E;
+}
+
+.cancelBtn, .signupBtn {
+    float: left;
+    width: 50%;
+    padding: 14px 20px;
+    border-style: solid;
+    color: white;
+    margin: 8px 0;
+    cursor: pointer;
+}
+
+.container {
+    padding:15px;
+}
+
+/* The Modal (background) */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: #ECD69A;
+    padding-top: 50px;
+}
+
+/* Modal Content/Box */
+.modal-content {
+    background-color: rgb(247, 244, 234);
+    margin: 5% auto 15% auto;
+    border: 1px solid #3A221C;
+    width: 75%;
+}
+
+/* Horizontal ruler */
+hr {
+    border: 2px solid #ECD69A;
+    margin-bottom: 25px;
+}
+
+/* Clear floats */
+.clarfix::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
+/* Change styles for cancel button and signup button on small screens */
+@media screen and (max-width: 300px) {
+    .cancelbtn, .signupbtn {
+        width: 100%;
+    }
+}

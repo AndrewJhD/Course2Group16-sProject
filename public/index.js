@@ -31,3 +31,27 @@
   document.getElementById('fileInput').addEventListener('change', function() {
     ApiCall(this);
   });
+
+var loginModal = document.getElementById('loginButton');
+
+var btn = decument.getElementById('login');
+
+var span = document.getElementsByClassName("close")[0];
+
+btn.onclick = function() {
+  loginModal.style.display = "block";
+}
+        
+window.onclick = function(event) {
+    if (event.target == loginModal) {
+        loginModal.style.display = "none";
+    }
+}
+
+var modal = document.getElementById('registerBtn');
+
+window.onclick = function(event) {
+  if(event.target == modal) {
+    modal.style.display = "none";
+  }
+}

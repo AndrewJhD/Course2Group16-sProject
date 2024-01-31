@@ -1,17 +1,22 @@
-.signupBtn {
-    background-color: #9CC9B1;
-}
+/* .signupBtn {
+    background-color: transparent;
+} */
 
-.cancelBtn {
+/* .cancelBtn {
     background-color: #E35A3E;
-}
+} */
 
-.cancelBtn, .signupBtn {
-    float: left;
-    width: 50%;
+.signupBtn {
+    position: relative;
+    background: white;
+    padding-left: 50%;
+    width: 25%;
     padding: 14px 20px;
-    border-style: solid;
-    color: white;
+    border-style: none;
+    border-radius: 30px;
+    color: black;
+    font-style: "Quicksand";
+    font-size: 25px;
     margin: 8px 0;
     cursor: pointer;
 }
@@ -30,16 +35,18 @@
     width: 100%;
     height: 100%;
     overflow: auto;
-    background-color: #ECD69A;
+    /* background-color: #98D4BB80; */
     padding-top: 50px;
 }
 
 /* Modal Content/Box */
 .modal-content {
-    background-color: rgb(247, 244, 234);
+    font-family: "Quicksand";
+    background-color: rgba(247, 244, 234, .95);
     margin: 5% auto 15% auto;
-    border: 1px solid #3A221C;
-    width: 75%;
+    border: 1px solid grey;
+    width: 50%;
+    border-radius: 30px;
 }
 
 /* Horizontal ruler */

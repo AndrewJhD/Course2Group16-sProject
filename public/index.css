@@ -8,21 +8,6 @@ html {
     
 }
 
-/* Will be adding a pop up window with a form for registration */
-#logIn {
-    background-color: transparent;
-    border: none;
-    cursor: pointer;
-    position: absolute;
-    font-size: 25px;
-    font-family: "Quicksand", sans-serif;
-}
-
-#logIn:hover {
-    color: var(--primary-color-hover);
-    transition: 800ms;
-}
-
 /* Bento Box spotlight welcome */
 * {
     box-sizing: border-box;
@@ -50,24 +35,30 @@ html {
   grid-auto-rows: minmax(120px, auto);
 }
 
-.text {
+#bentoBox {
+  font-family: "Quicksand", sans-serif;
+  font-weight: 900;
 }
 
 #one {
   grid-column: 1 / 3;
   grid-row: 1 / 3;
+  background-color: #B6D8F280;
 }
 #two {
   grid-column: 1;
   grid-row: 3 / 5;
+  background-color: #218B8270;
 }
 #three {
   grid-column: 2;
   grid-row: 3 / 5;
+  background-color: #98D4BB80;
 }
 #four {
   grid-column: 3;
   grid-row: 1 / 5;
+  background-color: #37667E80;
 }
 
 #taglineOne > ul { 

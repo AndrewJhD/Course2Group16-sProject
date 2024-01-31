@@ -1,6 +1,6 @@
 /* This will set the theme for the pages throughout */
 html {
-    --primary-color: #D8D1C7;
+    --primary-color: rgb(247, 244, 234);
     --primary-color-hover: #9AD9DB;
 
     --secondary-color: gray;
@@ -77,11 +77,12 @@ nav li {
     margin-left: 10px;
     border-radius: 30px;
     border: 1px solid white;
+    /* box-shadow: 1px 1px 10px 1px rgba(0, 0, 0, 0.2); */
     background: linear-gradient(to left, white 50%, #9AD9DB 50%)right;
-    transition: 600ms ease-in;
-    background-size: 200%;
-    width: 25mm; 
-    height: 9mm;
+    transition: 750ms ease-in;
+    background-size: 300%;
+    width: 28mm; 
+    height: 12mm;
 
 }
 
@@ -117,7 +118,9 @@ nav li {
 /* Footer styling */
 footer {
     font-family: "Quicksand", sans-serif;
-    position: relative;
+    position: absolute;
+    bottom: 2%;
+    right: 2%;
     padding-top: 20px;
     padding-left: 20px;
 }

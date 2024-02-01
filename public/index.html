@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SpeakEasy</title>
+    <title>AudioFile</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <body>
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -52,7 +52,7 @@
         </div>
         <div id="taglineOne">
             <ul>Find it, upload it,</ul>
-            <ul>make it SpeakEasy.</ul>
+            <ul>create your AudioFile.</ul>
         </div>
 
         <form id="uploadForm">
@@ -62,12 +62,10 @@
         </form>
 
         <div id="loginButton" class="loginModal">
-  
             <form class="login-modal-content animate" action="javascript:submitform();" method="post">
               <div class="imgcontainer">
                 <span onclick="document.getElementById('loginButton').style.display='none'" class="close" title="Close Modal">&times;</span>
               </div>
-          
               <div class="container">
                 <label for="email"><b>Email</b></label>
                 <input type="email" placeholder="Enter Email" name="email" required>
@@ -76,9 +74,8 @@
                 <input type="password" placeholder="Enter Password" name="psw" required>
                   
                 <button class="loginBtn" type="submit" >Login</button>
-                <label>
-                  <input type="checkbox" checked="checked" name="remember"> Remember me
-                </label>
+                <input type="checkbox" checked="checked" name="remember"> 
+                <label id="remember">Remember me</label>
             </div>
           
               <div class="container">
@@ -134,5 +131,5 @@
     
     <script type="module" src="./index.js"></script>
 </body>
-<footer>Copyright &copy; SpeakEasy 2024</footer>
+<footer>Copyright &copy; AudioFile 2024</footer>
 </html>

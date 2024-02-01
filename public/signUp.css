@@ -1,11 +1,3 @@
-/* .signupBtn {
-    background-color: transparent;
-} */
-
-/* .cancelBtn {
-    background-color: #E35A3E;
-} */
-
 .signupBtn {
     position: relative;
     background: white;
@@ -13,11 +5,11 @@
     width: 25%;
     padding: 14px 20px;
     border-style: none;
-    border-radius: 30px;
     color: black;
     font-style: "Quicksand";
     font-size: 25px;
     margin: 8px 0;
+    border-radius: 30px;
     cursor: pointer;
 }
 
@@ -35,16 +27,15 @@
     width: 100%;
     height: 100%;
     overflow: auto;
-    /* background-color: #98D4BB80; */
-    padding-top: 50px;
+    background-color: rgba(245, 245, 245, 0.8);
 }
 
 /* Modal Content/Box */
 .modal-content {
     font-family: "Quicksand";
-    background-color: rgba(247, 244, 234, .95);
+    background-color: white;
     margin: 5% auto 15% auto;
-    border: 1px solid grey;
+    border: 1px solid rgb(91, 90, 90);
     width: 50%;
     border-radius: 30px;
 }

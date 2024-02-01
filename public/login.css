@@ -7,6 +7,7 @@ input[type=email], input[type=password] {
     display: inline-block;
     border: 1px solid #ccc;
     box-sizing: border-box;
+    border-radius: 8px;
 }
 
 input[type=email]:focus, input[type=password]:focus {
@@ -20,19 +21,20 @@ input[type=email]:focus, input[type=password]:focus {
     color: white;
     padding: 14px 20px;
     margin: 8px 0;
+    position: relative;
+    left: 0;
     border: none;
     cursor: pointer;
-    width: 100%;
+    width: 50%;
     font-size: 25px;
     border-radius: 15px;
 }
 
-/* .loginCancel {
-    width: auto;
-    padding: 10px 20px;
-    border-style: solid;
-    background-color: #E35A3E;
-} */
+
+input[name="remember"], #remember {
+    position: relative;
+    left: 10%;
+}
 
 .container {
     padding: 16px;
@@ -46,40 +48,35 @@ span.psw {
 
 /* Model (background) */
 .loginModal {
-    font-family: "Quicksand", sans-serif;
-    font-weight: 300;
     display: none;
-    position: absolute;
+    position: fixed;
     z-index: 1;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 40%;
-    height: 55%;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
     overflow: auto;
-    background-color: (0,0,0);
-    background-color: rgba(247, 244, 234, .85);
-    padding-top: 60 px;
-    vertical-align: middle;
-    border: 2px solid #888;
-    border-radius: 30px;
+    background-color: rgba(245, 245, 245, .8);
 }
 
-/* Model content */
-.login-model-content {
+/* Modal content */
+.login-modal-content {
+    font-family: "Quicksand", sans-serif;
+    font-weight: 300;
     background-color: white;
     margin: 15% auto;
-    border: 1px solid #888;
-    width: 75%;
+    border: 2px solid #888;
+    border-radius: 30px;
+    width: 40%;
+    height: 40%;
 }
 
 /* Close button (x) */
 .close {
-    position: absolute;
-    right: 20px;
-    top: 0;
+    position: relative;
+    left: 94%;
     color: black;
-    font-size: 30px;
+    font-size: 40px;
     font-weight: bold;
 } 
 
@@ -94,8 +91,5 @@ span.psw {
     span.psw {
         display: block;
         float: none;
-    }
-    .loginCancel {
-        width: 100%;
     }
 }

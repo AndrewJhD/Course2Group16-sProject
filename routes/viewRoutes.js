@@ -9,8 +9,8 @@ router.get("/", serveLandingPage);
 
 router.get("/aboutUs", serveLandingPage);
 
-router.get("/browse", (req, res) => { 
+/* router.get("/browse", (req, res) => { 
   res.sendFile(path.join(__dirname, "../public/browse.html")); 
-}); 
+}); */
 
 module.exports = router;

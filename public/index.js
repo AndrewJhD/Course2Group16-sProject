@@ -1,4 +1,33 @@
-  function ApiCall(fileInput) {
+async function submitDocument(event) {
+  event.preventDefault(); // Prevent default form submission
+  
+  // Get the selected file from the file input field
+  const file = document.getElementById('fileInput').files[0];
+  
+  // Create a FormData object and append the file
+  const formData = new FormData();
+  formData.append('document', file);
+
+  try {
+    // Make a POST request to the server with the file data
+    const response = await fetch('/rapidapi', {
+      method: 'POST',
+      body: formData
+    });
+    const data = await response.text();
+    console.log("data received");
+    console.log(data);
+    // Display the response data in the browser
+    const responseContainer = document.getElementById('response-container');
+    responseContainer.innerHTML = `<pre>${JSON.stringify(data, null, 2)}</pre>`;
+  } catch (error) {
+    console.error('Error submitting document:', error);
+  }
+}
+
+
+
+/*  function ApiCall(fileInput) {
     const url = 'https://converter12.p.rapidapi.com/api/converter/1/FileConverter/Convert';
     const apiKey = 'placeholder';
     const formData = new FormData();
@@ -27,14 +56,13 @@
         console.error('Fetch Error:', error);
       });
   }
+} */ //commented off due to changing the call to backend for security
   
-  document.getElementById('fileInput').addEventListener('change', function() {
-    ApiCall(this);
-  });
+document.getElementById('uploadForm').addEventListener('submit', submitDocument);
 
 var loginModal = document.getElementById('loginButton');
 
-var btn = decument.getElementById('login');
+var btn = document.getElementById('login');
 
 var span = document.getElementsByClassName("close")[0];
 

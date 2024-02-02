@@ -55,11 +55,12 @@
             <ul>create your AudioFile.</ul>
         </div>
 
-        <form id="uploadForm">
+        <form id="uploadForm" enctype="multipart/form-data">
             <label for="fileInput">Select a file:</label>
-            <input type="file" id="fileInput" name="file" accept=".docx">
-            <button type="button"W>Upload and Convert</button>
+            <input type="file" id="fileInput" name="file" accept=".pdf, .doc, .docx">
+            <button type="submit"W>Upload and Convert</button>
         </form>
+        <div id="response-container"></div>
 
         <div id="loginButton" class="loginModal">
             <form class="login-modal-content animate" action="javascript:submitform();" method="post">

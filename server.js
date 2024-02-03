@@ -35,15 +35,14 @@ app.post('/rapidapi', upload.single('document'), async (request, res) => {
     const formData = new FormData();
     formData.append('file', fileData, { filename: request.file.originalname });
 
-    const responseToClient = res;
-
     const options = {
         method: 'POST',
         hostname: rapidAPIHost,
         port: null,
         path: '/api/converter/1/FileConverter/Convert',
         headers: {
-            ...formData.getHeaders(),
+            'Content-Type': 'multipart/form-data; boundary=' + formData.getBoundary(),
+            'Content-Length': formData.getLengthSync(),
             'X-RapidAPI-Key': rapidAPIKey,
             'X-RapidAPI-Host': rapidAPIHost
         }
@@ -59,13 +58,13 @@ app.post('/rapidapi', upload.single('document'), async (request, res) => {
         responseFromRapidAPI.on('end', function () {
             const responseBody = Buffer.concat(chunks).toString();
             console.log(responseBody);
-            responseToClient.status(200).send(responseBody);
+            res.status(200).send(responseBody);
         });
     });
 
     req.on('error', (error) => {
       console.error('Error calling RapidAPI:', error);
-      responseToClient.status(500).json({ error: 'Internal server error' });
+      res.status(500).json({ error: 'Internal server error' });
     });
 
     formData.pipe(req);
@@ -76,8 +75,6 @@ app.post('/rapidapi', upload.single('document'), async (request, res) => {
   }
 
 });
-  
-  
     
 /* async function main() {
     await mongoose.connect(""); //insert tw database name here
@@ -87,7 +84,6 @@ app.post('/rapidapi', upload.single('document'), async (request, res) => {
 }
 
 main().catch((err) => console.error(err)); */
-
 
 app.listen(port, () => {
     console.log(`Listening on port ${port}`);

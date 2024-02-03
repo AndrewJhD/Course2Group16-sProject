@@ -1,23 +1,19 @@
 async function submitDocument(event) {
-  event.preventDefault(); // Prevent default form submission
+  event.preventDefault(); 
   
-  // Get the selected file from the file input field
   const file = document.getElementById('fileInput').files[0];
   
-  // Create a FormData object and append the file
   const formData = new FormData();
   formData.append('document', file);
 
   try {
-    // Make a POST request to the server with the file data
     const response = await fetch('/rapidapi', {
       method: 'POST',
       body: formData
     });
     const data = await response.text();
-    console.log("data received");
     console.log(data);
-    // Display the response data in the browser
+
     const responseContainer = document.getElementById('response-container');
     responseContainer.innerHTML = `<pre>${JSON.stringify(data, null, 2)}</pre>`;
   } catch (error) {

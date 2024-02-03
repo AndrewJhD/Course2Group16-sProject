@@ -2,6 +2,7 @@ const synth = window.speechSynthesis;
 
 const inputForm = document.querySelector("form");
 const inputTxt = document.querySelector(".txt");
+let text2Speak = "";
 const voiceSelect = document.querySelector("select");
 
 const pitch = document.querySelector("#pitch");
@@ -56,10 +57,11 @@ function speak() {
     }
 
     if (inputTxt.value !== "") {
-        const utterThis = new SpeechSynthesisUtterance(inputTxt.value);
+        const utterThis = new SpeechSynthesisUtterance(text2Speak);
+        console.log(text2Speak)
 
         utterThis.onend = function(event) {
-            console.log("SpeechSynthesisUtterance.onend");
+            continueSpeaking()
         };
 
         utterThis.onerror = function(event) {
@@ -116,14 +118,17 @@ function resetSliders(pitchOrRate) {
 //         `An error has occurred with the speech synthesis: ${event.error}`,
 //     );
 // });
+let playText = true;
 
 function pauseAudio() {
     speechSynthesis.pause()
     console.log("paused")
+    playText = false;
 }
 
 function resumeAudio() {
     speechSynthesis.resume()
+    playText = true;
     console.log("resumed")
 }
 
@@ -132,15 +137,24 @@ function cancelAudio() {
     console.log("canceled")
 }
 
-function print() {
+function printtest() {
     console.log(inputTxt.value)
     console.log(inputTxt.value.replace(/(\r\n|\n|\r)/gm, "").split("."))
 }
+let counter = 0;
+let textArray = [];
+let txtLength = 0;
 
 function continueSpeaking() {
-    let text = inputTxt.value.replace(/(\r\n|\n|\r)/gm, " ").replace("!,", ".").split(".")
-    let txtLength = text.length
-    while (playText && !speechSynthesis.speaking && !speechSynthesis.paused) {
-
+    if (counter == 0) {
+        speechSynthesis.cancel()
+        textArray = inputTxt.value.replace(/(\r\n|\n|\r)/gm, " ").replace(/(\?|!|,)/gm, ".").split(".")
+        txtLength = textArray.length;
+    } else if (counter >= txtLength) {
+        console.log("SpeechSynthesisUtterance.onend");
+        return
     }
+    text2Speak = textArray[0 + counter];
+    counter += 1;
+    speak()
 }

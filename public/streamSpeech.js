@@ -3,6 +3,10 @@ const synth = window.speechSynthesis;
 const inputForm = document.querySelector("form");
 const inputTxt = document.querySelector(".txt");
 let text2Speak = "";
+let counter = 0;
+let textArray = [];
+let txtLength = 0;
+
 const voiceSelect = document.querySelector("select");
 
 const pitch = document.querySelector("#pitch");
@@ -113,27 +117,24 @@ function resetSliders(pitchOrRate) {
     }
 }
 
-// utterThis.addEventListener("error", (event) => {
-//     console.log(
-//         `An error has occurred with the speech synthesis: ${event.error}`,
-//     );
-// });
-let playText = true;
+function startSpeaking() {
+    counter = 0;
+    continueSpeaking();
+}
 
 function pauseAudio() {
     speechSynthesis.pause()
     console.log("paused")
-    playText = false;
 }
 
 function resumeAudio() {
     speechSynthesis.resume()
-    playText = true;
     console.log("resumed")
 }
 
 function cancelAudio() {
     speechSynthesis.cancel()
+    counter = 0;
     console.log("canceled")
 }
 
@@ -141,11 +142,10 @@ function printtest() {
     console.log(inputTxt.value)
     console.log(inputTxt.value.replace(/(\r\n|\n|\r)/gm, "").split("."))
 }
-let counter = 0;
-let textArray = [];
-let txtLength = 0;
+
 
 function continueSpeaking() {
+    console.log(inputTxt.value, counter)
     if (counter == 0) {
         speechSynthesis.cancel()
         textArray = inputTxt.value.replace(/(\r\n|\n|\r)/gm, " ").replace(/(\?|!|,)/gm, ".").split(".")

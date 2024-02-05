@@ -70,10 +70,10 @@
         </form>
 
         <br></br>
-        <form>
-            <textarea name="" id="" cols="30" rows="10" class="txt">
-Look, I didn’t want to be a half-blood.
-If you’re reading this because you think you might be one, my advice is:
+        <form class="txt">
+            <textarea name="" cols="100" rows="10" id="txt">
+Look, I didn't want to be a half-blood.
+If you're reading this because you think you might be one, my advice is:
 close this book right now. Believe whatever lie your mom or dad told you
 about your birth, and try to lead a normal life.
 Being a half-blood is dangerous. It’s scary. Most of the time, it gets you
@@ -85,15 +85,13 @@ stirring inside—stop reading immediately. You might be one of us. And once
 you know that, it’s only a matter of time before they sense it too, and they’ll
 come for you.
 Don’t say I didn’t warn you.
-
+My name is Percy Jackson.
+I’m twelve years old. Until a few months ago, I was a boarding student at
+Yancy Academy, a private school for troubled kids in upstate New York.
+Am I a troubled kid?
+Yeah. You could say that.
+                
             </textarea>
-            <br></br>
-            <button type="button" onclick="startSpeaking()">Play</button>
-            <button type="button" onclick="printtest()">←15</button>
-            <button type="button" onclick="pauseAudio()">Pause</button>
-            <button type="button" onclick="resumeAudio()">Resume</button>
-            <button type="button" onclick="">15→</button>
-            <button type="button" onclick="cancelAudio()">Refresh/Cancel</button>
             <style> 
             /* temporary because probably will move this to a different html page */
                 .txt {
@@ -102,24 +100,10 @@ Don’t say I didn’t warn you.
                     word-wrap: break-word;
                 }
             </style>
-
-            <div>
-                <label for="rate">Rate</label>
-                <input type="range" min="0.5" max="2" value="1" step="0.1" id="rate" />
-                <div class="rate-value">1</div>
-                <div class="clearfix"></div>
-                <button type="button" onclick="resetSliders('rate')">Set to Default</button>
-            </div>
-
-            <div>
-                <label for="pitch">Pitch</label
-                ><input type="range" min="0" max="2" value="1" step="0.1" id="pitch" />
-                <div class="pitch-value">1</div>
-                <div class="clearfix"></div>
-                <button type="button" onclick="resetSliders('pitch')">Set to Default</button>
-          </div>
-          <br></br>
-          <select></select>
+            <br></br>
+            <button type="button" onclick="localStorage.setItem('textToPass', document.querySelector('#txt').value);;location.href='./book.html';">Create Your AudioBook</button>
+            <br></br> 
+            
         </form>
         
 
@@ -194,7 +178,7 @@ Don’t say I didn’t warn you.
     </div> -->
 
     <script type="module" src="./index.js"></script>
-    <script src="streamSpeech.js"></script>
+    <script src="createBookPage.js"></script>
 </body>
 <footer>Copyright &copy; AudioFile 2024</footer>
 

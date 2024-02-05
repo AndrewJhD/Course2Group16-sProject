@@ -1,0 +1,120 @@
+#pageText {
+    /* height: 500px; */
+    text-align: center;
+    width:480px;
+    margin:30px auto 0px auto;  /*top-right-bottom-left */
+    min-height:500px;
+    height:500px
+}
+
+footer {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 0px;
+    padding-top: 5px;
+    position: absolute;
+    width: 100%;
+    margin: 0;
+    bottom: 0%;
+    right: 0%;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+p {
+    font-size: larger;
+    line-height: 50px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+#leftArrow2 {
+    margin-right: 8%;
+    
+}
+#rightArrow2 {
+    margin-left: 8%;
+}
+
+#content {
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    }
+
+
+.pageArrow2 {
+    width: 10vw;
+    height: 80px;
+    font-size: x-large;
+}
+
+/* #audioPlayer {
+    font-size: ;
+} */
+#audioPlayer button {
+    width: 60px;
+    height: 60px;
+}
+
+/* Pop up css start */
+
+.box {
+    position: relative;
+    display: flex;
+    align-items: left;
+    justify-content: left;
+}
+
+p {
+    font-size: 17px;
+    align-items: center;
+}
+
+.box a {
+    /* display: inline-block; */
+    background-color: #fff;
+    padding: 7px 7px 4px; /*top-right-bottom-left or top left+right bottom*/
+    border-radius: 1px;
+    color: #333;
+}
+
+.modal {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    /* position: absolute; */
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    transition: all 0.4s;
+    visibility: hidden;
+    opacity: 0;
+}
+
+.content {
+    position: absolute;
+    background: white;
+    width: 400px;
+    padding: 1em 2em;
+    border-radius: 4px;
+}
+
+.modal:target {
+    visibility: visible;
+    opacity: 1;
+}
+
+.box-close {
+    position: absolute;
+    top: 0;
+    right: 15px;
+    color: #fe0606;
+    text-decoration: none;
+    font-size: 35px;   
+}
+
+/* Pop up css end */

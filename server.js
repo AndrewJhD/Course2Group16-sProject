@@ -2,11 +2,6 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 require("dotenv").config();
-const multer = require('multer');
-const FormData = require('form-data');
-const fs = require('fs');
-const http = require('https');
-
 const app = express();
 const port = 3000;
 const viewRoutes = require("./routes/viewRoutes");
@@ -21,13 +16,11 @@ app.use(bodyParser.urlencoded({extended: false}),bodyParser.json({extended: fals
 
 app.use(express.static("public"));
 app.use(viewRoutes);
-//app.use("/api", apiRoutes); //commented out to allow webpages to load webpages
+app.use("/api", apiRoutes); //commented out to allow webpages to load webpages
 
-const upload = multer();
-const rapidAPIKey = process.env.RAPIDAPI_KEY;
-const rapidAPIHost = process.env.RAPIDAPI_HOST;
 
-app.post('/rapidapi', upload.single('document'), async (request, res) => {
+
+/*app.post('/rapidapi', upload.single('document'), async (request, res) => {
   try {
     console.log("Making fetch");
     const fileData = request.file.buffer;
@@ -74,7 +67,7 @@ app.post('/rapidapi', upload.single('document'), async (request, res) => {
     res.status(500).json({ error: 'Internal server error' });
   }
 
-});
+}); */
     
 /* async function main() {
     await mongoose.connect(""); //insert tw database name here

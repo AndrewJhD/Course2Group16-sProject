@@ -7,7 +7,7 @@ async function submitDocument(event) {
   formData.append('document', file);
 
   try {
-    const response = await fetch('/rapidapi', {
+    const response = await fetch('/api/rapidapi', {
       method: 'POST',
       body: formData
     });

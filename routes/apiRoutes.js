@@ -49,7 +49,10 @@ apiRouter.post('/rapidapi', upload.single('document'), async (request, res) => {
           responseFromRapidAPI.on('end', function () {
               const responseBody = Buffer.concat(chunks).toString();
               console.log(responseBody);
-              res.status(200).send(responseBody);
+              const data = JSON.parse(responseBody);
+
+              const text = data.text || [];
+              res.status(200).send(text);
           });
       });
   

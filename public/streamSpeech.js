@@ -1,11 +1,18 @@
 const synth = window.speechSynthesis;
 
 const inputForm = document.querySelector("form");
-const inputTxt = document.querySelector(".txt");
+// const inputTxt = document.querySelector(".txt");
+let inputTxt = localStorage.getItem('textToPass');
+
+const pauseSpan = '<span class="material-symbols-outlined">pause</span>'
+const playArrowSpan = '<span class="material-symbols-outlined">play_arrow</span>'
+
 let text2Speak = "";
 let counter = 0;
 let textArray = [];
 let txtLength = 0;
+
+const pausePlayLbl = document.getElementById('pauseOrPlay')
 
 const voiceSelect = document.querySelector("select");
 
@@ -33,11 +40,12 @@ function populateVoiceList() {
         voiceSelect.selectedIndex < 0 ? 0 : voiceSelect.selectedIndex;
     voiceSelect.innerHTML = "";
 
-    for (let i = 0; i < voices.length; i++) {
+    for (let i = 0; i < voices.length-3; i++) {
         const option = document.createElement("option");
         option.textContent = `${voices[i].name} | (${voices[i].lang})`;
 
         if (voices[i].default) {
+            
             option.textContent += " -- DEFAULT";
         }
 
@@ -64,12 +72,19 @@ function speak() {
         const utterThis = new SpeechSynthesisUtterance(text2Speak);
         console.log(text2Speak)
 
+
         utterThis.onend = function(event) {
-            continueSpeaking()
+            if (speechSynthesis.paused == false){
+                continueSpeaking()}
         };
 
         utterThis.onerror = function(event) {
-            console.error("SpeechSynthesisUtterance.onerror");
+            // console.error("SpeechSynthesisUtterance.onerror");
+            if (!speechSynthesis.speaking){
+                console.log("- Audio Cancelled")
+                audioStarted = false
+                pausePlayLbl.innerHTML = pauseSpan
+            }
         };
 
         const selectedOption =
@@ -81,23 +96,23 @@ function speak() {
                 break;
             }
         }
-        utterThis.pitch = pitch.value;
+        // utterThis.pitch = pitch.value;
         utterThis.rate = rate.value;
         synth.speak(utterThis);
     }
 }
 
-inputForm.onsubmit = function(event) {
-    event.preventDefault();
+// inputForm.onsubmit = function(event) {
+//     event.preventDefault();
 
-    speak();
+//     speak();
 
-    inputTxt.blur();
-};
+//     inputTxt.blur();
+// };
 
-pitch.onchange = function() {
-    pitchValue.textContent = pitch.value;
-};
+// pitch.onchange = function() {
+//     pitchValue.textContent = pitch.value;
+// };
 
 rate.onchange = function() {
     rateValue.textContent = rate.value;
@@ -111,20 +126,34 @@ function resetSliders(pitchOrRate) {
     if (pitchOrRate == 'pitch') {
         pitchValue.textContent = 1;
         pitch.value = 1;
-    } else {
+    } 
+    else {
         rateValue.textContent = 1;
-        rate.value = 1;
+        rate.value = 1.1;
     }
 }
 
 function startSpeaking() {
     counter = 0;
+    audioStarted = true
+    pausePlayLbl.innerHTML = pauseSpan
     continueSpeaking();
 }
 
-function pauseAudio() {
-    speechSynthesis.pause()
-    console.log("paused")
+let audioStarted = false;
+function pausePlayAudio() {
+    if (audioStarted){
+        if (pausePlayLbl.innerHTML == playArrowSpan) {
+            speechSynthesis.resume()
+            pausePlayLbl.innerHTML = pauseSpan
+            console.log("resumed")
+        } 
+        else{
+            speechSynthesis.pause()
+            pausePlayLbl.innerHTML = playArrowSpan
+            console.log('paused')
+        }
+    }
 }
 
 function resumeAudio() {
@@ -135,23 +164,23 @@ function resumeAudio() {
 function cancelAudio() {
     speechSynthesis.cancel()
     counter = 0;
-    console.log("canceled")
 }
 
 function printtest() {
     console.log(inputTxt.value)
-    console.log(inputTxt.value.replace(/(\r\n|\n|\r)/gm, "").split("."))
+    // console.log(inputTxt.value.replace(/(\r\n|\n|\r)/gm, "").split("."))
+    addText()
 }
 
 
 function continueSpeaking() {
-    console.log(inputTxt.value, counter)
+    // console.log(inputTxt.value, counter)
     if (counter == 0) {
         speechSynthesis.cancel()
-        textArray = inputTxt.value.replace(/(\r\n|\n|\r)/gm, " ").replace(/(\?|!|,)/gm, ".").split(".")
+        textArray = inputTxt.replace(/(\r\n|\n|\r)/gm, " ").replace(/(\?|!|,|—)/gm, ".").split(".")
         txtLength = textArray.length;
     } else if (counter >= txtLength) {
-        console.log("SpeechSynthesisUtterance.onend");
+        console.log("Audio Complete");
         return
     }
     text2Speak = textArray[0 + counter];

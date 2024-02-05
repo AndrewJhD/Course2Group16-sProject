@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AudioFile: Your Book</title>
+</head>
+<body> 
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Quicksand&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+        <link rel="stylesheet" href="./common.css">
+        <link rel="stylesheet" href="./reset.css">
+        <link rel="stylesheet" href="./login.css">
+        <link rel="stylesheet" href="./signUp.css">
+        <link rel="stylesheet" href="./book.css">
+        
+    <body>
+</head>
+
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a class="menu" href="./index.html">Home</a></li>
+                <!-- <li><a class="menu" href="./topAudio.html">Top Audio</a></li>
+                <li><a class="menu" href="./browse.html">Browse</a></li> -->
+                <li><a class="menu" href="./aboutUs.html">About Us</a></li>
+                <button class="logIn" onclick="document.getElementById('loginButton').style.display='block'" style="width:auto;">Sign In</button>
+                <button class="register" onclick="document.getElementById('registerButton').style.display='block'" style="width:auto;">Register</button>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <div id="content">
+            <div >
+                <p id="pageText">
+                    <!-- text content goes here -->
+                </p>
+            </div>
+        </div>
+        <div class="box">
+            <a href="#popup-box">
+                <span class="material-symbols-outlined">settings</span>
+            </a>
+        </div>
+    </main>
+    <footer >
+        <button id="leftArrow2" class="pageArrow2">&#10094;</button>
+        <div id="audioPlayer">
+            <button type="button" onclick="startSpeaking()"><span class="material-symbols-outlined">rocket_launch</span></button>
+            <button type="button" onclick="printtest()"><span class="material-symbols-outlined">skip_previous</span></button>
+            <button type="button" onclick="pausePlayAudio()" id="pauseOrPlay"><span class="material-symbols-outlined">pause</span></button>
+            <button type="button" onclick=""><span class="material-symbols-outlined">skip_next</span></button>
+            <button type="button" onclick="cancelAudio()"><span class="material-symbols-outlined">refresh</span></button>
+             
+
+        </div>
+
+        <button id="rightArrow2" class="pageArrow2">&#10095;</button>
+    </footer>
+    <!-- settings popup -->
+    <div id="popup-box" class="modal">
+        <div class="content">
+            <h1 style="color: orangered;">
+                Customize your Voice.
+            </h1>
+            <h5>Changes will be applied on the next sentence.</h5>
+
+            <label for="rate">Rate</label>
+            <input type="range" min="0.8" max="1.4" value="1.1" step="0.1" id="rate" />
+            <div class="rate-value">1.1</div>
+            <div class="clearfix"></div>
+
+            <button type="button" onclick="resetSliders('rate')">Set to Default</button>
+            <br></br>
+            <select></select>
+
+            <a href="#" class="box-close">
+                ×
+            </a>
+        </div>
+    </div>
+    
+    <script src="streamSpeech.js"></script>
+    <script src="createBookPage.js"></script>
+</body>
+</html>

@@ -70,10 +70,17 @@
         </form>
 
         <br></br>
+<<<<<<< HEAD
         <form name="Text Box">
             <textarea name="" id="" cols="30" rows="10" class="txt">
 Look, I didn’t want to be a half-blood.
 If you’re reading this because you think you might be one, my advice is:
+=======
+        <form class="txt">
+            <textarea name="" cols="100" rows="10" id="txt">
+Look, I didn't want to be a half-blood.
+If you're reading this because you think you might be one, my advice is:
+>>>>>>> e0d500d (Create book reader page)
 close this book right now. Believe whatever lie your mom or dad told you
 about your birth, and try to lead a normal life.
 Being a half-blood is dangerous. It’s scary. Most of the time, it gets you
@@ -85,8 +92,14 @@ stirring inside—stop reading immediately. You might be one of us. And once
 you know that, it’s only a matter of time before they sense it too, and they’ll
 come for you.
 Don’t say I didn’t warn you.
-
+My name is Percy Jackson.
+I’m twelve years old. Until a few months ago, I was a boarding student at
+Yancy Academy, a private school for troubled kids in upstate New York.
+Am I a troubled kid?
+Yeah. You could say that.
+                
             </textarea>
+<<<<<<< HEAD
             <br></br>
             <div class="audioPlayer">
                 <button type="button" onclick="printtest()">←15</button>
@@ -96,6 +109,8 @@ Don’t say I didn’t warn you.
                 <button type="button" onclick="">15→</button>
                 <button type="button" onclick="cancelAudio()">Refresh/Cancel</button>
             </div>
+=======
+>>>>>>> e0d500d (Create book reader page)
             <style> 
             /* temporary because probably will move this to a different html page */
                 .txt {
@@ -104,6 +119,7 @@ Don’t say I didn’t warn you.
                     word-wrap: break-word;
                 }
             </style>
+<<<<<<< HEAD
 
             <div>
                 <label for="rate">Rate</label>
@@ -122,6 +138,12 @@ Don’t say I didn’t warn you.
           </div>
           <br></br>
           <select></select>
+=======
+            <br></br>
+            <button type="button" onclick="localStorage.setItem('textToPass', document.querySelector('#txt').value);;location.href='./book.html';">Create Your AudioBook</button>
+            <br></br> 
+            
+>>>>>>> e0d500d (Create book reader page)
         </form>
         
 
@@ -190,7 +212,7 @@ Don’t say I didn’t warn you.
     </div> -->
 
     <script type="module" src="./index.js"></script>
-    <script src="streamSpeech.js"></script>
+    <script src="createBookPage.js"></script>
 </body>
 <footer>Copyright &copy; AudioFile 2024</footer>
 

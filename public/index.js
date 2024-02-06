@@ -1,6 +1,6 @@
 async function submitDocument(event) {
   event.preventDefault(); 
-  
+
   const file = document.getElementById('fileInput').files[0];
   
   const formData = new FormData();
@@ -13,9 +13,22 @@ async function submitDocument(event) {
     });
     const data = await response.text();
     console.log(data);
+      try {
+        
+        const response = await fetch('/api/saveAudio', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ text: String(data) })
+        });
+        
+      } catch (error) {
+        console.error('Error saving audio:', error);
+      }
 
-    const responseContainer = document.getElementById('response-container');
-    responseContainer.innerHTML = `<pre>${JSON.stringify(data, null, 2)}</pre>`;
+    //const responseContainer = document.getElementById('response-container');
+    //responseContainer.innerHTML = `<pre>${JSON.stringify(data, null, 2)}</pre>`;
   } catch (error) {
     console.error('Error submitting document:', error);
   }

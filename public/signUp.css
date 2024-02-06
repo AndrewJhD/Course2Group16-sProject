@@ -47,7 +47,7 @@ hr {
 }
 
 /* Clear floats */
-.clarfix::after {
+.clearfix::after {
     content: "";
     clear: both;
     display: table;

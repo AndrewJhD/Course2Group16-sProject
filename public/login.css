@@ -31,7 +31,7 @@ input[type=email]:focus, input[type=password]:focus {
 }
 
 
-input[name="remember"], #remember {
+input[id="rememberMe"] {
     position: relative;
     left: 10%;
 }

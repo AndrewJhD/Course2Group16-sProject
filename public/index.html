@@ -58,19 +58,19 @@
         </div>
 
         <div id="wrapper">
-            <label for="streamOrDownloadRadio">How would you like to listen to your Audiobook?</label>
-            <p><input type="radio" name="streamOrDownload">Stream</p>
-            <p><input type="radio" name="streamOrDownload">Download</p>
+            <h2 style="font-family: Quicksand">How would you like to listen to your Audiobook?</h2>
+            <p><input type="radio" id="stream">Stream</p>
+            <p><input type="radio" id="download">Download</p>
         </div>
 
         <form id="uploadForm" enctype="multipart/form-data">
             <label for="fileInput">Select a file:</label>
             <input type="file" id="fileInput" name="file" accept=".pdf, .doc, .docx">
-            <button type="submit" W>Upload and Convert</button>
+            <button type="submit">Upload and Convert</button>
         </form>
 
         <br></br>
-        <form>
+        <form name="Text Box">
             <textarea name="" id="" cols="30" rows="10" class="txt">
 Look, I didn’t want to be a half-blood.
 If you’re reading this because you think you might be one, my advice is:
@@ -88,12 +88,14 @@ Don’t say I didn’t warn you.
 
             </textarea>
             <br></br>
-            <button type="button" onclick="startSpeaking()">Play</button>
-            <button type="button" onclick="printtest()">←15</button>
-            <button type="button" onclick="pauseAudio()">Pause</button>
-            <button type="button" onclick="resumeAudio()">Resume</button>
-            <button type="button" onclick="">15→</button>
-            <button type="button" onclick="cancelAudio()">Refresh/Cancel</button>
+            <div class="audioPlayer">
+                <button type="button" onclick="printtest()">←15</button>
+                <button type="button" onclick="pauseAudio()">Pause</button>
+                <button type="button" onclick="startSpeaking()">Play</button>
+                <button type="button" onclick="resumeAudio()">Resume</button>
+                <button type="button" onclick="">15→</button>
+                <button type="button" onclick="cancelAudio()">Refresh/Cancel</button>
+            </div>
             <style> 
             /* temporary because probably will move this to a different html page */
                 .txt {
@@ -112,8 +114,8 @@ Don’t say I didn’t warn you.
             </div>
 
             <div>
-                <label for="pitch">Pitch</label
-                ><input type="range" min="0" max="2" value="1" step="0.1" id="pitch" />
+                <label for="pitch">Pitch</label>
+                <input type="range" min="0" max="2" value="1" step="0.1" id="pitch" />
                 <div class="pitch-value">1</div>
                 <div class="clearfix"></div>
                 <button type="button" onclick="resetSliders('pitch')">Set to Default</button>
@@ -126,24 +128,23 @@ Don’t say I didn’t warn you.
         <div id="response-container"></div>
 
         <div id="loginButton" class="loginModal">
-            <form class="login-modal-content animate" action="javascript:submitform();" method="post">
+            <form class="login-modal-content animate" action="javascript:submitform();" name="loginForm" method="post">
               <div class="imgcontainer">
                 <span onclick="document.getElementById('loginButton').style.display='none'" class="close" title="Close Modal">&times;</span>
               </div>
               <div class="container">
                 <label for="email"><b>Email</b></label>
-                <input type="email" placeholder="Enter Email" name="email" required>
+                <input type="email" placeholder="Enter Email" id="email" required>
 
                 <label for="psw"><b>Password</b></label>
-                <input type="password" placeholder="Enter Password" name="psw" required>
+                <input type="password" placeholder="Enter Password" id="psw" required>
 
                 <button class="loginBtn" type="submit">Login</button>
-                <input type="checkbox" checked="checked" name="remember">
-                <label id="remember">Remember me</label>
+                <input type="checkbox" checked="checked" id="rememberMe">
+                <label for="rememberMe">Remember me</label>
             </div>
 
             <div class="container">
-                <!-- <button type="button" onclick="document.getElementById('loginButton').style.display='none'" class="loginCancel">Cancel</button> -->
                 <span class="psw">Forgot <a href="#">Password?</a></span>
             </div>
         </form>
@@ -151,7 +152,7 @@ Don’t say I didn’t warn you.
         </div>
 
         <div id="registerButton" class="modal">
-            <form class="modal-content animate" action="javascript:registerform();" method="post">
+            <form class="modal-content animate" action="javascript:registerform();" name="registrationForm" method="post">
                 <div class="imgcontainer">
                     <span onclick="document.getElementById('registerButton').style.display='none'" class="close" title="Close Modal">&times;</span>
                 </div>
@@ -159,19 +160,17 @@ Don’t say I didn’t warn you.
                     <h1>Sign Up</h1>
                     <p> Please fill in this form to create an account.</p>
                     <hr>
-                    <label for="email"><b>Email</b></label>
-                    <input type="email" placeholder="Enter Email" name="email" required>
+                    <label for="newEmail"><b>Email</b></label>
+                    <input type="email" placeholder="Enter Email" id="newEmail" required>
 
-                    <label for="psw"><b>Password</b></label>
-                    <input type="password" placeholder="Enter Password" name="psw" required>
+                    <label for="newPsw"><b>Password</b></label>
+                    <input type="password" placeholder="Enter Password" id="newPsw" required>
 
                     <label for="psw-repeat"><b>Confirm Password</b></label>
-                    <input type="password" placeholder="Confirm Password" name="psw-repeat" required>
+                    <input type="password" placeholder="Confirm Password" id="psw-repeat" required>
 
-                    <label>
-                        <input type="checkbox" checked="checked" name="remember" 
-                        style="margin-bottom: 15px;"> Remember Me
-                    </label>
+                    <input type="checkbox" checked="checked" id="rememberMeReg" style="margin-bottom: 15px;">
+                    <label for="rememberMeReg">Remember Me</label>
 
                     <p>
                         By creating an account you agree to our
@@ -179,9 +178,6 @@ Don’t say I didn’t warn you.
                     </p>
 
                     <div class="clearfix">
-                        <!-- <button type="button"
-                        onclick="document.getElementById('registerButton').style.display='none'"
-                        class="cancelBtn">Cancel</button> -->
                         <button type="submit" class="signupBtn">Register</button>
                     </div>
                 </div>

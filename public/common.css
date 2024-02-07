@@ -11,6 +11,7 @@ html {
 
 body {
     background-color: var(--primary-color);
+    position: relative;
 }
 
 /* Menu styling */
@@ -118,9 +119,10 @@ nav li {
 /* Footer styling */
 footer {
     font-family: "Quicksand", sans-serif;
-    position: absolute;
-    bottom: 3%;
-    right: 5%;
-    padding-top: 20px;
-    padding-left: 20px;
+    float: right;
+    height: 35px;
+    padding-right: 30px;
+    /* position: absolute;
+    bottom: 0px;
+    right: 30px; */
 }

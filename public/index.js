@@ -1,25 +1,34 @@
 async function submitDocument(event) {
-  event.preventDefault(); // Prevent default form submission
-  
-  // Get the selected file from the file input field
+  event.preventDefault(); 
+
   const file = document.getElementById('fileInput').files[0];
   
-  // Create a FormData object and append the file
   const formData = new FormData();
   formData.append('document', file);
 
   try {
-    // Make a POST request to the server with the file data
-    const response = await fetch('/rapidapi', {
+    const response = await fetch('/api/rapidapi', {
       method: 'POST',
       body: formData
     });
     const data = await response.text();
-    console.log("data received");
     console.log(data);
-    // Display the response data in the browser
-    const responseContainer = document.getElementById('response-container');
-    responseContainer.innerHTML = `<pre>${JSON.stringify(data, null, 2)}</pre>`;
+      try {
+        
+        const response = await fetch('/api/saveAudio', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ text: String(data) })
+        });
+        
+      } catch (error) {
+        console.error('Error saving audio:', error);
+      }
+
+    //const responseContainer = document.getElementById('response-container');
+    //responseContainer.innerHTML = `<pre>${JSON.stringify(data, null, 2)}</pre>`;
   } catch (error) {
     console.error('Error submitting document:', error);
   }

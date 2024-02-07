@@ -56,22 +56,25 @@
             <ul>Find it, upload it,</ul>
             <ul>create your AudioFile.</ul>
         </div>
-
-        <div id="wrapper">
+        
+         <!--<div id="wrapper">
             <h2 style="font-family: Quicksand">How would you like to listen to your Audiobook?</h2>
             <p><input type="radio" id="stream">Stream</p>
             <p><input type="radio" id="download">Download</p>
-        </div>
-
+        </div> -->
+        <div>
         <form id="uploadForm" enctype="multipart/form-data">
             <label for="fileInput">Select a file:</label>
             <input type="file" id="fileInput" name="file" accept=".pdf, .doc, .docx">
             <button type="submit">Upload and Convert</button>
         </form>
-
+        </div>
+        <div id="audiobook"></div>
+        <!-- <button id="createbutton"> Create Uploaded Audio</button> -->
         <br></br>
+        
 
-        <form class="txt">
+        <!--<form class="txt">
             <textarea name="" cols="100" rows="25" id="txt">
 Look, I didn't want to be a half-blood.
 If you're reading this because you think you might be one, my advice is:
@@ -99,7 +102,7 @@ Yeah. You could say that.
             <br></br> 
             
 
-        </form>
+        </form> -->
         
 
         <div id="response-container"></div>
@@ -167,7 +170,7 @@ Yeah. You could say that.
     </div> -->
 
     <script type="module" src="./index.js"></script>
-    <script src="createBookPage.js"></script>
+    <!--<script src="createBookPage.js"></script>-->
 </body>
 <footer>Copyright &copy; AudioFile 2024</footer>
 

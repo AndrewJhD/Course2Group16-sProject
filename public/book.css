@@ -6,6 +6,38 @@
     min-height:500px;
     height:500px
 }
+p,u{
+    font-size: larger;
+    line-height: 50px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+@media only screen and (min-width:1000px) {
+    p, u {
+        font-size:x-large;
+        line-height: 44px;
+    }
+    #pageText {
+        width: 900px;
+    }
+}
+@media only screen and (max-width:999px) {
+    p, u {
+        font-size:large;
+        line-height: 34px;
+    }
+    #pageText {
+        width: 700px;
+    }
+}
+@media only screen and (max-width:715px) {
+    p, u {
+        font-size:medium;
+        line-height: 22px;
+    }
+    #pageText {
+        width: 480px;
+    }
+}
 
 footer {
     background-color: #333;
@@ -23,37 +55,37 @@ footer {
     justify-content: center;
 }
 
-
-p {
-    font-size: larger;
-    line-height: 50px;
-    font-family: Arial, Helvetica, sans-serif;
+#pageNumber {
+    /* float: right; */
+    position: absolute;
+    bottom: 85px;
+    left: 40px;
 }
 
-#leftArrow2 {
-    margin-right: 8%;
+
+
+
+#prevArrow {
+    margin-right: 6%;
     
 }
-#rightArrow2 {
-    margin-left: 8%;
+#nextArrow {
+    margin-left: 7%;
 }
 
 #content {
     display:flex;
     align-items: center;
     justify-content: center;
-    }
+}
 
 
-.pageArrow2 {
+.pageArrow {
     width: 10vw;
     height: 80px;
     font-size: x-large;
 }
 
-/* #audioPlayer {
-    font-size: ;
-} */
 #audioPlayer button {
     width: 60px;
     height: 60px;
@@ -62,16 +94,16 @@ p {
 /* Pop up css start */
 
 .box {
-    position: relative;
-    display: flex;
-    align-items: left;
-    justify-content: left;
+    position: absolute;
+    bottom: 85px;
+    left: 0px;
 }
 
 p {
     font-size: 17px;
     align-items: center;
 }
+
 
 .box a {
     /* display: inline-block; */

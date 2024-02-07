@@ -38,7 +38,15 @@
                 <p id="pageText">
                     <!-- text content goes here -->
                 </p>
+                <!-- <u>Rhetoric is the counterpart of Dialectic. Both</u>
+                <u>alike are concerned with such things as come, more or less, within the </u>
+                <u>general ken of all men and belong to no definite science. Accordingly all men make use,</u> -->
             </div>
+            
+        </div>
+        <div id="pageNumber">
+            <select name="pageSelector" id="pageSelector" onchange="selectPage(Option.value)">
+            </select>
         </div>
         <div class="box">
             <a href="#popup-box">
@@ -47,7 +55,7 @@
         </div>
     </main>
     <footer >
-        <button id="leftArrow2" class="pageArrow2">&#10094;</button>
+        <button id="prevArrow" class="pageArrow" onclick="changePage(-1)">&#10094;</button>
         <div id="audioPlayer">
             <button type="button" onclick="startSpeaking()"><span class="material-symbols-outlined">rocket_launch</span></button>
             <button type="button" onclick="printtest()"><span class="material-symbols-outlined">skip_previous</span></button>
@@ -58,7 +66,7 @@
 
         </div>
 
-        <button id="rightArrow2" class="pageArrow2">&#10095;</button>
+        <button id="nextArrow" class="pageArrow" onclick="changePage(+1)">&#10095;</button>
     </footer>
     <!-- settings popup -->
     <div id="popup-box" class="modal">
@@ -69,13 +77,13 @@
             <h5>Changes will be applied on the next sentence.</h5>
 
             <label for="rate">Rate</label>
-            <input type="range" min="0.8" max="1.4" value="1.1" step="0.1" id="rate" />
-            <div class="rate-value">1.1</div>
+            <input type="range" min="0.8" max="1.4" value="1.2" step="0.1" id="rate" />
+            <div class="rate-value">1.2</div>
             <div class="clearfix"></div>
 
-            <button type="button" onclick="resetSliders('rate')">Set to Default</button>
+            <button type="button" onclick="resetSliders()">Set to Default</button>
             <br></br>
-            <select></select>
+            <select id="voiceSelector"></select>
 
             <a href="#" class="box-close">
                 ×
@@ -84,6 +92,14 @@
     </div>
     
     <script src="streamSpeech.js"></script>
-    <script src="createBookPage.js"></script>
+    <script src="book.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function(){
+    $("p").select(function(){
+      alert("Text marked!");
+    });
+  });
+    </script>
 </body>
 </html>

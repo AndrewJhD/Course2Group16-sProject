@@ -14,7 +14,7 @@ let txtLength = 0;
 
 const pausePlayLbl = document.getElementById('pauseOrPlay')
 
-const voiceSelect = document.querySelector("select");
+const voiceSelect = document.getElementById("voiceSelector");
 
 const pitch = document.querySelector("#pitch");
 const pitchValue = document.querySelector(".pitch-value");
@@ -122,15 +122,9 @@ voiceSelect.onchange = function() {
     speak();
 };
 
-function resetSliders(pitchOrRate) {
-    if (pitchOrRate == 'pitch') {
-        pitchValue.textContent = 1;
-        pitch.value = 1;
-    } 
-    else {
-        rateValue.textContent = 1;
-        rate.value = 1.1;
-    }
+function resetSliders() {
+    rateValue.textContent = 1.2;
+    rate.value = 1.2;
 }
 
 function startSpeaking() {
@@ -177,7 +171,7 @@ function continueSpeaking() {
     // console.log(inputTxt.value, counter)
     if (counter == 0) {
         speechSynthesis.cancel()
-        textArray = inputTxt.replace(/(\r\n|\n|\r)/gm, " ").replace(/(\?|!|,|—)/gm, ".").split(".")
+        textArray = inputTxt.replace(/(\r\n|\n|\r)/gm, " ").replace(/(\?|!|,|—|;|:)/gm, ".").replace("Mr.", "Mr").replace("Mr.", "Mr").replace("Mrs.", "Mrs").replace("Ms.", "Ms").replace(")",".").replace("]",".").replace("}",".").split(".")
         txtLength = textArray.length;
     } else if (counter >= txtLength) {
         console.log("Audio Complete");
@@ -187,3 +181,9 @@ function continueSpeaking() {
     counter += 1;
     speak()
 }
+
+$(document).ready(function(){
+    $("pageText").select(function(){
+      alert("Text marked!");
+    });
+  });

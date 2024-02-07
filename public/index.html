@@ -56,73 +56,53 @@
             <ul>Find it, upload it,</ul>
             <ul>create your AudioFile.</ul>
         </div>
-
-        <div id="wrapper">
+        
+         <!--<div id="wrapper">
             <h2 style="font-family: Quicksand">How would you like to listen to your Audiobook?</h2>
             <p><input type="radio" id="stream">Stream</p>
             <p><input type="radio" id="download">Download</p>
-        </div>
-
+        </div> -->
+        <div>
         <form id="uploadForm" enctype="multipart/form-data">
             <label for="fileInput">Select a file:</label>
             <input type="file" id="fileInput" name="file" accept=".pdf, .doc, .docx">
             <button type="submit">Upload and Convert</button>
         </form>
-
+        </div>
+        <div id="audiobook"></div>
+        <!-- <button id="createbutton"> Create Uploaded Audio</button> -->
         <br></br>
-        <form name="Text Box">
-            <textarea name="" id="" cols="30" rows="10" class="txt">
-Look, I didn’t want to be a half-blood.
-If you’re reading this because you think you might be one, my advice is:
+        
+
+        <!--<form class="txt">
+            <textarea name="" cols="100" rows="25" id="txt">
+Look, I didn't want to be a half-blood.
+If you're reading this because you think you might be one, my advice is:
 close this book right now. Believe whatever lie your mom or dad told you
 about your birth, and try to lead a normal life.
-Being a half-blood is dangerous. It’s scary. Most of the time, it gets you
+Being a half-blood is dangerous. It's scary. Most of the time, it gets you
 killed in painful, nasty ways.
-If you’re a normal kid, reading this because you think it’s fiction, great.
+If you're a normal kid, reading this because you think it's fiction, great.
 Read on. I envy you for being able to believe that none of this ever happened.
 But if you recognize yourself in these pages—if you feel something
 stirring inside—stop reading immediately. You might be one of us. And once
-you know that, it’s only a matter of time before they sense it too, and they’ll
+you know that, it's only a matter of time before they sense it too, and they'll
 come for you.
-Don’t say I didn’t warn you.
-
+Dont say I didn't warn you.
+My name is Percy Jackson.
+I'm twelve years old. Until a few months ago, I was a boarding student at
+Yancy Academy, a private school for troubled kids in upstate New York.
+Am I a troubled kid?
+Yeah. You could say that.
             </textarea>
+            
             <br></br>
-            <div class="audioPlayer">
-                <button type="button" onclick="printtest()">←15</button>
-                <button type="button" onclick="pauseAudio()">Pause</button>
-                <button type="button" onclick="startSpeaking()">Play</button>
-                <button type="button" onclick="resumeAudio()">Resume</button>
-                <button type="button" onclick="">15→</button>
-                <button type="button" onclick="cancelAudio()">Refresh/Cancel</button>
-            </div>
-            <style> 
-            /* temporary because probably will move this to a different html page */
-                .txt {
-                    height: 240px;
-                    width: 800px;
-                    word-wrap: break-word;
-                }
-            </style>
 
-            <div>
-                <label for="rate">Rate</label>
-                <input type="range" min="0.5" max="2" value="1" step="0.1" id="rate" />
-                <div class="rate-value">1</div>
-                <div class="clearfix"></div>
-                <button type="button" onclick="resetSliders('rate')">Set to Default</button>
-            </div>
+            <button type="button" onclick="localStorage.setItem('textToPass', document.querySelector('#txt').value);;location.href='./book.html';">Create Your AudioBook</button>
+            <br></br> 
+            
 
-            <div>
-                <label for="pitch">Pitch</label>
-                <input type="range" min="0" max="2" value="1" step="0.1" id="pitch" />
-                <div class="pitch-value">1</div>
-                <div class="clearfix"></div>
-                <button type="button" onclick="resetSliders('pitch')">Set to Default</button>
-          </div>
-          <br></br>
-          <select></select>
-        </form>
+        </form> -->
         
 
         <div id="response-container"></div>
@@ -190,7 +170,7 @@ Don’t say I didn’t warn you.
     </div> -->
 
     <script type="module" src="./index.js"></script>
-    <script src="streamSpeech.js"></script>
+    <!--<script src="createBookPage.js"></script>-->
 </body>
 <footer>Copyright &copy; AudioFile 2024</footer>
 

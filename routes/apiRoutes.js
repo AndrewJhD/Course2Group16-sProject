@@ -7,6 +7,7 @@ const userRouter = Router();
 const apiRouter = Router();
 const upload = multer();
 const gTTS = require('gtts');
+const { text } = require("body-parser");
 const rapidAPIKey = process.env.RAPIDAPI_KEY;
 const rapidAPIHost = process.env.RAPIDAPI_HOST;
 const audioPath = process.env.AUDIO_PATH;
@@ -50,7 +51,7 @@ apiRouter.post('/rapidapi', upload.single('document'), async (request, res) => {
       
           responseFromRapidAPI.on('end', function () {
               const responseBody = Buffer.concat(chunks).toString();
-              console.log(responseBody);
+              //console.log(responseBody);
               const data = JSON.parse(responseBody);
 
               const text = data.text || [];
@@ -75,15 +76,18 @@ apiRouter.post('/rapidapi', upload.single('document'), async (request, res) => {
   apiRouter.post('/saveAudio', (req, res) => {
     console.log("Making Audio");
     //console.log(req.body.text);
-
-    const text = req.body.text;
+    const userId = req.body.userId;
+    const audioNumber = req.body.audioNumber;
+    //console.log(req.body.userId);
+    //console.log(req.body.audioNumber);
+    const text = 'Audio Success!.';
     try {
         var gtts = new gTTS(req.body.text, 'en');
-        gtts.save('public/uploads/test1.mp3', function (err, result) {
+        gtts.save('public/uploads/audio/' + userId + audioNumber + '.mp3', function (err, result) {
           if(err) { throw new Error(err) }
-          console.log('Success! Open file /tmp/hello.mp3 to hear result.');
+          console.log(text);
         });
-        res.sendStatus(200);
+        res.status(200).send(text);
     } catch (err) {
         console.error(err);
         res.sendStatus(500);

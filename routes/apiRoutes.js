@@ -77,13 +77,13 @@ apiRouter.post('/rapidapi', upload.single('document'), async (request, res) => {
     console.log("Making Audio");
     //console.log(req.body.text);
     const userId = req.body.userId;
-    const audioNumber = req.body.audioNumber;
+    const fileName = req.body.fileName;
     //console.log(req.body.userId);
     //console.log(req.body.audioNumber);
     const text = 'Audio Success!.';
     try {
         var gtts = new gTTS(req.body.text, 'en');
-        gtts.save('public/uploads/audio/' + userId + audioNumber + '.mp3', function (err, result) {
+        gtts.save('public/uploads/audio/' + userId + fileName + '.mp3', function (err, result) {
           if(err) { throw new Error(err) }
           console.log(text);
         });

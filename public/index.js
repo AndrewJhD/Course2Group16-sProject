@@ -1,9 +1,10 @@
 async function submitDocument(event) {
   event.preventDefault(); 
   localStorage.userId = 'u4321'; // make this be assigned on the login of a user
-  localStorage.audioNumber = 2; // make a call ahead of time to get this number
+  //localStorage.fileName = 2; // make a call ahead of time to get this number
   const file = document.getElementById('fileInput').files[0];
-  
+  localStorage.fileName = grabUntilPeriod(document.getElementById('fileInput').files[0].name);
+  console.log(localStorage.fileName)
   const formData = new FormData();
   formData.append('document', file);
   var audioContainer = document.getElementById('audiobook');
@@ -14,7 +15,7 @@ async function submitDocument(event) {
       body: formData
     });
     const data = await response.text();
-    //console.log(data);
+    console.log(data);
       try {
         
         const response = await fetch('/api/saveAudio', {
@@ -22,7 +23,7 @@ async function submitDocument(event) {
           headers: {
             'Content-Type': 'application/json'
           },
-          body: JSON.stringify({ text: String(data), userId: String(localStorage.userId), audioNumber: String(localStorage.audioNumber)})
+          body: JSON.stringify({ text: String(data), userId: String(localStorage.userId), fileName: String(localStorage.fileName)})
         });
         const data2 = await response.text();
         wait(19000);
@@ -58,37 +59,17 @@ function createAudio() {
   audioContainer.appendChild(audio);
 }
 
-/*  function ApiCall(fileInput) {
-    const url = 'https://converter12.p.rapidapi.com/api/converter/1/FileConverter/Convert';
-    const apiKey = 'placeholder';
-    const formData = new FormData();
-    formData.append('file', fileInput.files[0]);
-  
-    const options = {
-      method: 'POST',
-      headers: {
-        'X-RapidAPI-Key': apiKey,
-        'X-RapidAPI-Host': 'converter12.p.rapidapi.com'
-      },
-      body: formData
-    };
-  
-    fetch(url, options)
-      .then(response => {
-        if (!response.ok) {
-          throw new Error(`HTTP error! Status: ${response.status}`);
-        }
-        return response.text();
-      })
-      .then(result => {
-        console.log(result);
-      })
-      .catch(error => {
-        console.error('Fetch Error:', error);
-      });
+function grabUntilPeriod(input) {
+  let result = '';
+  for (let i = 0; i < input.length; i++) {
+      if (input[i] === '.') {
+          break;
+      }
+      result += input[i];
   }
-} */ //commented off due to changing the call to backend for security
-  
+  return result;
+}
+
 document.getElementById('uploadForm').addEventListener('submit', submitDocument);
 //document.getElementById('createbutton').addEventListener("click", createAudio);
 var loginModal = document.getElementById('loginButton');

@@ -1,10 +1,9 @@
 async function submitDocument(event) {
   event.preventDefault(); 
   localStorage.userId = 'u4321'; // make this be assigned on the login of a user
-  //localStorage.fileName = 2; // make a call ahead of time to get this number
   const file = document.getElementById('fileInput').files[0];
-  localStorage.fileName = grabUntilPeriod(document.getElementById('fileInput').files[0].name);
-  console.log(localStorage.fileName)
+  const fileName = grabUntilPeriod(document.getElementById('fileInput').files[0].name);
+  //console.log(localStorage.fileName)
   const formData = new FormData();
   formData.append('document', file);
   var audioContainer = document.getElementById('audiobook');
@@ -23,11 +22,11 @@ async function submitDocument(event) {
           headers: {
             'Content-Type': 'application/json'
           },
-          body: JSON.stringify({ text: String(data), userId: String(localStorage.userId), fileName: String(localStorage.fileName)})
+          body: JSON.stringify({ text: String(data), userId: String(localStorage.userId), fileName: String(fileName)})
         });
-        const data2 = await response.text();
-        wait(19000);
-        createAudio();
+        //const data2 = await response.text();
+        //wait(19000);
+        createAudio(fileName);
         
       } catch (error) {
         console.error('Error saving audio:', error);
@@ -45,11 +44,10 @@ function wait(ms){
  }
 }
 
-function createAudio() {
-  const audioName = localStorage.userId + localStorage.audioNumber + '.mp3';
+function createAudio(fileName) { // this function can also have the name imported
   var audio = document.createElement('audio');
   
-  audio.src = "./uploads/audio/" + audioName;
+  audio.src = `./uploads/${localStorage.userId}/audio/${fileName}.mp3`;
   audio.controls = true;
   
   var audioContainer = document.getElementById('audiobook');
@@ -70,8 +68,26 @@ function grabUntilPeriod(input) {
   return result;
 }
 
+async function createAccount(){
+  try {
+        
+    const response = await fetch('/api/createUserFolders', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({userId: String(localStorage.userId)})
+    });
+    //const data = await response.text();
+
+  } catch (error) {
+    console.error('Error creating user folder', error);
+  }
+}
+
 document.getElementById('uploadForm').addEventListener('submit', submitDocument);
 //document.getElementById('createbutton').addEventListener("click", createAudio);
+document.getElementById('accountCreationTest').addEventListener("click", createAccount);
 var loginModal = document.getElementById('loginButton');
 
 var btn = document.getElementById('login');

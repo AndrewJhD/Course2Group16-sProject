@@ -72,22 +72,56 @@ apiRouter.post('/rapidapi', upload.single('document'), async (request, res) => {
     }
   
   });
-
-  apiRouter.post('/saveAudio', (req, res) => {
-    console.log("Making Audio");
-    //console.log(req.body.text);
-    const userId = req.body.userId;
-    const fileName = req.body.fileName;
-    //console.log(req.body.userId);
-    //console.log(req.body.audioNumber);
-    const text = 'Audio Success!.';
-    try {
-        var gtts = new gTTS(req.body.text, 'en');
-        gtts.save('public/uploads/audio/' + userId + fileName + '.mp3', function (err, result) {
-          if(err) { throw new Error(err) }
-          console.log(text);
+  
+  //causes the program to wait until the generation is completed entirely
+  function generateAudio(text, userId, fileName) {
+    return new Promise((resolve, reject) => {
+        const gtts = new gTTS(text, 'en');
+        const filePath = `public/uploads/${userId}/audio/${fileName}.mp3`;
+        
+        gtts.save(filePath, (err, result) => {
+            if (err) {
+                reject(err);
+            } else {
+                console.log('Audio generated:', filePath);
+                resolve(filePath);
+            }
         });
-        res.status(200).send(text);
+    });
+}
+
+apiRouter.post('/saveAudio', async (req, res) => {
+  console.log("Entering Audio Maker");
+  const userId = req.body.userId;
+  const fileName = req.body.fileName;
+  const text = req.body.text;
+  //console.log(req.body.text);
+  //console.log(req.body.userId);
+  //console.log(req.body.audioNumber);
+  try {
+      console.log('Generating audio...');
+      const filePath = await generateAudio(text, userId, fileName);
+      console.log('Audio generated successfully at: ' + filePath)
+      res.sendStatus(200);
+  } catch (error) {
+      console.error('Error generating audio:', error);
+      res.status(500).send('Error generating audio');
+  }
+});
+
+  //placeholder for a section of the account creation 
+  apiRouter.post('/createUserFolders', (req, res) => {
+    const userId = req.body.userId;
+    const folderPath = `./public/uploads/${userId}/audio`;
+    try {
+      fs.mkdir(folderPath, { recursive: true }, (err) => {
+        if (err) {
+            console.error('Error creating folder:', err);
+        } else {
+            console.log('Folder created successfully!');
+        }
+    });
+        res.sendStatus(200);
     } catch (err) {
         console.error(err);
         res.sendStatus(500);

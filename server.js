@@ -19,7 +19,6 @@ app.use(viewRoutes);
 app.use("/api", apiRoutes); //commented out to allow webpages to load webpages
 
 
-
 /*app.post('/rapidapi', upload.single('document'), async (request, res) => {
   try {
     console.log("Making fetch");

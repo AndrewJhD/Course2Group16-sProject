@@ -111,9 +111,9 @@ console.log("Entering Audio Maker");
 const userId = req.body.userId;
 const fileName = req.body.fileName;
 const text = req.body.text;
-//console.log(req.body.text);
-//console.log(req.body.userId);
-//console.log(req.body.audioNumber);
+//console.log(text);
+//console.log(userId);
+//console.log(fileName);
 try {
     console.log('Generating audio...');
     const filePath = await generateAudio(text, userId, fileName);
@@ -157,6 +157,20 @@ try {
     console.error(err);
     res.sendStatus(500);
 }
+});
+
+//deletes all files inside of specified directory
+apiRouter.post('/deleteUserFolder', async (req, res) => { 
+  const userId = req.body.userId;
+  const folderPath = `./public/uploads/${userId}`;
+  try {
+    fs.rmSync(folderPath, { recursive: true, force: true });
+    console.log(`${folderPath} is deleted!`);
+    res.sendStatus(200);
+  } catch (err) {
+    console.error(`Error while deleting ${folderPath}.`);
+    res.sendStatus(500);
+  }
 });
 
 module.exports = apiRouter;

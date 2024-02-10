@@ -13,15 +13,29 @@ const rapidAPIHost = process.env.RAPIDAPI_HOST;
 const audioPath = process.env.AUDIO_PATH;
 const { initializeApp } = require('firebase/app');
 const { getAuth } = require('firebase/auth');
-//const mongoClient = require("../db/connection");
-//const ObjectId = require("mongodb").ObjectId;
+const mongoClient = require("../db/connection");
+const ObjectId = require("mongodb").ObjectId;
 //const {User, Entry} = require("../models");
 
 //const targetDb = process.env.MODE == "production";
 //const db = mongoClient.db(targetDb);
 
+userRouter.post("/newuser", async (request, res) => {
+    try {
+        const useName = request.body.newUserName;
+        const newPass = request.body.newPassword;
+        console.log(String(useName));
+        console.log(newPass);
+        res.sendStatus(200);
+    } catch (err) {
+        console.error(err);
+        res.sendStatus(500);
+    }
 
-//apiRouter.use("/user", userRouter);
+});
+
+//}
+apiRouter.use("/user", userRouter);
 
 apiRouter.post('/rapidapi', upload.single('document'), async (request, res) => {
 try {

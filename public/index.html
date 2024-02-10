@@ -70,40 +70,21 @@
         </form>
         </div>
         <div id="audiobook"></div>
-        <!-- <button id="createbutton"> Create Uploaded Audio</button> -->
-        <button id="accountCreationTest"> Create Account</button>
+        <button id="accountCreationFolder"> Create Account</button>
         <br></br>
+        <form id="accountCreation">
+            <label for="newUsername"><b>Username</b></label>
+            <input type="text" placeholder="Enter New Username" id="newUsername" required>
+
+            <label for="newPass"><b>Password</b></label>
+            <input type="password" placeholder="Enter Password" id="newPass" required>
+
+            <label for="newPassRepeat"><b>Repeat Password</b></label>
+            <input type="password" placeholder="Enter Repeat Password" id="newPassRepeat" required>
         
+            <button type="submit">Create User</button>
+        </form>
 
-        <!--<form class="txt">
-            <textarea name="" cols="100" rows="25" id="txt">
-Look, I didn't want to be a half-blood.
-If you're reading this because you think you might be one, my advice is:
-close this book right now. Believe whatever lie your mom or dad told you
-about your birth, and try to lead a normal life.
-Being a half-blood is dangerous. It's scary. Most of the time, it gets you
-killed in painful, nasty ways.
-If you're a normal kid, reading this because you think it's fiction, great.
-Read on. I envy you for being able to believe that none of this ever happened.
-But if you recognize yourself in these pages—if you feel something
-stirring inside—stop reading immediately. You might be one of us. And once
-you know that, it's only a matter of time before they sense it too, and they'll
-come for you.
-Dont say I didn't warn you.
-My name is Percy Jackson.
-I'm twelve years old. Until a few months ago, I was a boarding student at
-Yancy Academy, a private school for troubled kids in upstate New York.
-Am I a troubled kid?
-Yeah. You could say that.
-            </textarea>
-            
-            <br></br>
-
-            <button type="button" onclick="localStorage.setItem('textToPass', document.querySelector('#txt').value);;location.href='./book.html';">Create Your AudioBook</button>
-            <br></br> 
-            
-
-        </form> -->
         
 
         <div id="response-container"></div>
@@ -123,7 +104,11 @@ Yeah. You could say that.
                 <button class="loginBtn" type="submit">Login</button>
                 <input type="checkbox" checked="checked" id="rememberMe">
                 <label for="rememberMe">Remember me</label>
+
+                
+                
             </div>
+
 
             <div class="container">
                 <span class="psw">Forgot <a href="#">Password?</a></span>
@@ -131,15 +116,19 @@ Yeah. You could say that.
         </form>
         </div>
         </div>
+        
 
         <div id="registerButton" class="modal">
-            <form class="modal-content animate" action="javascript:registerform();" name="registrationForm" method="post">
+            
+            </form>
+                <form class="modal-content animate" action="javascript:registerform();" name="registrationForm" method="post">
                 <div class="imgcontainer">
                     <span onclick="document.getElementById('registerButton').style.display='none'" class="close" title="Close Modal">&times;</span>
                 </div>
                 <div class="container">
                     <h1>Sign Up</h1>
                     <p> Please fill in this form to create an account.</p>
+                    
                     <hr>
                     <label for="newEmail"><b>Email</b></label>
                     <input type="email" placeholder="Enter Email" id="newEmail" required>
@@ -151,7 +140,9 @@ Yeah. You could say that.
                     <input type="password" placeholder="Confirm Password" id="psw-repeat" required>
 
                     <input type="checkbox" checked="checked" id="rememberMeReg" style="margin-bottom: 15px;">
-                    <label for="rememberMeReg">Remember Me</label>
+                    <label for="rememberMeReg">Remember Me</label> 
+
+                    
 
                     <p>
                         By creating an account you agree to our
@@ -162,7 +153,7 @@ Yeah. You could say that.
                         <button type="submit" class="signupBtn">Register</button>
                     </div>
                 </div>
-            </form>
+            </form> 
         </div>
     </main>
     <!-- <div id="fileDrop" ondrop="dropHandler(event)">

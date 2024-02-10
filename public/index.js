@@ -1,3 +1,4 @@
+
 async function submitDocument(event) {
   event.preventDefault(); 
   localStorage.userId = 'u4321'; // make this be assigned on the login of a user
@@ -25,7 +26,6 @@ async function submitDocument(event) {
           body: JSON.stringify({ text: String(data), userId: String(localStorage.userId), fileName: String(fileName)})
         });
         //const data2 = await response.text();
-        //wait(19000);
         createAudio(fileName);
         
       } catch (error) {
@@ -35,13 +35,9 @@ async function submitDocument(event) {
     console.error('Error submitting document:', error);
   }
 }
+function createUser() {
+  var userData = document.getElementById('userdata');
 
-function wait(ms){
-  var start = new Date().getTime();
-  var end = start;
-  while(end < start + ms) {
-    end = new Date().getTime();
- }
 }
 
 function createAudio(fileName) { // this function can also have the name imported
@@ -67,9 +63,9 @@ function grabUntilPeriod(input) {
   }
   return result;
 }
-
 async function createAccount(){
-  try {
+  localStorage.userId = 'u4321';
+  try{
         
     const response = await fetch('/api/createUserFolders', {
       method: 'POST',
@@ -77,17 +73,56 @@ async function createAccount(){
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({userId: String(localStorage.userId)})
+      
     });
+    
     //const data = await response.text();
 
   } catch (error) {
     console.error('Error creating user folder', error);
   }
 }
+async function createUserAccount(event){
+  event.preventDefault();
+  const uName = document.getElementById('newUsername').value;
+  const newpsw = document.getElementById('newPass').value;
+  const reppsw = document.getElementById('newPassRepeat').value;
+  
+  console.log(uName);
+  console.log(newpsw);
+  console.log(reppsw);
+  if (newpsw == reppsw){
+    console.log('passwords match')
+ 
+  try{
+    console.log(uName);
+    console.log(newpsw);
+    console.log(reppsw);
+    const response = await fetch('/api/user/newuser',  {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({newUserName: String(uName), newPassword: String(newpsw)})
+
+    });
+    
+  }catch(error){
+    console.error('Error creating user', error);
+  }
+
+}
+else{
+  console.log("passes dont match");
+
+}
+  
+}
 
 document.getElementById('uploadForm').addEventListener('submit', submitDocument);
-//document.getElementById('createbutton').addEventListener("click", createAudio);
-document.getElementById('accountCreationTest').addEventListener("click", createAccount);
+document.getElementById('accountCreationFolder').addEventListener("submit", createAccount);
+document.getElementById('accountCreation').addEventListener("submit", createUserAccount);
+
 var loginModal = document.getElementById('loginButton');
 
 var btn = document.getElementById('login');

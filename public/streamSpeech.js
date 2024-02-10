@@ -182,8 +182,3 @@ function continueSpeaking() {
     speak()
 }
 
-$(document).ready(function(){
-    $("pageText").select(function(){
-      alert("Text marked!");
-    });
-  });

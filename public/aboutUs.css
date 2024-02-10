@@ -6,6 +6,14 @@
       transform: translateX(0);
     }
 }
+@keyframes slideInRight {
+  0% {
+    transform: translateX(200%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
 
 .explain, p {
     font-size: 30px;
@@ -18,6 +26,9 @@
     font-family: "Quicksand", sans-serif;
     animation: ease 1400ms 0s 1 slideInLeft;
 }
+/* .explain{
+  animation: ease 1400ms 0s 1 slideInLeft;
+} */
 
 .explain {
     font-size: 50px;
@@ -29,13 +40,59 @@
 
 .circle {
     position: absolute;
-    right: 3%;
+    left: 3%;
     height: 700px;
     width: 700px;
     background: #B6D8F280;
     border-radius: 50%;
     animation: ease 1400ms 0s 1 slideInLeft;
 }
+.circleRight {
+  position: absolute;
+  right: 3%;
+  height: 700px;
+  width: 700px;
+  background: #B6D8F280;
+  border-radius: 50%;
+  animation: ease 1400ms 0s 1 slideInRight;
+}
+
+footer {
+  position: absolute;
+  right: 2px;
+  bottom: 0px;
+}
+#woman {
+  /* position: absolute; */
+}
+
+#headphones {
+  position: absolute;
+  bottom: 9px;
+  z-index: 1;
+  animation: ease-in-out 1000ms 0s 1 fromTop;
+}
+
+#womanWithHeadphones {
+  /* position: absolute; */
+  /* margin: auto; */
+  position: absolute;
+  top: 73%;
+  /* left: 50%; */
+  left: 75%;
+  transform: translate(-50%, -50%);
+  padding: 10px;
+}
+
+@keyframes fromTop {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
 
   /* }
   header {

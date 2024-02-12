@@ -1,37 +1,45 @@
 async function submitDocument(event) {
-  event.preventDefault(); 
-  const file = document.getElementById('fileInput').files[0];
-  const fileName = grabUntilPeriod(document.getElementById('fileInput').files[0].name);
-  //console.log(localStorage.fileName)
-  const formData = new FormData();
-  formData.append('document', file);
-  var audioContainer = document.getElementById('audiobook');
-  audioContainer.innerHTML = 'Audio in creation please wait!';
-  try {
-    const response = await fetch('/api/rapidapi', {
-      method: 'POST',
-      body: formData
-    });
-    const data = await response.text();
-    console.log(data);
-      try {
-        
-        const response = await fetch('/api/saveAudio', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({ text: String(data), userId: String(localStorage.userId), fileName: String(fileName)})
-        });
-        //const data2 = await response.text();
-        displayAudio(fileName);
-        
-      } catch (error) {
-        console.error('Error saving audio:', error);
+    event.preventDefault();
+    var audioContainer = document.getElementById('audiobook');
+    audioContainer.innerHTML = 'Audio in creation please wait!';
+    const file = document.getElementById('fileInput').files[0];
+    //console.log(file);
+    const fileName = grabNameUntilPeriod(document.getElementById('fileInput').files[0].name);
+    //console.log(localStorage.fileName)
+    const formData = new FormData();
+    formData.append('document', file);
+    try {
+      const response = await fetch('/api/rapidapi', {
+        method: 'POST',
+        body: formData
+      });
+      const data = await response.text();
+      //console.log(data);
+      if(data != "[]"){ // prevents audio saving if the document has no text in it
+        try {
+          
+          const response = await fetch('/api/saveAudio', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ text: String(data), userId: String(localStorage.userId), fileName: String(fileName)})
+          });
+          //const data2 = await response.text();
+
+          displayAudio(fileName);
+          
+        } catch (error) {
+          console.error('Error saving audio:', error);
+        }
       }
-  } catch (error) {
-    console.error('Error submitting document:', error);
-  }
+      else{
+          audioContainer.innerHTML = 'Error the submitted document is empty';
+      }
+    } catch (error) {
+      console.error('Error submitting document:', error);
+    }
+    document.getElementById('documentUploadForm').reset();
 }
 function createUser() {
   var userData = document.getElementById('userdata');
@@ -51,7 +59,7 @@ function displayAudio(fileName) {
   audioContainer.appendChild(audio);
 }
 
-function grabUntilPeriod(input) {
+function grabNameUntilPeriod(input) {
   let result = '';
   for (let i = 0; i < input.length; i++) {
       if (input[i] === '.') {

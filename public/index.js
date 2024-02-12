@@ -14,7 +14,7 @@ async function submitDocument(event) {
         body: formData
       });
       const data = await response.text();
-      console.log(data);
+      //console.log(data);
       if(data != "[]"){ // prevents audio saving if the document has no text in it
         try {
           

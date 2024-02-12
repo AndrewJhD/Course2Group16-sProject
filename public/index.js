@@ -1,7 +1,5 @@
-
 async function submitDocument(event) {
   event.preventDefault(); 
-  localStorage.userId = 'u4321'; // make this be assigned on the login of a user
   const file = document.getElementById('fileInput').files[0];
   const fileName = grabUntilPeriod(document.getElementById('fileInput').files[0].name);
   //console.log(localStorage.fileName)
@@ -26,7 +24,7 @@ async function submitDocument(event) {
           body: JSON.stringify({ text: String(data), userId: String(localStorage.userId), fileName: String(fileName)})
         });
         //const data2 = await response.text();
-        createAudio(fileName);
+        displayAudio(fileName);
         
       } catch (error) {
         console.error('Error saving audio:', error);
@@ -40,7 +38,7 @@ function createUser() {
 
 }
 
-function createAudio(fileName) { // this function can also have the name imported
+function displayAudio(fileName) {
   var audio = document.createElement('audio');
   
   audio.src = `./uploads/${localStorage.userId}/audio/${fileName}.mp3`;
@@ -49,7 +47,7 @@ function createAudio(fileName) { // this function can also have the name importe
   var audioContainer = document.getElementById('audiobook');
   
   audioContainer.innerHTML = '';
-    // Append the audio element to the div
+
   audioContainer.appendChild(audio);
 }
 
@@ -63,8 +61,8 @@ function grabUntilPeriod(input) {
   }
   return result;
 }
-async function createAccount(){
-  localStorage.userId = 'u4321';
+async function createAccount(){ // creates the users folder (will be combined with the main account creation method once db functions are implemented)
+  localStorage.userId = 'u4321'; // this will also be removed when db gets implemented as this variable will be grabbed when the user signs in
   try{
         
     const response = await fetch('/api/createUserFolders', {
@@ -82,6 +80,24 @@ async function createAccount(){
     console.error('Error creating user folder', error);
   }
 }
+
+async function deleteAccount(){ // deletes the users folder (will be combined with the main account creation method once db functions are implemented)
+  localStorage.userId = 'u4321'; // this will also be removed when db gets implemented as this variable will be grabbed when the user signs in
+  try{
+    const response = await fetch('/api/deleteUserFolder', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({userId: String(localStorage.userId)})
+      
+    });
+    //const data = await response.text();
+  } catch (error) {
+    console.error('Error creating user folder', error);
+  }
+}
+
 async function createUserAccount(event){
   event.preventDefault();
   const uName = document.getElementById('newUsername').value;
@@ -91,42 +107,40 @@ async function createUserAccount(event){
   console.log(uName);
   console.log(newpsw);
   console.log(reppsw);
-  if (newpsw == reppsw){
+  if (newpsw == reppsw){ //confirms inputted passed match
     console.log('passwords match')
  
-  try{
-    console.log(uName);
-    console.log(newpsw);
-    console.log(reppsw);
-    const response = await fetch('/api/user/newuser',  {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({newUserName: String(uName), newPassword: String(newpsw)})
+    try{
+      console.log(uName);
+      console.log(newpsw);
+      console.log(reppsw);
+      const response = await fetch('/api/user/newuser',  {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({newUserName: String(uName), newPassword: String(newpsw)})
 
-    });
-    
-  }catch(error){
-    console.error('Error creating user', error);
+      });
+      
+    }catch(error){
+      console.error('Error creating user', error);
+    }
+
   }
-
-}
-else{
-  console.log("passes dont match");
-
-}
+  else{
+    console.log("passwords dont match");
+  }
   
 }
 
-document.getElementById('uploadForm').addEventListener('submit', submitDocument);
-document.getElementById('accountCreationFolder').addEventListener("submit", createAccount);
+document.getElementById('documentUploadForm').addEventListener('submit', submitDocument);
+document.getElementById('accountFolderCreation').addEventListener("click", createAccount);
+document.getElementById('accountFolderDeletion').addEventListener("click", deleteAccount);
 document.getElementById('accountCreation').addEventListener("submit", createUserAccount);
 
 var loginModal = document.getElementById('loginButton');
-
 var btn = document.getElementById('login');
-
 var span = document.getElementsByClassName("close")[0];
 
 btn.onclick = function() {

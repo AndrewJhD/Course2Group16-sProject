@@ -57,37 +57,32 @@
             <ul>create your AudioFile.</ul>
         </div>
         
-         <!--<div id="wrapper">
-            <h2 style="font-family: Quicksand">How would you like to listen to your Audiobook?</h2>
-            <p><input type="radio" id="stream">Stream</p>
-            <p><input type="radio" id="download">Download</p>
-        </div> -->
         <div>
-        <form id="uploadForm" enctype="multipart/form-data">
+        <form id="documentUploadForm" enctype="multipart/form-data">
             <label for="fileInput">Select a file:</label>
             <input type="file" id="fileInput" name="file" accept=".pdf, .doc, .docx">
             <button type="submit">Upload and Convert</button>
         </form>
         </div>
-        <div id="audiobook"></div>
-        <button id="accountCreationFolder"> Create Account</button>
+
         <br></br>
+        <div id="audiobook"></div>
+        <button id="accountFolderCreation"> Create Account</button>
+        <button id="accountFolderDeletion"> Delete Account</button>
+        <br></br>
+
         <form id="accountCreation">
-            <label for="newUsername"><b>Username</b></label>
             <input type="text" placeholder="Enter New Username" id="newUsername" required>
+            <label for="newUsername"><b>Username</b></label>
 
-            <label for="newPass"><b>Password</b></label>
             <input type="password" placeholder="Enter Password" id="newPass" required>
+            <label for="newPass"><b>Password</b></label>
 
-            <label for="newPassRepeat"><b>Repeat Password</b></label>
             <input type="password" placeholder="Enter Repeat Password" id="newPassRepeat" required>
+            <label for="newPassRepeat"><b>Repeat Password</b></label>
         
             <button type="submit">Create User</button>
         </form>
-
-        
-
-        <div id="response-container"></div>
 
         <div id="loginButton" class="loginModal">
             <form class="login-modal-content animate" action="javascript:submitform();" name="loginForm" method="post">
@@ -162,7 +157,6 @@
     </div> -->
 
     <script type="module" src="./index.js"></script>
-    <!--<script src="createBookPage.js"></script>-->
 </body>
 <footer>Copyright &copy; AudioFile 2024</footer>
 

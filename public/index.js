@@ -115,31 +115,44 @@ async function createUserAccount(event){
   console.log(uName);
   console.log(newpsw);
   console.log(reppsw);
-  if (newpsw == reppsw){ //confirms inputted passed match
-    console.log('passwords match')
- 
-    try{
-      console.log(uName);
-      console.log(newpsw);
-      console.log(reppsw);
-      const response = await fetch('/api/user/newuser',  {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({newUserName: String(uName), newPassword: String(newpsw)})
+  
+  const validName = await fetch('/api/user/checktaken', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({newUserName: String(uName)})
+  });
+  if (validName){
+    if (newpsw == reppsw){ //confirms inputted passed match
 
-      });
-      
-    }catch(error){
-      console.error('Error creating user', error);
+      console.log('passwords match')
+   
+      try{
+        console.log(uName);
+        console.log(newpsw);
+        console.log(reppsw);
+        const response = await fetch('/api/user/newuser',  {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({newUserName: String(uName), newPassword: String(newpsw)})
+  
+        });
+        
+      }catch(error){
+        console.error('Error creating user', error);
+      }
+  
     }
-
+    else{
+      console.log("passwords dont match");
+    }
   }
   else{
-    console.log("passwords dont match");
-  }
-  
+    console.log("username taken!")
+  } 
 }
 
 document.getElementById('documentUploadForm').addEventListener('submit', submitDocument);

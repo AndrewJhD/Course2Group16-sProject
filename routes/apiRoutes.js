@@ -3,58 +3,56 @@ const multer = require('multer');
 const FormData = require('form-data');
 const fs = require('fs');
 const http = require('https');
-const userRouter = Router();
+//const userRouter = Router();
 const apiRouter = Router();
 const upload = multer();
 const gTTS = require('gtts');
 const { text } = require("body-parser");
 const rapidAPIKey = process.env.RAPIDAPI_KEY;
 const rapidAPIHost = process.env.RAPIDAPI_HOST;
-const audioPath = process.env.AUDIO_PATH;
-const { initializeApp } = require('firebase/app');
-const { getAuth } = require('firebase/auth');
-const mongoClient = require('mongoose');
+//const audioPath = process.env.AUDIO_PATH;
+//const { initializeApp } = require('firebase/app');
+//const { getAuth } = require('firebase/auth');
+//const mongoClient = require('mongoose');
 //const ObjectId = require("mongodb").ObjectId;
-const User = require("../models/user");
-const dotenv = require('dotenv');
-dotenv.config();
-mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true });
-const connection = mongoose.connection;
-//const targetDb = process.env.MODE == "production";
-//const db = mongoClient.db(targetDb);
 
-userRouter.post("/newuser", async (request, res) => {
+const express = require('express');
+const User = require("../models/user");
+
+const userRouter = express.Router();
+
+userRouter.post("/newuser", async (req, res) => {
     try {
-        const useName = request.body.newUserName;
-        const newPass = request.body.newPassword;
-        mongoClient.connect(process.env.MONGO_URI, {
-            useNewUrlParser: true,
-            useUnifiedTopology: true,
-          })
-          .then(() => {
-            console.log('Connected to MongoDB');
-            
-            const newUser = new User({ 
-              username: useName, 
-              password: newPass
-            });
-          
-            newUser.save()
-              .then((user) => {
-                console.log('User saved:', user);
-              })
-              .catch((error) => {
-                console.error('Error saving user:', error);
-              });
-          })
-          .catch((err) => {
-            console.error('Error connecting to MongoDB:', err);
-          });
+        const userName = req.body.newUserName;
+        const newPass = req.body.newPassword;
+
+        const newUser = new User({ 
+          username: userName, 
+          password: newPass 
+        });
+      
+        await newUser.save();
+        console.log('User saved:', newUser);
+        res.status(201).json(newUser);
     } catch (err) {
         console.error(err);
         res.sendStatus(500);
     }
+});
 
+userRouter.post("/checktaken", async (req, res) => {
+    try {
+        const userName = req.body.newUserName.trim().toLowerCase(); // Trim and convert to lowercase
+
+        const userExists = await User.findOne({ username: { $regex: new RegExp('^' + userName + '$', 'i') } }); // Case-insensitive regex
+
+        const isTaken = !!userExists;
+        
+        res.json({ taken: isTaken });
+    } catch (err) {
+        console.error(err);
+        res.sendStatus(500);
+    }
 });
 //todo
 //1.get user by id
@@ -163,8 +161,8 @@ const firebaseConfig = {
 };
 
 // Initialize Firebase
-const fireApp = initializeApp(firebaseConfig);
-const auth = getAuth(fireApp);
+//const fireApp = initializeApp(firebaseConfig);
+//const auth = getAuth(fireApp);
   
 
 apiRouter.post('/createUserFolders', (req, res) => {

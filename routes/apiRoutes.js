@@ -13,10 +13,13 @@ const rapidAPIHost = process.env.RAPIDAPI_HOST;
 const audioPath = process.env.AUDIO_PATH;
 const { initializeApp } = require('firebase/app');
 const { getAuth } = require('firebase/auth');
-const mongoClient = require("../db/connection");
-const ObjectId = require("mongodb").ObjectId;
-//const {User, Entry} = require("../models");
-
+const mongoClient = require('mongoose');
+//const ObjectId = require("mongodb").ObjectId;
+const User = require("../models/user");
+const dotenv = require('dotenv');
+dotenv.config();
+mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true });
+const connection = mongoose.connection;
 //const targetDb = process.env.MODE == "production";
 //const db = mongoClient.db(targetDb);
 
@@ -24,16 +27,39 @@ userRouter.post("/newuser", async (request, res) => {
     try {
         const useName = request.body.newUserName;
         const newPass = request.body.newPassword;
-        console.log(String(useName));
-        console.log(newPass);
-        res.sendStatus(200);
+        mongoClient.connect(process.env.MONGO_URI, {
+            useNewUrlParser: true,
+            useUnifiedTopology: true,
+          })
+          .then(() => {
+            console.log('Connected to MongoDB');
+            
+            const newUser = new User({ 
+              username: useName, 
+              password: newPass
+            });
+          
+            newUser.save()
+              .then((user) => {
+                console.log('User saved:', user);
+              })
+              .catch((error) => {
+                console.error('Error saving user:', error);
+              });
+          })
+          .catch((err) => {
+            console.error('Error connecting to MongoDB:', err);
+          });
     } catch (err) {
         console.error(err);
         res.sendStatus(500);
     }
 
 });
-
+//todo
+//1.get user by id
+//2.way to check username
+//3.create new entry
 //}
 apiRouter.use("/user", userRouter);
 

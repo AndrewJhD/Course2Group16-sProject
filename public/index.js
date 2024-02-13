@@ -1,5 +1,6 @@
 async function submitDocument(event) {
     event.preventDefault();
+    var duplicatechecker;
     var audioContainer = document.getElementById('audiobook');
     audioContainer.innerHTML = 'Audio in creation please wait!';
     const file = document.getElementById('fileInput').files[0];
@@ -17,20 +18,39 @@ async function submitDocument(event) {
       //console.log(data);
       if(data != "[]"){ // prevents audio saving if the document has no text in it
         try {
-          
-          const response = await fetch('/api/saveAudio', {
+          const response = await fetch('/api/checkFiles', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ text: String(data), userId: String(localStorage.userId), fileName: String(fileName)})
+            body: JSON.stringify({userId: String(localStorage.userId), fileName: String(fileName)})
           });
-          //const data2 = await response.text();
 
-          displayAudio(fileName);
-          
+          duplicatechecker = await response.text();
         } catch (error) {
-          console.error('Error saving audio:', error);
+          console.error('File Checking Error:', error);
+        }
+        console.log(duplicatechecker);
+        if(duplicatechecker == true){
+          try {
+            
+            const response = await fetch('/api/saveAudio', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json'
+              },
+              body: JSON.stringify({ text: String(data), userId: String(localStorage.userId), fileName: String(fileName)})
+            });
+            //const data2 = await response.text();
+
+            displayAudio(fileName);
+            
+          } catch (error) {
+            console.error('Error saving audio:', error);
+          }
+        }
+        else{
+          audioContainer.innerHTML = 'Error a file with the same name as the submitted documents name already exists';
         }
       }
       else{
@@ -69,7 +89,7 @@ function grabNameUntilPeriod(input) {
   }
   return result;
 }
-async function createAccount(){ // creates the users folder (will be combined with the main account creation method once db functions are implemented)
+async function createAccountFolder(){ // creates the users folder (will be combined with the main account creation method once db functions are implemented)
   localStorage.userId = 'u4321'; // this will also be removed when db gets implemented as this variable will be grabbed when the user signs in
   try{
         
@@ -89,8 +109,23 @@ async function createAccount(){ // creates the users folder (will be combined wi
   }
 }
 
-async function deleteAccount(){ // deletes the users folder (will be combined with the main account creation method once db functions are implemented)
-  localStorage.userId = 'u4321'; // this will also be removed when db gets implemented as this variable will be grabbed when the user signs in
+async function deleteAccountFolder(){ // deletes the users folder (will be combined with the main account creation method once db functions are implemented)
+  try{
+    const response = await fetch('/api/deleteUserFolder', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({userId: String(localStorage.userId)})
+      
+    });
+    //const data = await response.text();
+  } catch (error) {
+    console.error('Error creating user folder', error);
+  }
+}
+
+async function deleteSingleAudio(){ // most likely include a call to either get the audio name or import it in 
   try{
     const response = await fetch('/api/deleteUserFolder', {
       method: 'POST',
@@ -143,8 +178,8 @@ async function createUserAccount(event){
 }
 
 document.getElementById('documentUploadForm').addEventListener('submit', submitDocument);
-document.getElementById('accountFolderCreation').addEventListener("click", createAccount);
-document.getElementById('accountFolderDeletion').addEventListener("click", deleteAccount);
+document.getElementById('accountFolderCreation').addEventListener("click", createAccountFolder);
+document.getElementById('accountFolderDeletion').addEventListener("click", deleteAccountFolder);
 document.getElementById('accountCreation').addEventListener("submit", createUserAccount);
 
 var loginModal = document.getElementById('loginButton');

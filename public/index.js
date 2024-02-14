@@ -31,7 +31,7 @@ async function submitDocument(event) {
           console.error('File Checking Error:', error);
         }
         console.log(duplicatechecker);
-        if(duplicatechecker == true){
+        if(duplicatechecker == 'false'){
           try {
             
             const response = await fetch('/api/saveAudio', {

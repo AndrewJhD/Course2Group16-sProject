@@ -157,7 +157,7 @@ apiRouter.post('/deleteUserFolder', async (req, res) => {
 apiRouter.post('/deleteSingleAudio', async (req, res) => { //not testible yet due to reliance on browse page being completed frist
     const userId = req.body.userId;
     const fileName = req.body.fileName;
-    const filePath = `./public/uploads/${userId}/audio/${fileName}`;
+    const filePath = `./public/uploads/${userId}/audio/${fileName}.mp3`;
     try {
         fs.unlinkSync(filePath);
         console.log(`${filePath} has been deleted.`);
@@ -166,7 +166,29 @@ apiRouter.post('/deleteSingleAudio', async (req, res) => { //not testible yet du
         console.error(`Error deleting ${filePath}:`, error);
         res.status(500);
       }
-  
-    });
+});
 
+apiRouter.post('/checkFiles', async (req, res) => { //not testible yet due to reliance on browse page being completed frist
+    const userId = req.body.userId;
+    const fileName = req.body.fileName;
+    const filePath = `./public/uploads/${userId}/audio/${fileName}.mp3`;
+    if (fileExists(filePath)) {
+      console.log('File exists.');
+      res.status(200).send('true');
+    } else {
+      console.log('File does not exist.');
+      res.status(200).send('false');
+    }
+});
+
+function fileExists(filePath) {
+    try {
+      // Check if the file exists synchronously
+      console.log("checking for file");
+      return fs.existsSync(filePath);
+    } catch (error) {
+      console.error('Error checking file existence:', error);
+      return false;
+    }
+  }
 module.exports = apiRouter;

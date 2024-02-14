@@ -6,7 +6,8 @@
     "gtts": "^0.2.1",
     "mongodb": "^6.3.0",
     "mongoose": "^8.1.0",
-    "multer": "^1.4.5-lts.1"
+    "multer": "^1.4.5-lts.1",
+    "nodemon": "^3.0.3"
   },
   "name": "course2group16-sproject",
   "description": "The Project of Group 16 Course 2 Techwise Project",

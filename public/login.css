@@ -1,5 +1,5 @@
 /* Full-width input fields */
-input[type=email], input[type=password] {
+input[type=text], input[type=password] {
     font-family: "Quicksand";
     width: 100%;
     padding: 12px 20px;
@@ -10,7 +10,7 @@ input[type=email], input[type=password] {
     border-radius: 8px;
 }
 
-input[type=email]:focus, input[type=password]:focus {
+input[type=text]:focus, input[type=password]:focus {
     background-color: rgba(211, 211, 211, .6);
     outline: none;
 }
@@ -36,7 +36,7 @@ input[id="rememberMe"] {
     left: 10%;
 }
 
-.container {
+.userCredentials {
     padding: 16px;
 
 }
@@ -47,7 +47,7 @@ span.psw {
 }
 
 /* Model (background) */
-.loginModal {
+.loginContainer {
     display: none;
     position: fixed;
     z-index: 1;
@@ -59,8 +59,8 @@ span.psw {
     background-color: rgba(245, 245, 245, .8);
 }
 
-/* Modal content */
-.login-modal-content {
+/* login Form */
+#loginForm {
     font-family: "Quicksand", sans-serif;
     font-weight: 300;
     background-color: white;
@@ -73,11 +73,13 @@ span.psw {
 
 /* Close button (x) */
 .close {
+    background: transparent;
+    border: none;
     position: relative;
     left: 94%;
     color: black;
     font-size: 40px;
-    font-weight: bold;
+    font-weight: lighter;
 } 
 
 .close:hover,

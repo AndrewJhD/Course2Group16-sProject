@@ -147,9 +147,6 @@ async function createUserAccount(event){
   const newpsw = document.getElementById('newPass').value;
   const reppsw = document.getElementById('newPassRepeat').value;
   
-  console.log(uName);
-  console.log(newpsw);
-  console.log(reppsw);
   try {
     const validNameResponse = await fetch('/api/user/checkUsername', {
       method: 'POST',
@@ -199,29 +196,39 @@ async function createUserAccount(event){
   }
 
 }
+
 document.getElementById('documentUploadForm').addEventListener('submit', submitDocument);
 document.getElementById('accountFolderCreation').addEventListener("click", createAccountFolder);
 document.getElementById('accountFolderDeletion').addEventListener("click", deleteAccountFolder);
-document.getElementById('accountCreation').addEventListener("submit", createUserAccount);
+document.getElementById('registrationForm').addEventListener("submit", createUserAccount);
 
-var loginModal = document.getElementById('loginButton');
-var btn = document.getElementById('login');
-var span = document.getElementsByClassName("close")[0];
-
-btn.onclick = function() {
-  loginModal.style.display = "block";
+function closeForm() {
+  document.getElementById().style.display="none";
 }
+
+// var loginModal = document.getElementById('loginButton');
+// var btn = document.getElementById('login');
+// var span = document.getElementsByClassName("close")[0];
+
+// btn.onclick = function() {
+//   loginModal.style.display = "block";
+// }
         
-window.onclick = function(event) {
-    if (event.target == loginModal) {
-        loginModal.style.display = "none";
-    }
-}
+// window.onclick = function(event) {
+//     if (event.target == loginModal) {
+//         loginModal.style.display = "none";
+//     }
+// }
 
-var modal = document.getElementById('registerBtn');
 
-window.onclick = function(event) {
-  if(event.target == modal) {
-    modal.style.display = "none";
-  }
-}
+// document.addEventListener('click', handleOutsideClick);
+
+
+
+// var modal = document.getElementById('registerBtn');
+
+// window.onclick = function(event) {
+//   if(event.target == modal) {
+//     modal.style.display = "none";
+//   }
+// }

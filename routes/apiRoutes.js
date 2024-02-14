@@ -3,7 +3,6 @@ const multer = require('multer');
 const FormData = require('form-data');
 const fs = require('fs');
 const http = require('https');
-const userRouter = Router();
 const apiRouter = Router();
 const upload = multer();
 const gTTS = require('gtts');
@@ -11,27 +10,49 @@ const { text } = require("body-parser");
 const rapidAPIKey = process.env.RAPIDAPI_KEY;
 const rapidAPIHost = process.env.RAPIDAPI_HOST;
 const audioPath = process.env.AUDIO_PATH;
-const mongoClient = require("../db/connection");
-const ObjectId = require("mongodb").ObjectId;
-//const {User, Entry} = require("../models");
+const express = require('express');
+const User = require("../models/user");
+const userRouter = express.Router();
 
-//const targetDb = process.env.MODE == "production";
-//const db = mongoClient.db(targetDb);
-
-userRouter.post("/newuser", async (request, res) => {
+userRouter.post("/newuser", async (req, res) => {
     try {
-        const useName = request.body.newUserName;
-        const newPass = request.body.newPassword;
-        console.log(String(useName));
-        console.log(newPass);
-        res.sendStatus(200);
+        const userName = req.body.newUserName;
+        const newPass = req.body.newPassword;
+
+        const newUser = new User({ 
+          username: userName, 
+          password: newPass 
+        });
+      
+        await newUser.save();
+        console.log('User saved:', newUser);
+        res.status(201).json(newUser);
     } catch (err) {
         console.error(err);
         res.sendStatus(500);
     }
-
 });
 
+userRouter.post("/checkUsername", async (req, res) => {
+    try {
+        const userName = req.body.username; 
+
+
+        const userExists = await User.findOne({ username: userName });
+
+        if (userExists) {
+            console.log('Username exists:', userName);
+            res.status(200).json({ exists: true });
+        } else {
+
+            console.log('Username does not exist:', userName);
+            res.status(200).json({ exists: false });
+        }
+    } catch (err) {
+        console.error(err);
+        res.sendStatus(500);
+    }
+});
 apiRouter.use("/user", userRouter);
 
 apiRouter.post('/rapidapi', upload.single('document'), async (request, res) => {
@@ -190,5 +211,6 @@ function fileExists(filePath) {
       console.error('Error checking file existence:', error);
       return false;
     }
-  }
+}
+
 module.exports = apiRouter;

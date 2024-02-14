@@ -32,6 +32,27 @@ userRouter.post("/newuser", async (req, res) => {
         res.sendStatus(500);
     }
 });
+
+userRouter.post("/checkUsername", async (req, res) => {
+    try {
+        const userName = req.body.username; 
+
+
+        const userExists = await User.findOne({ username: userName });
+
+        if (userExists) {
+            console.log('Username exists:', userName);
+            res.status(200).json({ exists: true });
+        } else {
+
+            console.log('Username does not exist:', userName);
+            res.status(200).json({ exists: false });
+        }
+    } catch (err) {
+        console.error(err);
+        res.sendStatus(500);
+    }
+});
 apiRouter.use("/user", userRouter);
 
 apiRouter.post('/rapidapi', upload.single('document'), async (request, res) => {
@@ -190,5 +211,6 @@ function fileExists(filePath) {
       console.error('Error checking file existence:', error);
       return false;
     }
-  }
+}
+
 module.exports = apiRouter;

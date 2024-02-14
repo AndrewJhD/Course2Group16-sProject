@@ -150,33 +150,55 @@ async function createUserAccount(event){
   console.log(uName);
   console.log(newpsw);
   console.log(reppsw);
-  if (newpsw == reppsw){ //confirms inputted passed match
-    console.log('passwords match')
- 
-    try{
-      console.log(uName);
-      console.log(newpsw);
-      console.log(reppsw);
-      const response = await fetch('/api/user/newuser',  {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({newUserName: String(uName), newPassword: String(newpsw)})
+  try {
+    const validNameResponse = await fetch('/api/user/checkUsername', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({username: uName}) // Ensure the key matches what the server expects
+    });
 
-      });
-      
-    }catch(error){
-      console.error('Error creating user', error);
+    const validName = await validNameResponse.json(); // Parse the JSON response
+
+    // Check if the username is taken based on the response. Assuming the API returns { exists: true/false }
+    if (!validName.exists) {
+      if (newpsw === reppsw) { // Confirms inputted passwords match
+        console.log('Passwords match');
+
+        try {
+          const response = await fetch('/api/user/newuser', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({newUserName: uName, newPassword: newpsw})
+          });
+
+          if (response.ok) {
+            // If the request was successful
+            console.log('User created successfully');
+            const userData = await response.json();
+            console.log(userData);
+            // You might want to redirect the user or clear the form here
+          } else {
+            // Handle server errors or user creation issues
+            console.error('Error creating user: Server responded with status', response.status);
+          }
+        } catch (error) {
+          console.error('Error creating user', error);
+        }
+      } else {
+        console.log("Passwords don't match");
+      }
+    } else {
+      console.log("Username taken!");
     }
+  } catch (error) {
+    console.error('Error checking username availability', error);
+  }
 
-  }
-  else{
-    console.log("passwords dont match");
-  }
-  
 }
-
 document.getElementById('documentUploadForm').addEventListener('submit', submitDocument);
 document.getElementById('accountFolderCreation').addEventListener("click", createAccountFolder);
 document.getElementById('accountFolderDeletion').addEventListener("click", deleteAccountFolder);

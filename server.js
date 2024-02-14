@@ -1,7 +1,8 @@
 const express = require("express");
 const bodyParser = require("body-parser");
-const mongoose = require("mongoose");
+const connectDB = require('./db/connection')
 require("dotenv").config();
+connectDB();
 const app = express();
 const port = 3000;
 const viewRoutes = require("./routes/viewRoutes");

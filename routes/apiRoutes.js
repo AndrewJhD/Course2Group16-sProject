@@ -11,8 +11,6 @@ const { text } = require("body-parser");
 const rapidAPIKey = process.env.RAPIDAPI_KEY;
 const rapidAPIHost = process.env.RAPIDAPI_HOST;
 const audioPath = process.env.AUDIO_PATH;
-const { initializeApp } = require('firebase/app');
-const { getAuth } = require('firebase/auth');
 const mongoClient = require("../db/connection");
 const ObjectId = require("mongodb").ObjectId;
 //const {User, Entry} = require("../models");
@@ -34,7 +32,6 @@ userRouter.post("/newuser", async (request, res) => {
 
 });
 
-//}
 apiRouter.use("/user", userRouter);
 
 apiRouter.post('/rapidapi', upload.single('document'), async (request, res) => {
@@ -125,22 +122,6 @@ try {
 }
 });
 
-// Firebase configuration
-const firebaseConfig = {
-  apiKey: "AIzaSyA6inh3SZgix6rJCPzOmM0ii4ydEryTtcc",
-  authDomain: "audiofile-9393c.firebaseapp.com",
-  projectId: "audiofile-9393c",
-  storageBucket: "audiofile-9393c.appspot.com",
-  messagingSenderId: "330179755119",
-  appId: "1:330179755119:web:17a7ff2a9d429be39f219a",
-  measurementId: "G-7LS27FRJ15"
-};
-
-// Initialize Firebase
-const fireApp = initializeApp(firebaseConfig);
-const auth = getAuth(fireApp);
-  
-
 apiRouter.post('/createUserFolders', (req, res) => {
 const userId = req.body.userId;
 const folderPath = `./public/uploads/${userId}/audio`;
@@ -173,4 +154,41 @@ apiRouter.post('/deleteUserFolder', async (req, res) => {
   }
 });
 
+apiRouter.post('/deleteSingleAudio', async (req, res) => { //not testible yet due to reliance on browse page being completed frist
+    const userId = req.body.userId;
+    const fileName = req.body.fileName;
+    const filePath = `./public/uploads/${userId}/audio/${fileName}.mp3`;
+    try {
+        fs.unlinkSync(filePath);
+        console.log(`${filePath} has been deleted.`);
+        res.status(200);
+      } catch (error) {
+        console.error(`Error deleting ${filePath}:`, error);
+        res.status(500);
+      }
+});
+
+apiRouter.post('/checkFiles', async (req, res) => { //not testible yet due to reliance on browse page being completed frist
+    const userId = req.body.userId;
+    const fileName = req.body.fileName;
+    const filePath = `./public/uploads/${userId}/audio/${fileName}.mp3`;
+    if (fileExists(filePath)) {
+      console.log('File exists.');
+      res.status(200).send('true');
+    } else {
+      console.log('File does not exist.');
+      res.status(200).send('false');
+    }
+});
+
+function fileExists(filePath) {
+    try {
+      // Check if the file exists synchronously
+      console.log("checking for file");
+      return fs.existsSync(filePath);
+    } catch (error) {
+      console.error('Error checking file existence:', error);
+      return false;
+    }
+  }
 module.exports = apiRouter;

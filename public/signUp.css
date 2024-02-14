@@ -13,12 +13,12 @@
     cursor: pointer;
 }
 
-.container {
+.userCredentials {
     padding:15px;
 }
 
 /* The Modal (background) */
-.modal {
+.registrationContainer {
     display: none;
     position: fixed;
     z-index: 1;
@@ -31,7 +31,7 @@
 }
 
 /* Modal Content/Box */
-.modal-content {
+#registrationForm {
     font-family: "Quicksand";
     background-color: white;
     margin: 5% auto 15% auto;

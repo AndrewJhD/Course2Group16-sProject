@@ -53,6 +53,49 @@ userRouter.post("/checkUsername", async (req, res) => {
         res.sendStatus(500);
     }
 });
+
+userRouter.post("/getUserdata", async (req, res) => {
+    try {
+        const userName = req.body.username; 
+
+        const userData = await User.findOne({ username: userName });
+
+        try{
+            console.log('Username data:', userName);
+            
+            res.status(200).json({
+                password: userData.password, 
+            });
+        } catch {
+            console.error(err);
+            res.status(404).json({ message: "User not found" });
+        }
+    } catch (err) {
+        console.error(err);
+        // Internal server error
+        res.status(500).send("An error occurred on the server");
+    }
+});
+
+userRouter.post("/login", async (req, res) => {
+    try {
+        const userName = req.body.username; 
+        const pass = req.body.logPass;
+
+        const userData = await User.findOne({ username: userName,  password: pass});
+
+        if (userData) {
+            console.log('login successful');
+            
+            res.status(200).json({loggedIn : true});
+        } else {
+            res.status(404).json({loggedIn : false});
+        }
+    } catch (err) {
+        console.error(err);
+        res.status(500).send("An error occurred on the server");
+    }
+});
 apiRouter.use("/user", userRouter);
 
 apiRouter.post('/rapidapi', upload.single('document'), async (request, res) => {

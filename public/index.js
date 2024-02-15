@@ -1,3 +1,35 @@
+var loggedIn = false;
+var loggedUsername;
+async function loginUser(event){
+  event.preventDefault();
+  const Usn = document.getElementById('logUsn').value;
+  console.log(Usn);
+  //const Psw = document.getElementById('logPsw').value;
+  try{
+        
+    const response = await fetch('/api/user/getUserdata', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({userName : Usn})
+      
+    });
+    
+    const userDat = await response.json();
+    console.log(userDat);
+
+  } catch (error) {
+    console.error('Error logging in', error);
+  }
+  if (loggedIn){
+    console.log('Successful login');
+    loggedUsername = Usn;
+    console.log(Usn);
+  } else{
+    console.log('errorlogging in');
+  }
+}
 async function submitDocument(event) {
     event.preventDefault();
     var duplicatechecker;
@@ -196,7 +228,8 @@ async function createUserAccount(event){
   }
 
 }
-
+document.getElementById('entBtn').addEventListener("click", testEntries);
+document.getElementById('loginForm').addEventListener("submit", loginUser);
 document.getElementById('documentUploadForm').addEventListener('submit', submitDocument);
 document.getElementById('accountFolderCreation').addEventListener("click", createAccountFolder);
 document.getElementById('accountFolderDeletion').addEventListener("click", deleteAccountFolder);

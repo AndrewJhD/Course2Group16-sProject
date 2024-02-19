@@ -6,16 +6,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AudioFile</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-
-    <body>
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Quicksand&display=swap" rel="stylesheet">
-        <link rel="stylesheet" href="./common.css">
-        <link rel="stylesheet" href="./index.css">
-        <link rel="stylesheet" href="./login.css">
-        <link rel="stylesheet" href="./signUp.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./common.css">
+    <link rel="stylesheet" href="./index.css">
+    <link rel="stylesheet" href="./login.css">
+    <link rel="stylesheet" href="./signUp.css">
 </head>
+
 <body>
     <header>
         <nav>
@@ -24,8 +23,8 @@
                 <!-- <li><a class="menu" href="./topAudio.html">Top Audio</a></li> -->
                 <li><a class="menu" href="./browse.html">Browse</a></li>
                 <li><a class="menu" href="./aboutUs.html">About Us</a></li>
-                <button class="logIn" onclick="document.getElementById('loginButton').style.display='block'" style="width:auto;">Sign In</button>
-                <button class="register" onclick="document.getElementById('registerButton').style.display='block'" style="width:auto;">Register</button>
+                <button class="logIn" onclick="document.getElementById('loginContainer').style.display='block'" style="width:auto;">Sign In</button>
+                <button class="register" onclick="document.getElementById('registrationContainer').style.display='block'" style="width:auto;">Register</button>
             </ul>
         </nav>
     </header>
@@ -70,41 +69,31 @@
         <button id="accountFolderDeletion"> Delete Account</button>
         <br></br>
 
-        <!-- <form id="accountCreation">
-            <input type="text" placeholder="Enter New Username" id="newUsername" required>
-            <label for="newUsername"><b>Username</b></label>
-
-            <input type="password" placeholder="Enter Password" id="newPass" required>
-            <label for="newPass"><b>Password</b></label>
-
-            <input type="password" placeholder="Enter Repeat Password" id="newPassRepeat" required>
-            <label for="newPassRepeat"><b>Repeat Password</b></label>
-        
-            <button type="submit">Create User</button>
-        </form> -->
-
-        <div id="loginButton" class="loginContainer">
+        <div id="loginContainer">
             <form id="loginForm">
-                <button onclick="closeForm()" class="close" formnovalidate>&times;</button>
+                <button onclick="closeForm('loginContainer')" class="close">&times;</button>
                 <div class="userCredentials">
+                    <h1>Log In</h1>
+                    <hr>
                     <label for="username"><b>Username</b></label>
                     <input type="text" placeholder="Username" id="username" required>
 
                     <label for="psw"><b>Password</b></label>
                     <input type="password" placeholder="Password" id="psw" required>
-
-                    <button class="loginBtn" type="submit">Login</button>
-                    <input type="checkbox" checked="checked" id="rememberMe">
-                    <label for="rememberMe">Remember me</label>
                 </div>
+                <input type="checkbox" checked="checked" id="rememberMeBox">
+                <label id="rememberMe">Remember me</label>
+
                 <a id="forgot" href="#">Forgot Password?</a>
+
+                <button id="loginBtn" type="submit">Login</button>
             </form>        
         </div>
         
 
-        <div id="registerButton" class="registrationContainer">
+        <div id="registrationContainer">
             <form id="registrationForm">
-                <button onclick="closeForm()" class="close" formnovalidate>&times;</button>
+                <button onclick="closeForm('registrationContainer')" class="close">&times;</button>
                 <div class="userCredentials">
                     <h1>Create an account</h1>
                     <hr>
@@ -122,15 +111,12 @@
                     By creating an account you agree to our
                     <a href="#" style="color:dodgerblue"> Terms and Conditions</a>
                 </p>
-
-                <div class="clearfix">
-                    <button type="submit" class="signupBtn">Register</button>
-                </div>
+                <button type="submit" id="signUpBtn">Register</button>
             </form> 
         </div>
     </main>
 
-    <script type="module" src="./index.js"></script>
+    <script src="./index.js"></script>
 </body>
 <footer>Copyright &copy; AudioFile 2024</footer>
 

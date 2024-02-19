@@ -200,10 +200,14 @@ async function createUserAccount(event){
 document.getElementById('documentUploadForm').addEventListener('submit', submitDocument);
 document.getElementById('accountFolderCreation').addEventListener("click", createAccountFolder);
 document.getElementById('accountFolderDeletion').addEventListener("click", deleteAccountFolder);
-document.getElementById('registrationForm').addEventListener("submit", createUserAccount);
+document.getElementById('registrationForm').addEventListener('submit', createUserAccount);
 
-function closeForm() {
-  document.getElementById().style.display="none";
+function closeForm(container) {
+  if (container === 'loginContainer') {
+    document.getElementById('loginContainer').style.display = 'none';
+  } else if (container === 'registrationContainer') {
+    document.getElementById('registrationContainer').style.display = 'none';
+  }
 }
 
 // var loginModal = document.getElementById('loginButton');

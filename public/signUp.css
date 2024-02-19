@@ -1,6 +1,6 @@
-.signupBtn {
+#signUpBtn {
     position: relative;
-    background: white;
+    background: cyan;
     padding-left: 50%;
     width: 25%;
     padding: 14px 20px;
@@ -18,7 +18,7 @@
 }
 
 /* The Modal (background) */
-.registrationContainer {
+#registrationContainer {
     display: none;
     position: fixed;
     z-index: 1;
@@ -32,12 +32,13 @@
 
 /* Modal Content/Box */
 #registrationForm {
+    position: relative;
     font-family: "Quicksand";
     background-color: white;
     margin: 5% auto 15% auto;
     border: 1px solid rgb(91, 90, 90);
     width: 50%;
-    border-radius: 30px;
+    border-radius: 15px;
 }
 
 /* Horizontal ruler */
@@ -54,8 +55,8 @@ hr {
 }
 
 /* Change styles for cancel button and signup button on small screens */
-@media screen and (max-width: 300px) {
-    .cancelbtn, .signupbtn {
+/* @media screen and (max-width: 300px) {
+    .signUpBtn {
         width: 100%;
     }
-}
+} */

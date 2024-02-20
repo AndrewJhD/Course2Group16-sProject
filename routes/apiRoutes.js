@@ -1,18 +1,20 @@
-const {Router, response} = require("express");
-const multer = require('multer');
-const FormData = require('form-data');
-const fs = require('fs');
-const http = require('https');
+import Router from 'express';
+import multer from 'multer';
+import FormData from 'form-data';
+import fs from 'fs';
+import http from 'https';
 const apiRouter = Router();
 const upload = multer();
-const gTTS = require('gtts');
-const { text } = require("body-parser");
+import gTTS from 'gtts';
+import text from 'body-parser';
 const rapidAPIKey = process.env.RAPIDAPI_KEY;
 const rapidAPIHost = process.env.RAPIDAPI_HOST;
 const audioPath = process.env.AUDIO_PATH;
-const express = require('express');
-const User = require("../models/user");
+import express from 'express';
+import User from '../models/user.js';
 const userRouter = express.Router();
+
+
 
 userRouter.post("/newuser", async (req, res) => {
     try {
@@ -213,4 +215,4 @@ function fileExists(filePath) {
     }
 }
 
-module.exports = apiRouter;
+export default apiRouter;

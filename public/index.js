@@ -90,7 +90,7 @@ function grabNameUntilPeriod(input) {
   return result;
 }
 async function createAccountFolder(){ // creates the users folder (will be combined with the main account creation method once db functions are implemented)
-  localStorage.userId = 'u4321'; // this will also be removed when db gets implemented as this variable will be grabbed when the user signs in
+  localStorage.userId = 'u1234'; // this will also be removed when db gets implemented as this variable will be grabbed when the user signs in
   try{
         
     const response = await fetch('/api/createUserFolders', {
@@ -209,30 +209,3 @@ function closeForm(container) {
     document.getElementById('registrationContainer').style.display = 'none';
   }
 }
-
-// var loginModal = document.getElementById('loginButton');
-// var btn = document.getElementById('login');
-// var span = document.getElementsByClassName("close")[0];
-
-// btn.onclick = function() {
-//   loginModal.style.display = "block";
-// }
-        
-// window.onclick = function(event) {
-//     if (event.target == loginModal) {
-//         loginModal.style.display = "none";
-//     }
-// }
-
-
-// document.addEventListener('click', handleOutsideClick);
-
-
-
-// var modal = document.getElementById('registerBtn');
-
-// window.onclick = function(event) {
-//   if(event.target == modal) {
-//     modal.style.display = "none";
-//   }
-// }

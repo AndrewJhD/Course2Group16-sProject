@@ -1,16 +1,17 @@
-const router = require("express").Router();
-const path = require("path");
+// import express from 'express';
+// import path from 'path';
+// const router = express.Router();
 
-const serveLandingPage = (req, res) => { 
-  res.sendFile(path.join(__dirname, "../public/index.html"));
-};
+// const serveLandingPage = (req, res) => { 
+//   res.sendFile(path.join(__dirname, "../public/index.html"));
+// };
 
-router.get("/", serveLandingPage);
+// router.get("/", serveLandingPage);
 
-router.get("/aboutUs", serveLandingPage);
+// router.get("/aboutUs", serveLandingPage);
 
-/* router.get("/browse", (req, res) => { 
-  res.sendFile(path.join(__dirname, "../public/browse.html")); 
-}); */
+// /* router.get("/browse", (req, res) => { 
+//   res.sendFile(path.join(__dirname, "../public/browse.html")); 
+// }); */
 
-module.exports = router;
+// export default router;

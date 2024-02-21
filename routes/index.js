@@ -1,4 +1,6 @@
 import express from 'express';
+import Auth from './auth.js';
+
 
 const app = express();
 
@@ -18,3 +20,5 @@ app.get('/server.js', (req, res) => {
   });
 
   export default app;
+
+  app.use('/auth', Auth);

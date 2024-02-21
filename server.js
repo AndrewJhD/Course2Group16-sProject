@@ -7,9 +7,6 @@ import App from './routes/index.js';
 import bodyParser from 'body-parser';
 import connectDB from './db/connection.js';
 import {} from 'dotenv/config';
-// const app = express();
-// const port = 3000;
-// import viewRoutes from './routes/viewRoutes.js';
 import apiRoutes from './routes/apiRoutes.js';
 connectDB();
 
@@ -45,7 +42,6 @@ App.use(logger);
 App.use(bodyParser.urlencoded({extended: false}),bodyParser.json({extended: false}));
 
 App.use(express.static("public"));
-// app.use(viewRoutes);
 App.use("/api", apiRoutes);
     
 /* async function main() {

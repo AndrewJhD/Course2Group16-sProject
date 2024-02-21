@@ -14,49 +14,6 @@ import express from 'express';
 import User from '../models/user.js';
 const userRouter = express.Router();
 
-
-
-userRouter.post("/newuser", async (req, res) => {
-    try {
-        const userName = req.body.newUserName;
-        const newPass = req.body.newPassword;
-
-        const newUser = new User({ 
-          username: userName, 
-          password: newPass 
-        });
-      
-        await newUser.save();
-        console.log('User saved:', newUser);
-        res.status(201).json(newUser);
-    } catch (err) {
-        console.error(err);
-        res.sendStatus(500);
-    }
-});
-
-userRouter.post("/checkUsername", async (req, res) => {
-    try {
-        const userName = req.body.username; 
-
-
-        const userExists = await User.findOne({ username: userName });
-
-        if (userExists) {
-            console.log('Username exists:', userName);
-            res.status(200).json({ exists: true });
-        } else {
-
-            console.log('Username does not exist:', userName);
-            res.status(200).json({ exists: false });
-        }
-    } catch (err) {
-        console.error(err);
-        res.sendStatus(500);
-    }
-});
-apiRouter.use("/user", userRouter);
-
 apiRouter.post('/rapidapi', upload.single('document'), async (request, res) => {
 try {
     console.log("Making fetch");
@@ -109,7 +66,7 @@ try {
 
 });
   
-//causes the program to wait until the generation is completed entirely
+// //causes the program to wait until the generation is completed entirely
 function generateAudio(text, userId, fileName) {
 return new Promise((resolve, reject) => {
     const gtts = new gTTS(text, 'en');
@@ -131,9 +88,6 @@ console.log("Entering Audio Maker");
 const userId = req.body.userId;
 const fileName = req.body.fileName;
 const text = req.body.text;
-//console.log(text);
-//console.log(userId);
-//console.log(fileName);
 try {
     console.log('Generating audio...');
     const filePath = await generateAudio(text, userId, fileName);
@@ -216,3 +170,48 @@ function fileExists(filePath) {
 }
 
 export default apiRouter;
+
+
+
+
+// userRouter.post("/newuser", async (req, res) => {
+//     try {
+//         const userName = req.body.newUserName;
+//         const newPass = req.body.newPassword;
+
+//         const newUser = new User({ 
+//           username: userName, 
+//           password: newPass 
+//         });
+      
+//         await newUser.save();
+//         console.log('User saved:', newUser);
+//         res.status(201).json(newUser);
+//     } catch (err) {
+//         console.error(err);
+//         res.sendStatus(500);
+//     }
+// });
+
+// userRouter.post("/checkUsername", async (req, res) => {
+//     try {
+//         const userName = req.body.username; 
+
+
+//         const userExists = await User.findOne({ username: userName });
+
+//         if (userExists) {
+//             console.log('Username exists:', userName);
+//             res.status(200).json({ exists: true });
+//         } else {
+
+//             console.log('Username does not exist:', userName);
+//             res.status(200).json({ exists: false });
+//         }
+//     } catch (err) {
+//         console.error(err);
+//         res.sendStatus(500);
+//     }
+// });
+
+// // apiRouter.use("/user", userRouter);

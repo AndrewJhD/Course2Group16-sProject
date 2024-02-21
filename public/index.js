@@ -61,9 +61,9 @@ async function submitDocument(event) {
     }
     document.getElementById('documentUploadForm').reset();
 }
+
 function createUser() {
   var userData = document.getElementById('userdata');
-
 }
 
 function displayAudio(fileName) {
@@ -89,8 +89,11 @@ function grabNameUntilPeriod(input) {
   }
   return result;
 }
-async function createAccountFolder(){ // creates the users folder (will be combined with the main account creation method once db functions are implemented)
-  localStorage.userId = 'u1234'; // this will also be removed when db gets implemented as this variable will be grabbed when the user signs in
+
+// creates the users folder (will be combined with the main account creation method once db functions are implemented)
+async function createAccountFolder(){ 
+  // This will also be removed when db gets implemented as this variable will be grabbed when the user signs in
+  localStorage.userId = 'u1234'; 
   try{
         
     const response = await fetch('/api/createUserFolders', {
@@ -164,12 +167,12 @@ async function createUserAccount(event){
         console.log('Passwords match');
 
         try {
-          const response = await fetch('/api/user/newuser', {
+          const response = await fetch('/auth/register', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json'
             },
-            body: JSON.stringify({newUserName: uName, newPassword: newpsw})
+            body: JSON.stringify({username: uName, password: newpsw})
           });
 
           if (response.ok) {
@@ -200,7 +203,7 @@ async function createUserAccount(event){
 document.getElementById('documentUploadForm').addEventListener('submit', submitDocument);
 document.getElementById('accountFolderCreation').addEventListener("click", createAccountFolder);
 document.getElementById('accountFolderDeletion').addEventListener("click", deleteAccountFolder);
-document.getElementById('registrationForm').addEventListener('submit', createUserAccount);
+// document.getElementById('registrationForm').addEventListener('submit', createUserAccount);
 
 function closeForm(container) {
   if (container === 'loginContainer') {

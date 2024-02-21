@@ -1,7 +1,1 @@
-POST http://localhost:3000/auth/login
-Content-Type: application/json
-
-{
-    "username": "magcamps",
-    "password": 12345678
-}
+GET http://localhost:3000/server

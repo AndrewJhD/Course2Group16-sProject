@@ -1,5 +1,5 @@
-module.exports = {
-    User: require("./user"),
-    Entry: require("./entry"),
-};
+// module.exports = {
+//     User: require("./user"),
+//     Entry: require("./entry"),
+// };
 

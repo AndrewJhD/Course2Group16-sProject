@@ -37,28 +37,37 @@ export async function Register(req, res) {
 export async function Login(req, res) {
     const { username } = req.body;
     try {
+        // Check if the user exists
         const user = await User.findOne({ username }).select('+password');
         if (!user)
             return res.status(401).json({
                 status: 'failed',
                 data: [],
-                message: 'Invalid username or password. Please try again.',
+                message: 'Account does not exist.',
             });
-        const isPasswordValid = bcrypt.compare(
+        // If user exists, validate password
+        const isPasswordValid = await bcrypt.compare(
             `${req.body.password}`,
             user.password
         );
+        // If not valid, return unauthorized response
         if (!isPasswordValid)
             return res.status(401).json({
                 status: 'failed',
                 data: [],
                 message: 'Invalid username or password. Please try again.',
             })
-        const {password, ...userData } = user._doc;
-
+        
+        let options = {
+            maxAge: 60 * 60 * 1000, // The token will expire after 60 minutes
+            httpOnly: true,
+            secure: true,
+            sameSite: 'None',
+        };
+        const token = user.generateAccessJWT();
+        res.cookie('SessionID', token, options);
         res.status(200).json({
             status: 'success',
-            data: [userData],
             message: 'You have successfully logged in.',
         });
     } catch (err) {

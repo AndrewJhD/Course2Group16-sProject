@@ -1,24 +1,34 @@
 import express from 'express';
 import Auth from './auth.js';
+import { Verify } from '../middleware/verify.js';
 
 
 const app = express();
 
-app.get('/server.js', (req, res) => {
-    try {
-      res.status(200).json({
-        status: 'success',
-        data: [],
-        message: 'Welcome to our API homepage!',
-      });
-    } catch (err) {
-      res.status(500.).json({
-        status: 'error',
-        message: 'Internal Server Error',
-      });
-    }
-  });
+app.disable('x-powered-by');
 
-  export default app;
+app.get('/', (req, res) => {
+  try {
+    res.status(200).json({
+      status: 'success',
+      data: [],
+      message: 'Welcome to our API homepage!',
+    });
+  } catch (err) {
+    res.status(500).json({
+      status: 'error',
+      message: 'Internal Server Error',
+    });
+  }
+});
 
-  app.use('/auth', Auth);
+app.get('/user', Verify, (req, res) => {
+    res.status(200).json({
+      status: 'success',
+      message: 'Welcome to your Dashboard!',
+    });
+});
+
+app.use('/auth', Auth);
+
+export default app;

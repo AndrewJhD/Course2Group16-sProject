@@ -7,12 +7,13 @@ import App from './routes/index.js';
 import bodyParser from 'body-parser';
 import connectDB from './db/connection.js';
 import {} from 'dotenv/config';
-import apiRoutes from './routes/apiRoutes.js';
+// import apiRoutes from './routes/apiRoutes.js';
 connectDB();
 
 const server = express();
 
 server.use(cors());
+server.disable('x-powered-by'); // Reduce fingerprinting
 server.use(cookieParser());
 server.use(express.urlencoded({ extended : false }));
 server.use(express.json());
@@ -42,7 +43,8 @@ App.use(logger);
 App.use(bodyParser.urlencoded({extended: false}),bodyParser.json({extended: false}));
 
 App.use(express.static("public"));
-App.use("/api", apiRoutes);
+
+// App.use("/api", apiRoutes);
     
 /* async function main() {
     await mongoose.connect(""); //insert tw database name here

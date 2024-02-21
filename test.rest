@@ -1,7 +1,9 @@
-POST http://localhost:3000/auth/login
-Content-Type: application/json
+GET http://localhost:3000/user
 
-{
-    "username": "magcamps",
-    "password": 12345678
-}
+# POST http://localhost:3000/auth/login 
+# Content-Type: application/json
+
+# {
+#     "username": "magcamps",
+#     "password": 12345678
+# }

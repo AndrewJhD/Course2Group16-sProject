@@ -7,7 +7,7 @@ const app = express();
 
 app.disable('x-powered-by');
 
-app.get('/', (req, res) => {
+app.get('/server', (req, res) => {
   try {
     res.status(200).json({
       status: 'success',

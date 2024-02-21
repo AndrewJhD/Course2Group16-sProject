@@ -61,9 +61,9 @@ async function submitDocument(event) {
     }
     document.getElementById('documentUploadForm').reset();
 }
+
 function createUser() {
   var userData = document.getElementById('userdata');
-
 }
 
 function displayAudio(fileName) {
@@ -89,8 +89,11 @@ function grabNameUntilPeriod(input) {
   }
   return result;
 }
-async function createAccountFolder(){ // creates the users folder (will be combined with the main account creation method once db functions are implemented)
-  localStorage.userId = 'u1234'; // this will also be removed when db gets implemented as this variable will be grabbed when the user signs in
+
+// creates the users folder (will be combined with the main account creation method once db functions are implemented)
+async function createAccountFolder(){ 
+  // This will also be removed when db gets implemented as this variable will be grabbed when the user signs in
+  localStorage.userId = 'u1234'; 
   try{
         
     const response = await fetch('/api/createUserFolders', {
@@ -141,66 +144,66 @@ async function deleteSingleAudio(){ // most likely include a call to either get 
   }
 }
 
-// async function createUserAccount(event){
-//   event.preventDefault();
-//   const uName = document.getElementById('newUsername').value;
-//   const newpsw = document.getElementById('newPass').value;
-//   const reppsw = document.getElementById('newPassRepeat').value;
+async function createUserAccount(event){
+  event.preventDefault();
+  const uName = document.getElementById('newUsername').value;
+  const newpsw = document.getElementById('newPass').value;
+  const reppsw = document.getElementById('newPassRepeat').value;
   
-//   try {
-//     const validNameResponse = await fetch('/api/user/checkUsername', {
-//       method: 'POST',
-//       headers: {
-//         'Content-Type': 'application/json'
-//       },
-//       body: JSON.stringify({username: uName}) // Ensure the key matches what the server expects
-//     });
+  try {
+    const validNameResponse = await fetch('/api/user/checkUsername', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({username: uName}) // Ensure the key matches what the server expects
+    });
 
-//     const validName = await validNameResponse.json(); // Parse the JSON response
+    const validName = await validNameResponse.json(); // Parse the JSON response
 
-//     // Check if the username is taken based on the response. Assuming the API returns { exists: true/false }
-//     if (!validName.exists) {
-//       if (newpsw === reppsw) { // Confirms inputted passwords match
-//         console.log('Passwords match');
+    // Check if the username is taken based on the response. Assuming the API returns { exists: true/false }
+    if (!validName.exists) {
+      if (newpsw === reppsw) { // Confirms inputted passwords match
+        console.log('Passwords match');
 
-//         try {
-//           const response = await fetch('/api/user/newuser', {
-//             method: 'POST',
-//             headers: {
-//               'Content-Type': 'application/json'
-//             },
-//             body: JSON.stringify({newUserName: uName, newPassword: newpsw})
-//           });
+        try {
+          const response = await fetch('/auth/register', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({username: uName, password: newpsw})
+          });
 
-//           if (response.ok) {
-//             // If the request was successful
-//             console.log('User created successfully');
-//             const userData = await response.json();
-//             console.log(userData);
-//             // You might want to redirect the user or clear the form here
-//           } else {
-//             // Handle server errors or user creation issues
-//             console.error('Error creating user: Server responded with status', response.status);
-//           }
-//         } catch (error) {
-//           console.error('Error creating user', error);
-//         }
-//       } else {
-//         console.log("Passwords don't match");
-//       }
-//     } else {
-//       console.log("Username taken!");
-//     }
-//   } catch (error) {
-//     console.error('Error checking username availability', error);
-//   }
+          if (response.ok) {
+            // If the request was successful
+            console.log('User created successfully');
+            const userData = await response.json();
+            console.log(userData);
+            // You might want to redirect the user or clear the form here
+          } else {
+            // Handle server errors or user creation issues
+            console.error('Error creating user: Server responded with status', response.status);
+          }
+        } catch (error) {
+          console.error('Error creating user', error);
+        }
+      } else {
+        console.log("Passwords don't match");
+      }
+    } else {
+      console.log("Username taken!");
+    }
+  } catch (error) {
+    console.error('Error checking username availability', error);
+  }
 
-// }
+}
 
 document.getElementById('documentUploadForm').addEventListener('submit', submitDocument);
 document.getElementById('accountFolderCreation').addEventListener("click", createAccountFolder);
 document.getElementById('accountFolderDeletion').addEventListener("click", deleteAccountFolder);
-document.getElementById('registrationForm').addEventListener('submit', createUserAccount);
+// document.getElementById('registrationForm').addEventListener('submit', createUserAccount);
 
 function closeForm(container) {
   if (container === 'loginContainer') {

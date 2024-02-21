@@ -46,7 +46,7 @@ export async function Login(req, res) {
                 message: 'Account does not exist.',
             });
         // If user exists, validate password
-        const isPasswordValid = bcrypt.compare(
+        const isPasswordValid = await bcrypt.compare(
             `${req.body.password}`,
             user.password
         );
@@ -59,7 +59,7 @@ export async function Login(req, res) {
             })
         
         let options = {
-            maxAge: 20 * 60 * 1000,
+            maxAge: 60 * 60 * 1000, // The token will expire after 60 minutes
             httpOnly: true,
             secure: true,
             sameSite: 'None',

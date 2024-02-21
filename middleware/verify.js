@@ -1,3 +1,4 @@
+import { SECRET_ACCESS_TOKEN } from '../config/index.js';
 import User from '../models/user.js';
 import jwt from 'jsonwebtoken';
 
@@ -8,7 +9,7 @@ export async function Verify(req, res, next) {
         if (!authHeader) return res.sendStatus(401);
         const cookie = authHeader.split('=')[1];
 
-        jwt.verify(cookie, config.SECRET_ACCESS_TOKEN, async (err, decoded) => {
+        jwt.verify(cookie, SECRET_ACCESS_TOKEN, async (err, decoded) => {
             if (err) {
                 return res
                     .status(401)

@@ -2,13 +2,13 @@ import express from 'express';
 import cors from 'cors';
 import cookieParser from 'cookie-parser';
 import mongoose from 'mongoose';
-import { PORT, URI } from './config/index.js';
+import { PORT, MONGO_URI } from './config/index.js';
 import App from './routes/index.js';
 import bodyParser from 'body-parser';
-import connectDB from './db/connection.js';
-import {} from 'dotenv/config';
-// import apiRoutes from './routes/apiRoutes.js';
-connectDB();
+import apiRoutes from './routes/apiRoutes.js';
+// import connectDB from './db/connection.js';
+// import {} from 'dotenv/config';
+// connectDB();
 
 const server = express();
 
@@ -21,7 +21,7 @@ server.use(express.json());
 mongoose.promise = global.Promise;
 mongoose.set('strictQuery', false);
 mongoose
-    .connect(URI, {
+    .connect(MONGO_URI, {
         useNewUrlParser: true,
         useUnifiedTopology: true,
     })
@@ -44,7 +44,7 @@ App.use(bodyParser.urlencoded({extended: false}),bodyParser.json({extended: fals
 
 App.use(express.static("public"));
 
-// App.use("/api", apiRoutes);
+App.use("/api", apiRoutes);
     
 /* async function main() {
     await mongoose.connect(""); //insert tw database name here

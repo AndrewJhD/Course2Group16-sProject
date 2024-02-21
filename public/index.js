@@ -149,20 +149,21 @@ async function createUserAccount(event){
   const uName = document.getElementById('newUsername').value;
   const newpsw = document.getElementById('newPass').value;
   const reppsw = document.getElementById('newPassRepeat').value;
+  console.log('creating User')
   
   try {
-    const validNameResponse = await fetch('/api/user/checkUsername', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({username: uName}) // Ensure the key matches what the server expects
-    });
+    // const validNameResponse = await fetch('routes/auth/register', {
+    //   method: 'POST',
+    //   headers: {
+    //     'Content-Type': 'application/json'
+    //   },
+    //   body: JSON.stringify({username: uName}) // Ensure the key matches what the server expects
+    // });
 
-    const validName = await validNameResponse.json(); // Parse the JSON response
+    // const validName = await validNameResponse.json(); // Parse the JSON response
 
     // Check if the username is taken based on the response. Assuming the API returns { exists: true/false }
-    if (!validName.exists) {
+    // if (!validName.exists) {
       if (newpsw === reppsw) { // Confirms inputted passwords match
         console.log('Passwords match');
 
@@ -191,9 +192,9 @@ async function createUserAccount(event){
       } else {
         console.log("Passwords don't match");
       }
-    } else {
-      console.log("Username taken!");
-    }
+    // } else {
+    //   console.log("Username taken!");
+    // }
   } catch (error) {
     console.error('Error checking username availability', error);
   }
@@ -203,7 +204,7 @@ async function createUserAccount(event){
 document.getElementById('documentUploadForm').addEventListener('submit', submitDocument);
 document.getElementById('accountFolderCreation').addEventListener("click", createAccountFolder);
 document.getElementById('accountFolderDeletion').addEventListener("click", deleteAccountFolder);
-// document.getElementById('registrationForm').addEventListener('submit', createUserAccount);
+document.getElementById('registrationContainer').addEventListener('submit', createUserAccount);
 
 function closeForm(container) {
   if (container === 'loginContainer') {

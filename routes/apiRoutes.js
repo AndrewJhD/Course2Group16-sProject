@@ -6,11 +6,11 @@ import http from 'https';
 const apiRouter = Router();
 const upload = multer();
 import gTTS from 'gtts';
-import text from 'body-parser';
 const rapidAPIKey = process.env.RAPIDAPI_KEY;
 const rapidAPIHost = process.env.RAPIDAPI_HOST;
 const audioPath = process.env.AUDIO_PATH;
 import express from 'express';
+import text from 'body-parser';
 import User from '../models/user.js';
 const userRouter = express.Router();
 
@@ -84,32 +84,33 @@ return new Promise((resolve, reject) => {
 }
 
 apiRouter.post('/saveAudio', async (req, res) => {
-console.log("Entering Audio Maker");
-const userId = req.body.userId;
-const fileName = req.body.fileName;
-const text = req.body.text;
-try {
-    console.log('Generating audio...');
-    const filePath = await generateAudio(text, userId, fileName);
-    console.log('Audio generated successfully at: ' + filePath)
-    res.sendStatus(200);
-} catch (error) {
-    console.error('Error generating audio:', error);
-    res.status(500).send('Error generating audio');
-}
+    console.log("Entering Audio Maker");
+    const username = req.body.username;
+    const fileName = req.body.fileName;
+    const text = req.body.text;
+    try {
+        console.log('Generating audio...');
+        const filePath = await generateAudio(text, username, fileName);
+        console.log('Audio generated successfully at: ' + filePath)
+        res.sendStatus(200);
+    } catch (error) {
+        console.error('Error generating audio:', error);
+        res.status(500).send('Error generating audio');
+    }
 });
 
 apiRouter.post('/createUserFolders', (req, res) => {
-const userId = req.body.userId;
-const folderPath = `./public/uploads/${userId}/audio`;
-try {
-    fs.mkdir(folderPath, { recursive: true }, (err) => {
-    if (err) {
-        console.error('Error creating folder:', err);
-    } else {
-        console.log('Folder created successfully!');
-    }
-});
+    const { username } = req.body;
+    console.log(username);
+    const folderPath = `./public/uploads/${username}/audio`;
+    try {
+        fs.mkdir(folderPath, { recursive: true }, (err) => {
+        if (err) {
+            console.error('Error creating folder:', err);
+        } else {
+            console.log('Folder created successfully!');
+        }
+    });
     res.sendStatus(200);
 } catch (err) {
     console.error(err);

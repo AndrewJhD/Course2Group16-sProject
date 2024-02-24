@@ -11,7 +11,7 @@ export async function Register(req, res) {
         });
         const existingUser = await User.findOne({ username });
         if (existingUser)
-            return res.status(200).json({
+            return res.status(400).json({
                 status: 'failed',
                 data: [],
                 message: 'It seems you already have an account, please try loggin in.',

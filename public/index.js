@@ -54,10 +54,8 @@ async function userLogin () {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({ username: uName, password: pass }),
-    });
+    }); 
     if (response.ok) {
-      sessionStorage.setItem(username, uName);
-      currentUser = sessionStorage.getItem(username)
       console.log(`${currentUser} is now logged in!`);
     }
   } catch (error) {
@@ -70,7 +68,6 @@ async function submitDocument(event) {
 
   let duplicatechecker;
   let audioContainer = document.getElementById('audiobook');
-  audioContainer.innerHTML = 'Generating audio file, please wait!';
   const file = document.getElementById('fileInput').files[0];
   const fileName = grabNameUntilPeriod(document.getElementById('fileInput').files[0].name);
   const formData = new FormData();
@@ -94,8 +91,10 @@ async function submitDocument(event) {
       } catch (error) {
         console.error('File Checking Error:', error);
       }
-      console.log(duplicatechecker);
+      // console.log(duplicatechecker);
       if(duplicatechecker == 'false'){
+        console.log('Creating audio file.')
+        audioContainer.innerHTML = 'Generating audio file, please wait!';
         try { 
           const response = await fetch('/api/saveAudio', {
             method: 'POST',

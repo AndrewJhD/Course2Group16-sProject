@@ -67,10 +67,10 @@ try {
 });
   
 // //causes the program to wait until the generation is completed entirely
-function generateAudio(text, userId, fileName) {
+function generateAudio(text, username, fileName) {
 return new Promise((resolve, reject) => {
     const gtts = new gTTS(text, 'en');
-    const filePath = `public/uploads/${userId}/audio/${fileName}.mp3`;
+    const filePath = `public/uploads/${username}/audio/${fileName}.mp3`;
     
     gtts.save(filePath, (err, result) => {
         if (err) {
@@ -85,7 +85,7 @@ return new Promise((resolve, reject) => {
 
 apiRouter.post('/saveAudio', async (req, res) => {
     console.log("Entering Audio Maker");
-    const username = req.body.username;
+    const { username } = req.body;
     const fileName = req.body.fileName;
     const text = req.body.text;
     try {
@@ -120,8 +120,8 @@ apiRouter.post('/createUserFolders', (req, res) => {
 
 //deletes all files inside of specified directory
 apiRouter.post('/deleteUserFolder', async (req, res) => { 
-  const userId = req.body.userId;
-  const folderPath = `./public/uploads/${userId}`;
+  const { username } = req.body;
+  const folderPath = `./public/uploads/${username}`;
   try {
     fs.rmSync(folderPath, { recursive: true, force: true });
     console.log(`${folderPath} is deleted!`);
@@ -133,9 +133,9 @@ apiRouter.post('/deleteUserFolder', async (req, res) => {
 });
 
 apiRouter.post('/deleteSingleAudio', async (req, res) => { //not testible yet due to reliance on browse page being completed frist
-    const userId = req.body.userId;
+    const { username } = req.body;
     const fileName = req.body.fileName;
-    const filePath = `./public/uploads/${userId}/audio/${fileName}.mp3`;
+    const filePath = `./public/uploads/${username}/audio/${fileName}.mp3`;
     try {
         fs.unlinkSync(filePath);
         console.log(`${filePath} has been deleted.`);
@@ -147,9 +147,9 @@ apiRouter.post('/deleteSingleAudio', async (req, res) => { //not testible yet du
 });
 
 apiRouter.post('/checkFiles', async (req, res) => { //not testible yet due to reliance on browse page being completed frist
-    const userId = req.body.userId;
+    const { username } = req.body;
     const fileName = req.body.fileName;
-    const filePath = `./public/uploads/${userId}/audio/${fileName}.mp3`;
+    const filePath = `./public/uploads/${username}/audio/${fileName}.mp3`;
     if (fileExists(filePath)) {
       console.log('File exists.');
       res.status(200).send('true');

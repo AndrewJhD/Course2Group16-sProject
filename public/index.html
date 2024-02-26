@@ -23,8 +23,10 @@
                 <!-- <li><a class="menu" href="./topAudio.html">Top Audio</a></li> -->
                 <li><a class="menu" href="./browse.html">Browse</a></li>
                 <li><a class="menu" href="./aboutUs.html">About Us</a></li>
-                <button class="logIn" onclick="document.getElementById('loginContainer').style.display='block'" style="width:auto;">Sign In</button>
-                <button class="register" onclick="document.getElementById('registrationContainer').style.display='block'" style="width:auto;">Register</button>
+                <section id="interactionButtons">
+                    <button class="logIn" onclick="document.getElementById('loginContainer').style.display='block'" style="width:auto;">Sign In</button>
+                    <button class="register" onclick="document.getElementById('registrationContainer').style.display='block'" style="width:auto;">Register</button>
+                </section>
             </ul>
         </nav>
     </header>
@@ -70,9 +72,10 @@
         </div> -->
 
         <br></br>
-        <!-- <div id="audiobook"></div> -->
+        <!-- <div id="audiobook"></div>
         <button id="accountFolderCreation"> Create Account</button>
         <button id="accountFolderDeletion"> Delete Account</button>
+        -->
         <br></br>
 
         <div id="loginContainer">
@@ -84,10 +87,11 @@
                     <label for="username"><b>Username</b></label>
                     <input type="text" placeholder="Username" id="username" required>
 
-                    <label for="psw"><b>Password</b></label>
+                    <label for="pass"><b>Password</b></label>
                     <input type="password" placeholder="Password" id="pass" required>
                 </div>
                 <input type="checkbox" checked="checked" id="rememberMeBox">
+                <p class="login-warning-text" style="display: none; color: red;">Username or password did not match</p>
                 <p id="rememberMe">Remember me</p>
 
                 <a id="forgot" href="#">Forgot Password?</a>

@@ -1,5 +1,5 @@
 import User from '../models/user.js';
-import bcrypt from 'bcrypt';
+import bcrypt from 'bcryptjs';
 import Blacklist from '../models/Blacklist.js';
 
 export async function Register(req, res) {

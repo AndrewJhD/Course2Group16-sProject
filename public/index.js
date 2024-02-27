@@ -114,15 +114,31 @@ async function userLogin () {
       document.getElementById('Hiddenbrowse').style.display = 'block';
       document.querySelector('.converterDiv').style.display = 'block';
       document.querySelector('.preconvertDiv').style.display = 'none';
-
-    }
-    else{
-      console.error('Username or password did not match.');
-      document.querySelector('.login-warning-text').style.display = 'block';
+    } else{
+        console.error('Username or password did not match.');
+        document.querySelector('.login-warning-text').style.display = 'block';
     }
   } catch (error) {
-    console.log(error);
-    
+      console.error(error);
+  }
+}
+
+async function userLogout() {
+  try {
+    const response = await fetch('/auth/logout', {
+      method: 'GET',
+    });
+    console.log(response);
+    if (response.ok) {
+      console.log('You have been logged out.');
+      document.getElementById('interactionButtons').style.display = 'block';
+      document.querySelector('.login-warning-text').style.display = 'block';
+      document.getElementById('Hiddenbrowse').style.display = 'none';
+      document.querySelector('.converterDiv').style.display = 'none';
+      document.querySelector('.preconvertDiv').style.display = 'block';
+    }
+  } catch (error) {
+    console.error('Something went wrong. Please try again.');
   }
 }
 
@@ -356,6 +372,8 @@ document.getElementById('register').addEventListener('click', registrationOpen);
 document.getElementById('documentUploadForm').addEventListener('submit', submitDocument);
 document.getElementById('signUpBtn').addEventListener('click', createUserAccount);
 document.getElementById('loginBtn').addEventListener('click', userLogin);
-
+//submit forms using return 
 document.addEventListener('keypress', function() {submitRForm(event)}, false);
 document.addEventListener('keypress', function() {submitLForm(event)}, false);
+//log out 
+document.getElementById('logout').addEventListener('click', userLogout);

@@ -30,6 +30,7 @@
                     <button type="button" class="logIn" id="logIn">Sign In</button>
                     <button type="button" class="register" id="register">Register</button>
                 </section>
+                <button type="button" class="logout" id="logout">Log Out</button>
             </ul>
         </nav>
     </header>
@@ -94,11 +95,11 @@
                         <h1>Log In</h1>
                         <hr>
                         <label for="username"><b>Username</b></label>
-                        <input type="text" placeholder="Username" id="username" >
+                        <input type="text" placeholder="Username" id="username" autocomplete="on">
                         <p class="empty-login-user" style="display: none; color: red;">The username is empty</p>
 
                         <label for="pass"><b>Password</b></label>
-                        <input type="password" placeholder="Password" id="pass" >
+                        <input type="password" placeholder="Password" id="pass" autocomplete="on">
                         <p class="empty-login-pass" style="display: none; color: red;">The password is empty</p>
 
                     </div>
@@ -121,11 +122,11 @@
                         <input type="text" placeholder="Username" id="newUsername" >
                         <p class="empty-reg-user" style="display: none; color: red;">The username is empty</p>
                         <label for="newPass"><b>Password</b></label>
-                        <input type="password" placeholder="Password" id="newPass" >
+                        <input type="password" placeholder="Password" id="newPass" autocomplete="on">
                         <p class="reg-pass-warning-text" style="display: none; color: red;">The password has to be 8 characters or more/p>
                         <p class="empty-reg-pass" style="display: none; color: red;">The password is empty</p>
                         <label for="newPassRepeat"><b>Confirm Password</b></label>
-                        <input type="password" placeholder="Confirm Password" id="newPassRepeat" >
+                        <input type="password" placeholder="Confirm Password" id="newPassRepeat" autocomplete="on">
                         <p class="empty-reg-confirmpass" style="display: none; color: red;">The confirm password is empty</p>
                     </div>
                         <p class="reg-warning-text" style="display: none; color: red;">The password and confirm password don't match</p>

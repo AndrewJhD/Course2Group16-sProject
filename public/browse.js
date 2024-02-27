@@ -1,4 +1,4 @@
-let dataEx = {
+let dataEx = { // move this into getAudio once entries work is finished
     0: {
         title: "Percy Jackson and the Lightning Theif",
         audio: "",
@@ -49,7 +49,21 @@ let dataEx = {
     },
 };
 
+
+function getAudioNames(){ // get entries here
+
+}
+
+function refreshBrowse(){
+    var browseDiv = document.getElementById('audioLibrary');
+    browseDiv.innerHTML = '';
+    createAudioLibrary();
+}
+
+
+
 function createAudioLibrary() {
+    getAudioNames();
     for (let i in dataEx){
         let title = dataEx[i].title
         let audioSource = dataEx[i].audio

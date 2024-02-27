@@ -111,13 +111,10 @@ async function userLogin () {
       document.getElementById('loginContainer').style.display = 'none'; //closes menu on valid login
       document.getElementById('interactionButtons').style.display = 'none';
       document.querySelector('.login-warning-text').style.display = 'none';
+      document.querySelector('.preconvertDiv').style.display = 'none';
       document.getElementById('Hiddenbrowse').style.display = 'block';
       document.querySelector('.converterDiv').style.display = 'block';
-      document.querySelector('.preconvertDiv').style.display = 'none';
-    } else{
-        console.error('Username or password did not match.');
-        document.querySelector('.login-warning-text').style.display = 'block';
-    }
+      document.querySelector('.signOut').style.display = 'block';
   } catch (error) {
       console.error(error);
   }
@@ -176,6 +173,7 @@ async function submitDocument(event) {
   const fileName = grabNameUntilPeriod(document.getElementById('fileInput').files[0].name);
   const formData = new FormData();
   formData.append('document', file);
+  audioContainer.innerHTML = "Converting your document please be patient";
   try {
     const response = await fetch('/api/rapidapi', {
       method: 'POST',
@@ -358,6 +356,12 @@ function focusBrowse(){
   document.getElementById('browseFocusBtn').classList.add('special');
 }
 
+function callSignOut(){
+
+}
+
+//sign out button
+document.getElementById('signOut').addEventListener('click', callSignOut);
 //form focus buttons
 document.getElementById('homeFocusBtn').addEventListener('click', focusHome);
 document.getElementById('aboutUsFocusBtn').addEventListener('click', focusAbout);

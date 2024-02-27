@@ -4,9 +4,9 @@ async function createUserAccount() {
   const uName = document.getElementById('newUsername').value;
   const newPass = document.getElementById('newPass').value;
   const repPass = document.getElementById('newPassRepeat').value;
-  console.log(uName);
-  console.log(newPass);
-  console.log(repPass);
+  //console.log(uName);
+  //console.log(newPass);
+  //console.log(repPass);
   
   if(!validateRegisterFormInput(uName,newPass,repPass)){
     return;
@@ -27,9 +27,9 @@ async function createUserAccount() {
     });
     if (response.ok) {
       // If the request was successful
-      console.log('User created successfully');
+      //console.log('User created successfully');
       const userData = await response.json();
-      console.log(userData);
+      //console.log(userData);
       createAccountFolder(uName);
       document.getElementById('registrationContainer').style.display = 'none';
       document.getElementById('loginContainer').style.display = 'block';
@@ -46,35 +46,42 @@ async function createUserAccount() {
 
 function validateRegisterFormInput(uName, newPass, repPass){
   var emptyFields = [];
-  var shortFields = [];
+  document.querySelector('.reg-warning-text').style.display = 'none';
   document.querySelector('.empty-reg-user').style.display = 'none';
   document.querySelector('.empty-reg-pass').style.display = 'none';
   document.querySelector('.empty-reg-confirmpass').style.display = 'none';
   document.querySelector('.reg-pass-warning-text').style.display = 'none';
-  if(!uName || !newPass || !repPass){
+  if (newPass !== repPass) {
+    //console.log("Passwords don't match");
+    document.querySelector('.reg-warning-text').style.display = 'block';
+    return;
+  }
+  else{
+    if(!uName || !newPass || !repPass){
 
-    if (uName === '') {
-        emptyFields.push('Username');
-        document.querySelector('.empty-reg-user').style.display = 'block';
-    }
-    if (newPass === '') {
-        emptyFields.push('Password');
-        document.querySelector('.empty-reg-pass').style.display = 'block';
-    }
-    if (repPass === '') {
-        emptyFields.push('Email');
-        document.querySelector('.empty-reg-confirmpass').style.display = 'block';
-    }
+      if (uName === '') {
+          emptyFields.push('Username');
+          document.querySelector('.empty-reg-user').style.display = 'block';
+      }
+      if (newPass === '') {
+          emptyFields.push('Password');
+          document.querySelector('.empty-reg-pass').style.display = 'block';
+      }
+      if (repPass === '') {
+          emptyFields.push('Email');
+          document.querySelector('.empty-reg-confirmpass').style.display = 'block';
+      }
 
-    if (emptyFields.length > 0) {
-      //var message = 'Please fill in the following fields:\n' + emptyFields.join(', ');
-      //alert(message); 
+      if (emptyFields.length > 0) {
+        //var message = 'Please fill in the following fields:\n' + emptyFields.join(', ');
+        //alert(message); 
+        return false;
+      }
+    }
+    else if(newPass.length < 8){
+      document.querySelector('.reg-pass-warning-text').style.display = 'block';
       return false;
     }
-  }
-  else if(newPass.length < 8){
-    document.querySelector('.reg-pass-warning-text').style.display = 'block';
-    return false;
   }
   return true;
 }
@@ -104,6 +111,10 @@ async function userLogin () {
       document.getElementById('loginContainer').style.display = 'none'; //closes menu on valid login
       document.getElementById('interactionButtons').style.display = 'none';
       document.querySelector('.login-warning-text').style.display = 'none';
+      document.getElementById('Hiddenbrowse').style.display = 'block';
+      document.querySelector('.converterDiv').style.display = 'block';
+      document.querySelector('.preconvertDiv').style.display = 'none';
+
     }
     else{
       console.error('Username or password did not match.');
@@ -249,7 +260,7 @@ async function deleteAccountFolder(){ // deletes the users folder (will be combi
     });
     //const data = await response.text();
   } catch (error) {
-    console.error('Error creating user folder', error);
+    console.error('Error deleting user folder', error);
   }
 }
 
@@ -265,7 +276,7 @@ async function deleteSingleAudio(){ // most likely include a call to either get 
     });
     //const data = await response.text();
   } catch (error) {
-    console.error('Error creating user folder', error);
+    console.error('Error deleting audio', error);
   }
 }
 
@@ -277,7 +288,46 @@ function closeForm(container) {
   }
 }
 
+function registrationOpen()
+{
+  document.getElementById('registrationContainer').style.display='block';
+}
+function loginOpen()
+{
+  document.getElementById('loginContainer').style.display='block';
+}
+
+function focusHome(){
+    //console.log("focusing home");
+    document.querySelector('.home').style.display = 'block';
+    document.querySelector('.aboutUs').style.display = 'none';
+    document.querySelector('.browse').style.display = 'none';
+}
+
+function focusAbout(){
+  //console.log("focusing aboutUs");
+  document.querySelector('.home').style.display = 'none';
+  document.querySelector('.aboutUs').style.display = 'block';
+  document.querySelector('.browse').style.display = 'none';
+}
+function focusBrowse(){
+  //console.log("focusing browse");
+  document.querySelector('.home').style.display = 'none';
+  document.querySelector('.aboutUs').style.display = 'none';
+  document.querySelector('.browse').style.display = 'block';
+}
+
+//form focus buttons
+document.getElementById('homeFocusBtn').addEventListener('click', focusHome);
+document.getElementById('aboutUsFocusBtn').addEventListener('click', focusAbout);
+document.getElementById('browseFocusBtn').addEventListener('click', focusBrowse);
+//close form buttons
+document.getElementById('closeLogin').addEventListener('click', closeForm('loginContainer'));
+document.getElementById('closeRegister').addEventListener('click', closeForm('registrationContainer'));
+//open form buttons
+document.getElementById('logIn').addEventListener('click', loginOpen);
+document.getElementById('register').addEventListener('click', registrationOpen);
+//form submit buttons
 document.getElementById('documentUploadForm').addEventListener('submit', submitDocument);
 document.getElementById('signUpBtn').addEventListener('click', createUserAccount);
 document.getElementById('loginBtn').addEventListener('click', userLogin);
-// document.getElementById('accountFolderCreation').addEventListener("click", createAccountFolder);

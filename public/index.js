@@ -181,25 +181,31 @@ document.getElementById('documentUploadForm').addEventListener('submit', submitD
 document.getElementById('accountFolderCreation').addEventListener("click", createAccountFolder);
 document.getElementById('accountFolderDeletion').addEventListener("click", deleteAccountFolder);
 document.getElementById('accountCreation').addEventListener("submit", createUserAccount);
+document.getElementById('navOpen').addEventListener("click", openNav());
+document.getElementById('navClose').addEventListener("click", closeNav());
+
 
 var loginModal = document.getElementById('loginButton');
+var modal = document.getElementById('registerBtn');
 var btn = document.getElementById('login');
 var span = document.getElementsByClassName("close")[0];
-
-btn.onclick = function() {
-  loginModal.style.display = "block";
-}
-        
+     
 window.onclick = function(event) {
     if (event.target == loginModal) {
         loginModal.style.display = "none";
     }
 }
 
-var modal = document.getElementById('registerBtn');
-
 window.onclick = function(event) {
   if(event.target == modal) {
     modal.style.display = "none";
   }
+}
+
+function openNav() {
+  document.getElementById("myNav").style.height = "100%";
+}
+
+function closeNav() {
+  document.getElementById("myNav").style.height = "0%";
 }

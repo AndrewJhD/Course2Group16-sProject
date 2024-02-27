@@ -15,6 +15,7 @@
         <link rel="stylesheet" href="./index.css">
         <link rel="stylesheet" href="./login.css">
         <link rel="stylesheet" href="./signUp.css">
+        <link rel="stylesheet" href="./overlay.css">
 </head>
 
 <body>
@@ -150,6 +151,17 @@
                 </div>
             </form> 
         </div>
+
+        <div id="myNav" class="overlay">
+            <a class="closebtn" id="navClose">&times; </a>
+            <div class="overlay-content">
+              <a href="#">About</a>
+              <a href="#">Services</a>
+              <a href="#">Clients</a>
+              <a href="#">Contact</a>
+            </div>
+        </div>
+        <span id="navOpen" style="cursor:pointer">open</span>
     </main>
     <!-- <div id="fileDrop" ondrop="dropHandler(event)">
         <span> Drag your file in here. </span>

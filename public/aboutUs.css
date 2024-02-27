@@ -19,7 +19,7 @@
 
 .explain, #explained {
     animation: ease-out 1500ms 0s 1 fromTop;
-    padding-top: 10%; 
+    padding-top: 8%; 
     text-align: center;
     text-wrap: balance;
     font-size: 30px;
@@ -61,7 +61,7 @@
   /* position: absolute; */
   /* margin: auto; */
   position: absolute;
-  top: 700px;
+  top: 721px;
   left: 50%;
   /* left: 75%; */
   transform: translate(-50%, -50%);
@@ -91,10 +91,27 @@
   grid-template-columns: 33% 33% 33%;
 }
 
+.grid__item {
+  opacity: 0;
+  margin: 30px 0px;
+  animation: fade-in linear forwards;
+  animation-timeline: view();
+  animation-range-start: entry 100px;
+  animation-range-end: 300px;
+  background-color: #37667e;
+  color: white;
+  border-radius: 10px;
+}
+.teamSummaries > .grid__item {
+  padding: 1em;
+}
 /* meet our team grid */
 #one {
+  background-color: transparent;
+  color: rgb(88, 88, 88);
   grid-column: 1 / 4;
   grid-row: 1;
+  margin: 0px;
 }
 
 #two {
@@ -144,6 +161,16 @@
   grid-column: 3;
   grid-row: 6;
 }
+
+
+#twelve {
+  grid-column: 2/4;
+  grid-row: 7;
+}
+#thirteen {
+  grid-column: 1;
+  grid-row: 7;
+}
 /* grid end */
 
 .teamSummaries > div > img {
@@ -160,7 +187,7 @@
   top: 0;
   left: 0;
   z-index: 1000;
-  background-color: #37667e;
+  background-color: #218b82;
   width: 100%;
   scale: 0 1;
   transform-origin:left;
@@ -172,14 +199,7 @@
   to { scale: 1 1;}
 }
 
-.grid__item {
-  opacity: 0;
-  margin: 30px 0px;
-  animation: fade-in linear forwards;
-  animation-timeline: view();
-  animation-range-start: entry 100px;
-  animation-range-end: 300px;
-}
+
 @keyframes fade-in {
   from {scale: .8; opacity: 0;}
   to {scale: 1; opacity: 1;}
@@ -200,6 +220,7 @@
 @media only screen and (max-width:700px) {
   .teamSummaries {
     line-height: 1;
+    font-size: medium;
   }
 }
 

@@ -13,15 +13,19 @@
     <link rel="stylesheet" href="./index.css">
     <link rel="stylesheet" href="./login.css">
     <link rel="stylesheet" href="./signUp.css">
+    <link rel="stylesheet" href="./aboutUs.css">
+    <link rel="stylesheet" href="./browse.css">
 </head>
 
 <body>
     <header>
+        
         <nav>
             <ul>
-                <li><button type="button" class="homeBtn" id="homeFocusBtn">Home</button></li>
-                <li><button type="button" class="aboutUsBtn" id="aboutUsFocusBtn">AboutUs</button></li>
-                <li id="Hiddenbrowse" style="display: none;"><button type="button" class="browsebtn" id="browseFocusBtn">Browse</button></li>
+                <li><button type="button" class="tab special" id="homeFocusBtn">Home</button></li>
+                <li><button type="button" class="tab" id="aboutUsFocusBtn">About Us</button></li>
+                <!-- <li id="Hiddenbrowse" style="display: none;"><button type="button" class="browsebtn" id="browseFocusBtn">Browse</button></li> -->
+                <li id="Hiddenbrowse" ><button type="button" class="tab" id="browseFocusBtn">My Audios</button></li>
                 <section id="interactionButtons">
                     <button type="button" class="logIn" id="logIn">Sign In</button>
                     <button type="button" class="register" id="register">Register</button>
@@ -33,7 +37,7 @@
     <main>
         <div class="home">
             <div class="wrapper" id="bentoBox">
-                <div class="text" id="one">
+                <div class="text" id="bento-one">
                     <div class="converterDiv" style="display: none;">    
                         <h1>Create your first audio recording!</h1>
                         <form id="documentUploadForm" enctype="multipart/form-data">
@@ -47,17 +51,17 @@
                         <p> Login to get started!</p>
                     </div>
                 </div>
-                <div class="text" id="two">
+                <div class="text" id="bento-two">
                     <p style="font-size: 20px;">
                         Easier than learning how to read. Just choose the file that appeals to your senses make it AudioFile.
                     </p>
                 </div>
-                <div class="text" id="three">
+                <div class="text" id="bento-three">
                     <p style="font-size: 20px;">
                         Who we are and what inspires us. Get to know our story (link to AboutUs placeholder)
                     </p>
                 </div>
-                <div class="text" id="four">
+                <div class="text" id="bento-four">
                     <p style="font-size: 30px;">
                         Sign Up now to create your first transcription (This will hold the transcription button once the user is signed in)
                     </p>
@@ -133,15 +137,74 @@
                 </form> 
             </div>
         </div>
-        <div class="aboutUs" style="display: none;">
-
+    <div class="aboutUs" style="display: none;">
+        <div class="scroll-watcher"></div>
+        <div class="container">
+            <div class="circle">
+                <h1 class="explain">What is AudioFile?</h1>
+                <p id="explained">
+                    AudioFile is a way to take all of your text documents and convert them into a high quality audio file at the click of a button. 
+                </p>
+            </div>
         </div>
-        <div class="browse" style="display: none;">
+        <div id="womanWithHeadphones">
+            <div>
+                <!-- <h1>About Us!</h1> -->
+                <img src="./images/headphones.png" id="headphones"alt="">
+            </div>
+            <div>
+                <!-- <img src="./images/womanWithHeadphones.png" alt="" style="visibility: hidden;"> -->
+                <img src="./images/headOnly.png" id="woman" alt="">
+            </div>
+        </div>
 
+        <div class="teamSummaries">
+            <h1 id="one" class="grid__item">Meet Our Team!</h1>
+            <div id="two" class="grid__item">
+                Andrew Dowd is currently deciding on a 4 year university to attend after completing his 2 year A.A.S. degree in Computer Information Systems. An aspiring developer of 3 and a half years who currently works as a lifeguard at his local swimming pool. He is one of our back-end developers in charge of handling API calls and data processing.
+            </div>
+            <div id="three"><img src="./images/andrew-pic.png" class="grid__item" alt=""></div>
+            <div id="four" class="grid__item">
+                Magdiel Campos is currently studying at Manchester Community College in pursuit of an A.S. in Mathematics and Computer Science. He currently works for Apple and has been an aspiring developer for almost two years. He is one of our front-end developers and also worked on the user authentication process and scripting for dynamic page layouts throughout our website.
+            </div>
+            <div id="five"><img src="./images/mag-pic.jpg" class="grid__item" alt=""></div>
+            <div id="six" class="grid__item">
+                Benjamin Majeski is currently studying at Des Moines Area Community College for his Associates degree in Computer Information Systems. He currently plans to enter the work force after college.
+            </div>
+            <div id="seven"><img src="./images/ben-pic.jpg" class="grid__item" alt=""></div>
+            <div id="eight" class="grid__item">
+                Sam Adams is studying at Manchester Community College in pursuit of an Associates in Computer Science and Innovation. He is also a student in the Techwise program and works at Hannaford Supermarket.
+            </div>
+            <div id="nine"><img src="./images/sam-pic.jpg" class="grid__item" alt=""></div>
+            <div id="ten" class="grid__item">
+                Alie VanDeVoorde is a student at the Des Moines Area Community College. She is pursuing an Associates degree in Computer Information Systems.
+        
+            </div>
+            <div id="eleven"><img src="./images/allie-pic.jpg" class="grid__item" alt=""></div>
+            
+            <h1 id="twelve" class="grid__item">Get in touch with us!</h1>
+            <div id="thirteen"><img src="./images/qr-code.png" class="grid__item" alt=""></div>
+     
+        </div>
+    </div>
+        <div class="browse" style="display: none;">
+            <div class="scroll-watcher"></div>
+        <div id="container">
+            <h1>My Audios (Coming Soon!)</h1>
+            
+            <div id="audioLibrary">
+                <p id="insertHere"></p>
+                <div class="bookItem">
+                    <h2 class="bookTitle">The Hobbit</h2>
+                    <audio class="bookAudio" controls src=""></audio>
+                </div>
+            </div>
+        </div>
         </div>
     </main>
 
     <script src="./index.js"></script>
+    <script src="./browse.js"></script>
 </body>
 <footer>Copyright &copy; AudioFile 2024</footer>
 

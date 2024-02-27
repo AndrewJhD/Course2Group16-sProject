@@ -1,6 +1,36 @@
-.signupBtn {
+/* Background for registration form */
+#registrationContainer {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(245, 245, 245, 0.8);
+}
+
+/* Registration Form*/
+#registrationForm {
     position: relative;
-    background: white;
+    font-family: "Quicksand";
+    background-color: white;
+    margin: 5% auto 15% auto;
+    border: 1px solid rgb(91, 90, 90);
+    width: 60%;
+    border-radius: 15px;
+}
+
+/* Horizontal ruler */
+hr {
+    border: 2px solid #ECD69A;
+    margin-bottom: 25px;
+}
+
+#signUpBtn {
+    position: relative;
+    background: cyan;
     padding-left: 50%;
     width: 25%;
     padding: 14px 20px;
@@ -13,49 +43,15 @@
     cursor: pointer;
 }
 
-.container {
+.userCredentials {
     padding:15px;
 }
 
-/* The Modal (background) */
-.modal {
-    display: none;
-    position: fixed;
-    z-index: 1;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-    background-color: rgba(245, 245, 245, 0.8);
-}
 
-/* Modal Content/Box */
-.modal-content {
-    font-family: "Quicksand";
-    background-color: white;
-    margin: 5% auto 15% auto;
-    border: 1px solid rgb(91, 90, 90);
-    width: 50%;
-    border-radius: 30px;
-}
-
-/* Horizontal ruler */
-hr {
-    border: 2px solid #ECD69A;
-    margin-bottom: 25px;
-}
 
 /* Clear floats */
 .clearfix::after {
     content: "";
     clear: both;
     display: table;
-}
-
-/* Change styles for cancel button and signup button on small screens */
-@media screen and (max-width: 300px) {
-    .cancelbtn, .signupbtn {
-        width: 100%;
-    }
 }

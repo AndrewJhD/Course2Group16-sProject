@@ -1,5 +1,37 @@
-/* Full-width input fields */
-input[type=email], input[type=password] {
+/* Background for the login form */
+#loginContainer {
+    position: fixed;
+    display: none;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(245, 245, 245, .8);
+}
+
+/* Login Form */
+#loginForm {
+    position: relative;
+    font-family: "Quicksand", sans-serif;
+    font-weight: 300;
+    z-index: 1;
+    background-color: white;
+    margin: 15% auto;
+    border: 2px solid #888;
+    border-radius: 15px;
+    width: 45%;
+    height: 50%;
+}
+
+/* Horizontal ruler */
+hr {
+    border: 2px solid #ECD69A;
+    margin-bottom: 25px;
+}
+
+/* Styling for all the input fields */
+input[type=text], input[type=password] {
     font-family: "Quicksand";
     width: 100%;
     padding: 12px 20px;
@@ -10,35 +42,14 @@ input[type=email], input[type=password] {
     border-radius: 8px;
 }
 
-input[type=email]:focus, input[type=password]:focus {
+input[type=text]:focus, input[type=password]:focus {
     background-color: rgba(211, 211, 211, .6);
     outline: none;
 }
 
-.loginBtn {
-    font-family: "QuickSand", sans-serif;
-    background-color: #9CC9B1;
-    color: white;
-    padding: 14px 20px;
-    margin: 8px 0;
-    position: relative;
-    left: 0;
-    border: none;
-    cursor: pointer;
-    width: 50%;
-    font-size: 25px;
-    border-radius: 15px;
-}
-
-
 input[id="rememberMe"] {
     position: relative;
     left: 10%;
-}
-
-.container {
-    padding: 16px;
-
 }
 
 span.psw {
@@ -46,50 +57,35 @@ span.psw {
     padding-top: 16px;
 }
 
-/* Model (background) */
-.loginModal {
-    display: none;
-    position: fixed;
-    z-index: 1;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-    background-color: rgba(245, 245, 245, .8);
-}
-
-/* Modal content */
-.login-modal-content {
-    font-family: "Quicksand", sans-serif;
-    font-weight: 300;
-    background-color: white;
-    margin: 15% auto;
-    border: 2px solid #888;
-    border-radius: 30px;
-    width: 40%;
-    height: 40%;
+/* Styling for the log in button */
+#loginBtn {
+    font-family: "QuickSand", sans-serif;
+    color: white;
+    background: #218B8270;
+    position: relative;
+    float: right;
+    border: none;
+    cursor: pointer;
+    width: 100px;
+    font-size: 25px;
+    border-radius: 15px;
 }
 
 /* Close button (x) */
 .close {
-    position: relative;
-    left: 94%;
+    position: absolute;
+    background: transparent;
+    border: none;
+    font-family: "Quicksand";
+    font-size: 30px;
+    font-weight: lighter;
     color: black;
-    font-size: 40px;
-    font-weight: bold;
+    top: -6px;
+    right: 2px;
 } 
 
 .close:hover,
 .close:focus {
     color: darkgray;
     cursor: pointer;
-}
-
-/* Changing styles for a smaller screen */
-@media screen and (max-width: 300px) {
-    span.psw {
-        display: block;
-        float: none;
-    }
 }

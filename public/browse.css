@@ -1,0 +1,38 @@
+#container {
+    background-color: #9AD9DB;
+    border-radius: 15px;
+    padding: 5px 0;
+
+    font-family: "Quicksand", sans-serif;
+}
+
+.bookItem {
+    display: flex;
+    align-items: center;
+    /* justify-content: center; */
+
+    margin: 10px auto;
+    width: 60%;
+    background-color: #37667e;
+    border-radius: 50px;
+    padding: 0 40px;
+    /* left: 50%; */
+}
+
+h1 {
+    text-align: center;
+    color: rgb(92, 92, 92);
+}
+.bookTitle {
+    display: inline;
+    margin-right: 15%;
+    color: white;
+    width: 50%;
+}
+.bookAudio {
+    position: absolute;
+    right: 18%;
+    width: 30%;
+}
+
+

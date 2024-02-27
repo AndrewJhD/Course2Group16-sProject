@@ -1,10 +1,19 @@
-const {MongoClient} = require("mongodb");
-console.log(process.env.MODE);
-let url = "mongodb://localhost:27017";
-if (process.env.MODE == "production") {
-    url = ``; //add in connection to techwise db here
-} else {
-    url = "mongodb://localhost:27017";
-}
-const mongoClient = new MongoClient(url);
-module.exports = mongoClient;
+// import mongoose from 'mongoose';
+// import dotenv from 'dotenv';
+// dotenv.config();
+
+// const connectDB = async () => {
+//   try {
+//     await mongoose.connect(process.env.MONGO_URI, {
+//       useNewUrlParser: true,
+//       useUnifiedTopology: true,
+//     });
+//     console.log('Connected to MongoDB');
+//   } catch (err) {
+//     console.error('Error connecting to MongoDB:', err);
+//     process.exit(1); 
+//   }
+// };
+
+// // module.exports = connectDB;
+// export default connectDB;

@@ -1,109 +1,248 @@
+async function createUserAccount() {
+  event.preventDefault();
+
+  const uName = document.getElementById('newUsername').value;
+  const newPass = document.getElementById('newPass').value;
+  const repPass = document.getElementById('newPassRepeat').value;
+  //console.log(uName);
+  //console.log(newPass);
+  //console.log(repPass);
+  
+  if(!validateRegisterFormInput(uName,newPass,repPass)){
+    return;
+  }
+
+  if (newPass !== repPass) {
+    console.log("Passwords don't match");
+    return;
+  }
+
+  try {
+    const response = await fetch('/auth/register', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ username: uName, password: newPass }),
+    });
+    if (response.ok) {
+      // If the request was successful
+      //console.log('User created successfully');
+      const userData = await response.json();
+      //console.log(userData);
+      createAccountFolder(uName);
+      document.getElementById('registrationContainer').style.display = 'none';
+      document.getElementById('loginContainer').style.display = 'block';
+    } else {
+        // Handle server errors or user creation issues
+        console.error('Error creating user: Server responded with status', response.status);
+        const errorData = await response.json();
+        console.error(errorData);
+    }
+  } catch (error) {
+      console.error('Error creating user', error);
+  }
+}
+
+function validateRegisterFormInput(uName, newPass, repPass){
+  var emptyFields = [];
+  document.querySelector('.reg-warning-text').style.display = 'none';
+  document.querySelector('.empty-reg-user').style.display = 'none';
+  document.querySelector('.empty-reg-pass').style.display = 'none';
+  document.querySelector('.empty-reg-confirmpass').style.display = 'none';
+  document.querySelector('.reg-pass-warning-text').style.display = 'none';
+  if (newPass !== repPass) {
+    //console.log("Passwords don't match");
+    document.querySelector('.reg-warning-text').style.display = 'block';
+    return;
+  }
+  else{
+    if(!uName || !newPass || !repPass){
+
+      if (uName === '') {
+          emptyFields.push('Username');
+          document.querySelector('.empty-reg-user').style.display = 'block';
+      }
+      if (newPass === '') {
+          emptyFields.push('Password');
+          document.querySelector('.empty-reg-pass').style.display = 'block';
+      }
+      if (repPass === '') {
+          emptyFields.push('Email');
+          document.querySelector('.empty-reg-confirmpass').style.display = 'block';
+      }
+
+      if (emptyFields.length > 0) {
+        //var message = 'Please fill in the following fields:\n' + emptyFields.join(', ');
+        //alert(message); 
+        return false;
+      }
+    }
+    else if(newPass.length < 8){
+      document.querySelector('.reg-pass-warning-text').style.display = 'block';
+      return false;
+    }
+  }
+  return true;
+}
+
+async function userLogin () {
+  event.preventDefault();
+
+  const uName = document.getElementById('username').value;
+  const pass = document.getElementById('pass').value;
+
+  if (!validateLoginFormInput(uName, pass)) {
+    return;
+  }
+
+  try {
+    const response = await fetch('/auth/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ username: uName, password: pass }),
+    }); 
+    console.log(response);
+    if (response.ok) {
+      currentUser = uName;
+      console.log(`${currentUser} is now logged in!`);
+      document.getElementById('loginContainer').style.display = 'none'; //closes menu on valid login
+      document.getElementById('interactionButtons').style.display = 'none';
+      document.querySelector('.login-warning-text').style.display = 'none';
+      document.getElementById('Hiddenbrowse').style.display = 'block';
+      document.querySelector('.converterDiv').style.display = 'block';
+      document.querySelector('.preconvertDiv').style.display = 'none';
+
+    }
+    else{
+      console.error('Username or password did not match.');
+      document.querySelector('.login-warning-text').style.display = 'block';
+    }
+  } catch (error) {
+    console.log(error);
+    
+  }
+}
+
+function validateLoginFormInput(uName, pass){
+  var emptyFields = [];
+  document.querySelector('.empty-login-user').style.display = 'none';
+  document.querySelector('.empty-login-pass').style.display = 'none';
+  if(!uName || !pass){
+
+    if (uName === '') {
+        emptyFields.push('Username');
+        document.querySelector('.empty-login-user').style.display = 'block';
+    }
+    if (pass === '') {
+        emptyFields.push('Password');
+        document.querySelector('.empty-login-pass').style.display = 'block';
+    }
+   
+
+    if (emptyFields.length > 0) {
+      //var message = 'Please fill in the following fields:\n' + emptyFields.join(', ');
+      //alert(message); 
+      return false;
+    }
+  }
+  return true;
+}
+
 async function submitDocument(event) {
-    event.preventDefault();
-    var duplicatechecker;
-    var audioContainer = document.getElementById('audiobook');
-    audioContainer.innerHTML = 'Audio in creation please wait!';
-    const file = document.getElementById('fileInput').files[0];
-    //console.log(file);
-    const fileName = grabNameUntilPeriod(document.getElementById('fileInput').files[0].name);
-    //console.log(localStorage.fileName)
-    const formData = new FormData();
-    formData.append('document', file);
-    try {
-      const response = await fetch('/api/rapidapi', {
-        method: 'POST',
-        body: formData
-      });
-      const data = await response.text();
-      //console.log(data);
-      if(data != "[]"){ // prevents audio saving if the document has no text in it
-        try {
-          const response = await fetch('/api/checkFiles', {
+  event.preventDefault();
+
+  let duplicatechecker;
+  let audioContainer = document.getElementById('audiobook');
+  const file = document.getElementById('fileInput').files[0];
+  const fileName = grabNameUntilPeriod(document.getElementById('fileInput').files[0].name);
+  const formData = new FormData();
+  formData.append('document', file);
+  try {
+    const response = await fetch('/api/rapidapi', {
+      method: 'POST',
+      body: formData
+    });
+    const data = await response.text();
+    if(data != "[]"){ // prevents audio saving if the document has no text in it
+      try {
+        const response = await fetch('/api/checkFiles', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({username: currentUser, fileName: String(fileName)})
+        });
+        duplicatechecker = await response.text();
+      } catch (error) {
+        console.error('File Checking Error:', error);
+      }
+      // console.log(duplicatechecker);
+      if(duplicatechecker == 'false'){
+        console.log('Creating audio file.')
+        audioContainer.innerHTML = 'Generating audio file, please wait!';
+        try { 
+          const response = await fetch('/api/saveAudio', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json'
             },
-            body: JSON.stringify({userId: String(localStorage.userId), fileName: String(fileName)})
+            body: JSON.stringify({ text: String(data), username: currentUser, fileName: String(fileName)})
           });
-
-          duplicatechecker = await response.text();
+          displayAudio(fileName);
         } catch (error) {
-          console.error('File Checking Error:', error);
-        }
-        console.log(duplicatechecker);
-        if(duplicatechecker == 'false'){
-          try {
-            
-            const response = await fetch('/api/saveAudio', {
-              method: 'POST',
-              headers: {
-                'Content-Type': 'application/json'
-              },
-              body: JSON.stringify({ text: String(data), userId: String(localStorage.userId), fileName: String(fileName)})
-            });
-            //const data2 = await response.text();
-
-            displayAudio(fileName);
-            
-          } catch (error) {
-            console.error('Error saving audio:', error);
-          }
-        }
-        else{
-          audioContainer.innerHTML = 'Error a file with the same name as the submitted documents name already exists';
+          console.error('Error saving audio:', error);
         }
       }
       else{
-          audioContainer.innerHTML = 'Error the submitted document is empty';
+        audioContainer.innerHTML = 'Uh oh! A file with the same name as the submitted documents name already exists';
       }
-    } catch (error) {
-      console.error('Error submitting document:', error);
     }
-    document.getElementById('documentUploadForm').reset();
-}
-function createUser() {
-  var userData = document.getElementById('userdata');
-
+    else{
+      audioContainer.innerHTML = 'Oops! The submitted document was found to be empty!';
+    }
+  } catch (error) {
+    console.error('Error submitting document:', error);
+  }
+  document.getElementById('documentUploadForm').reset();
 }
 
 function displayAudio(fileName) {
-  var audio = document.createElement('audio');
+  let audio = document.createElement('audio');
   
-  audio.src = `./uploads/${localStorage.userId}/audio/${fileName}.mp3`;
+  audio.src = `./uploads/${currentUser}/audio/${fileName}.mp3`;
   audio.controls = true;
   
-  var audioContainer = document.getElementById('audiobook');
+  let audioContainer = document.getElementById('audiobook');
   
   audioContainer.innerHTML = '';
-
+  
   audioContainer.appendChild(audio);
 }
 
 function grabNameUntilPeriod(input) {
   let result = '';
   for (let i = 0; i < input.length; i++) {
-      if (input[i] === '.') {
-          break;
-      }
-      result += input[i];
+    if (input[i] === '.') {
+      break;
+    }
+    result += input[i];
   }
   return result;
 }
-async function createAccountFolder(){ // creates the users folder (will be combined with the main account creation method once db functions are implemented)
-  localStorage.userId = 'u4321'; // this will also be removed when db gets implemented as this variable will be grabbed when the user signs in
-  try{
-        
+
+// creates the users folder (will be combined with the main account creation method once db functions are implemented)
+async function createAccountFolder(user){ 
+  try{ 
     const response = await fetch('/api/createUserFolders', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({userId: String(localStorage.userId)})
-      
+      body: JSON.stringify({username: user})
     });
-    
-    //const data = await response.text();
-
   } catch (error) {
     console.error('Error creating user folder', error);
   }
@@ -116,12 +255,12 @@ async function deleteAccountFolder(){ // deletes the users folder (will be combi
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({userId: String(localStorage.userId)})
+      body: JSON.stringify({userId: String(currentUser)})
       
     });
     //const data = await response.text();
   } catch (error) {
-    console.error('Error creating user folder', error);
+    console.error('Error deleting user folder', error);
   }
 }
 
@@ -132,80 +271,63 @@ async function deleteSingleAudio(){ // most likely include a call to either get 
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({userId: String(localStorage.userId)})
+      body: JSON.stringify({userId: String(currentUser)})
       
     });
     //const data = await response.text();
   } catch (error) {
-    console.error('Error creating user folder', error);
+    console.error('Error deleting audio', error);
   }
 }
 
-async function createUserAccount(event){
-  event.preventDefault();
-  const uName = document.getElementById('newUsername').value;
-  const newpsw = document.getElementById('newPass').value;
-  const reppsw = document.getElementById('newPassRepeat').value;
-  
-  console.log(uName);
-  console.log(newpsw);
-  console.log(reppsw);
-  if (newpsw == reppsw){ //confirms inputted passed match
-    console.log('passwords match')
- 
-    try{
-      console.log(uName);
-      console.log(newpsw);
-      console.log(reppsw);
-      const response = await fetch('/api/user/newuser',  {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({newUserName: String(uName), newPassword: String(newpsw)})
-
-      });
-      
-    }catch(error){
-      console.error('Error creating user', error);
-    }
-
+function closeForm(container) {
+  if (container === 'loginContainer') {
+    document.getElementById('loginContainer').style.display = 'none';
+  } else if (container === 'registrationContainer') {
+    document.getElementById('registrationContainer').style.display = 'none';
   }
-  else{
-    console.log("passwords dont match");
-  }
-  
 }
 
+function registrationOpen()
+{
+  document.getElementById('registrationContainer').style.display='block';
+}
+function loginOpen()
+{
+  document.getElementById('loginContainer').style.display='block';
+}
+
+function focusHome(){
+    //console.log("focusing home");
+    document.querySelector('.home').style.display = 'block';
+    document.querySelector('.aboutUs').style.display = 'none';
+    document.querySelector('.browse').style.display = 'none';
+}
+
+function focusAbout(){
+  //console.log("focusing aboutUs");
+  document.querySelector('.home').style.display = 'none';
+  document.querySelector('.aboutUs').style.display = 'block';
+  document.querySelector('.browse').style.display = 'none';
+}
+function focusBrowse(){
+  //console.log("focusing browse");
+  document.querySelector('.home').style.display = 'none';
+  document.querySelector('.aboutUs').style.display = 'none';
+  document.querySelector('.browse').style.display = 'block';
+}
+
+//form focus buttons
+document.getElementById('homeFocusBtn').addEventListener('click', focusHome);
+document.getElementById('aboutUsFocusBtn').addEventListener('click', focusAbout);
+document.getElementById('browseFocusBtn').addEventListener('click', focusBrowse);
+//close form buttons
+document.getElementById('closeLogin').addEventListener('click', closeForm('loginContainer'));
+document.getElementById('closeRegister').addEventListener('click', closeForm('registrationContainer'));
+//open form buttons
+document.getElementById('logIn').addEventListener('click', loginOpen);
+document.getElementById('register').addEventListener('click', registrationOpen);
+//form submit buttons
 document.getElementById('documentUploadForm').addEventListener('submit', submitDocument);
-document.getElementById('accountFolderCreation').addEventListener("click", createAccountFolder);
-document.getElementById('accountFolderDeletion').addEventListener("click", deleteAccountFolder);
-document.getElementById('accountCreation').addEventListener("submit", createUserAccount);
-document.getElementById('navOpen').addEventListener("click", openNav());
-document.getElementById('navClose').addEventListener("click", closeNav());
-
-
-var loginModal = document.getElementById('loginButton');
-var modal = document.getElementById('registerBtn');
-var btn = document.getElementById('login');
-var span = document.getElementsByClassName("close")[0];
-     
-window.onclick = function(event) {
-    if (event.target == loginModal) {
-        loginModal.style.display = "none";
-    }
-}
-
-window.onclick = function(event) {
-  if(event.target == modal) {
-    modal.style.display = "none";
-  }
-}
-
-function openNav() {
-  document.getElementById("myNav").style.height = "100%";
-}
-
-function closeNav() {
-  document.getElementById("myNav").style.height = "0%";
-}
+document.getElementById('signUpBtn').addEventListener('click', createUserAccount);
+document.getElementById('loginBtn').addEventListener('click', userLogin);

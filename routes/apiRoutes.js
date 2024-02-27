@@ -1,38 +1,18 @@
-const {Router, response} = require("express");
-const multer = require('multer');
-const FormData = require('form-data');
-const fs = require('fs');
-const http = require('https');
-const userRouter = Router();
+import Router from 'express';
+import multer from 'multer';
+import FormData from 'form-data';
+import fs from 'fs';
+import http from 'https';
 const apiRouter = Router();
 const upload = multer();
-const gTTS = require('gtts');
-const { text } = require("body-parser");
+import gTTS from 'gtts';
 const rapidAPIKey = process.env.RAPIDAPI_KEY;
 const rapidAPIHost = process.env.RAPIDAPI_HOST;
 const audioPath = process.env.AUDIO_PATH;
-const mongoClient = require("../db/connection");
-const ObjectId = require("mongodb").ObjectId;
-//const {User, Entry} = require("../models");
-
-//const targetDb = process.env.MODE == "production";
-//const db = mongoClient.db(targetDb);
-
-userRouter.post("/newuser", async (request, res) => {
-    try {
-        const useName = request.body.newUserName;
-        const newPass = request.body.newPassword;
-        console.log(String(useName));
-        console.log(newPass);
-        res.sendStatus(200);
-    } catch (err) {
-        console.error(err);
-        res.sendStatus(500);
-    }
-
-});
-
-apiRouter.use("/user", userRouter);
+import express from 'express';
+import text from 'body-parser';
+import User from '../models/user.js';
+const userRouter = express.Router();
 
 apiRouter.post('/rapidapi', upload.single('document'), async (request, res) => {
 try {
@@ -86,11 +66,11 @@ try {
 
 });
   
-//causes the program to wait until the generation is completed entirely
-function generateAudio(text, userId, fileName) {
+// //causes the program to wait until the generation is completed entirely
+function generateAudio(text, username, fileName) {
 return new Promise((resolve, reject) => {
     const gtts = new gTTS(text, 'en');
-    const filePath = `public/uploads/${userId}/audio/${fileName}.mp3`;
+    const filePath = `public/uploads/${username}/audio/${fileName}.mp3`;
     
     gtts.save(filePath, (err, result) => {
         if (err) {
@@ -104,35 +84,33 @@ return new Promise((resolve, reject) => {
 }
 
 apiRouter.post('/saveAudio', async (req, res) => {
-console.log("Entering Audio Maker");
-const userId = req.body.userId;
-const fileName = req.body.fileName;
-const text = req.body.text;
-//console.log(text);
-//console.log(userId);
-//console.log(fileName);
-try {
-    console.log('Generating audio...');
-    const filePath = await generateAudio(text, userId, fileName);
-    console.log('Audio generated successfully at: ' + filePath)
-    res.sendStatus(200);
-} catch (error) {
-    console.error('Error generating audio:', error);
-    res.status(500).send('Error generating audio');
-}
+    console.log("Entering Audio Maker");
+    const { username } = req.body;
+    const fileName = req.body.fileName;
+    const text = req.body.text;
+    try {
+        console.log('Generating audio...');
+        const filePath = await generateAudio(text, username, fileName);
+        console.log('Audio generated successfully at: ' + filePath)
+        res.sendStatus(200);
+    } catch (error) {
+        console.error('Error generating audio:', error);
+        res.status(500).send('Error generating audio');
+    }
 });
 
 apiRouter.post('/createUserFolders', (req, res) => {
-const userId = req.body.userId;
-const folderPath = `./public/uploads/${userId}/audio`;
-try {
-    fs.mkdir(folderPath, { recursive: true }, (err) => {
-    if (err) {
-        console.error('Error creating folder:', err);
-    } else {
-        console.log('Folder created successfully!');
-    }
-});
+    const { username } = req.body;
+    console.log(username);
+    const folderPath = `./public/uploads/${username}/audio`;
+    try {
+        fs.mkdir(folderPath, { recursive: true }, (err) => {
+        if (err) {
+            console.error('Error creating folder:', err);
+        } else {
+            console.log('Folder created successfully!');
+        }
+    });
     res.sendStatus(200);
 } catch (err) {
     console.error(err);
@@ -142,8 +120,8 @@ try {
 
 //deletes all files inside of specified directory
 apiRouter.post('/deleteUserFolder', async (req, res) => { 
-  const userId = req.body.userId;
-  const folderPath = `./public/uploads/${userId}`;
+  const { username } = req.body;
+  const folderPath = `./public/uploads/${username}`;
   try {
     fs.rmSync(folderPath, { recursive: true, force: true });
     console.log(`${folderPath} is deleted!`);
@@ -155,9 +133,9 @@ apiRouter.post('/deleteUserFolder', async (req, res) => {
 });
 
 apiRouter.post('/deleteSingleAudio', async (req, res) => { //not testible yet due to reliance on browse page being completed frist
-    const userId = req.body.userId;
+    const { username } = req.body;
     const fileName = req.body.fileName;
-    const filePath = `./public/uploads/${userId}/audio/${fileName}.mp3`;
+    const filePath = `./public/uploads/${username}/audio/${fileName}.mp3`;
     try {
         fs.unlinkSync(filePath);
         console.log(`${filePath} has been deleted.`);
@@ -169,9 +147,9 @@ apiRouter.post('/deleteSingleAudio', async (req, res) => { //not testible yet du
 });
 
 apiRouter.post('/checkFiles', async (req, res) => { //not testible yet due to reliance on browse page being completed frist
-    const userId = req.body.userId;
+    const { username } = req.body;
     const fileName = req.body.fileName;
-    const filePath = `./public/uploads/${userId}/audio/${fileName}.mp3`;
+    const filePath = `./public/uploads/${username}/audio/${fileName}.mp3`;
     if (fileExists(filePath)) {
       console.log('File exists.');
       res.status(200).send('true');
@@ -190,5 +168,51 @@ function fileExists(filePath) {
       console.error('Error checking file existence:', error);
       return false;
     }
-  }
-module.exports = apiRouter;
+}
+
+export default apiRouter;
+
+
+
+
+// userRouter.post("/newuser", async (req, res) => {
+//     try {
+//         const userName = req.body.newUserName;
+//         const newPass = req.body.newPassword;
+
+//         const newUser = new User({ 
+//           username: userName, 
+//           password: newPass 
+//         });
+      
+//         await newUser.save();
+//         console.log('User saved:', newUser);
+//         res.status(201).json(newUser);
+//     } catch (err) {
+//         console.error(err);
+//         res.sendStatus(500);
+//     }
+// });
+
+// userRouter.post("/checkUsername", async (req, res) => {
+//     try {
+//         const userName = req.body.username; 
+
+
+//         const userExists = await User.findOne({ username: userName });
+
+//         if (userExists) {
+//             console.log('Username exists:', userName);
+//             res.status(200).json({ exists: true });
+//         } else {
+
+//             console.log('Username does not exist:', userName);
+//             res.status(200).json({ exists: false });
+//         }
+//     } catch (err) {
+//         console.error(err);
+//         res.sendStatus(500);
+//     }
+// });
+
+// // apiRouter.use("/user", userRouter);

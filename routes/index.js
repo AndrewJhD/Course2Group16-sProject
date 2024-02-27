@@ -7,7 +7,7 @@ const app = express();
 
 app.disable('x-powered-by');
 
-app.get('/server', (req, res) => {
+app.get('/AudioFile.v1', (req, res) => {
   try {
     res.status(200).json({
       status: 'success',

@@ -8,7 +8,7 @@ async function createUserAccount() {
   //console.log(newPass);
   //console.log(repPass);
   
-  if(!validateRegisterFormInput(uName,newPass,repPass)){
+  if(!validateRegisterFormInput(uName, newPass, repPass)){
     return;
   }
 
@@ -27,9 +27,9 @@ async function createUserAccount() {
     });
     if (response.ok) {
       // If the request was successful
-      //console.log('User created successfully');
+      console.log('User created successfully');
       const userData = await response.json();
-      //console.log(userData);
+      console.log(userData);
       createAccountFolder(uName);
       document.getElementById('registrationContainer').style.display = 'none';
       document.getElementById('loginContainer').style.display = 'block';
@@ -115,14 +115,27 @@ async function userLogin () {
       document.getElementById('Hiddenbrowse').style.display = 'block';
       document.querySelector('.converterDiv').style.display = 'block';
       document.querySelector('.signOut').style.display = 'block';
-    }
-    else{
-      console.error('Username or password did not match.');
+  } catch (error) {
+      console.error(error);
+  }
+}
+
+async function userLogout() {
+  try {
+    const response = await fetch('/auth/logout', {
+      method: 'GET',
+    });
+    console.log(response);
+    if (response.ok) {
+      console.log('You have been logged out.');
+      document.getElementById('interactionButtons').style.display = 'block';
       document.querySelector('.login-warning-text').style.display = 'block';
+      document.getElementById('Hiddenbrowse').style.display = 'none';
+      document.querySelector('.converterDiv').style.display = 'none';
+      document.querySelector('.preconvertDiv').style.display = 'block';
     }
   } catch (error) {
-    console.log(error);
-    
+    console.error('Something went wrong. Please try again.');
   }
 }
 
@@ -289,6 +302,18 @@ function closeForm(container) {
   }
 }
 
+function submitRForm(e) {
+  if (e.keyCode === 13 && registrationContainer.style.display != 'none') {
+    createUserAccount();
+  }
+}
+
+function submitLForm(e) {
+  if (e.keyCode === 13 && loginContainer.style.display != 'none') {
+    userLogin();
+  }
+}
+
 function registrationOpen()
 {
   document.getElementById('registrationContainer').style.display='block';
@@ -351,3 +376,8 @@ document.getElementById('register').addEventListener('click', registrationOpen);
 document.getElementById('documentUploadForm').addEventListener('submit', submitDocument);
 document.getElementById('signUpBtn').addEventListener('click', createUserAccount);
 document.getElementById('loginBtn').addEventListener('click', userLogin);
+//submit forms using return 
+document.addEventListener('keypress', function() {submitRForm(event)}, false);
+document.addEventListener('keypress', function() {submitLForm(event)}, false);
+//log out 
+document.getElementById('logout').addEventListener('click', userLogout);

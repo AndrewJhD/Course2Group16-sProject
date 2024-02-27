@@ -85,14 +85,15 @@
                     <h1>Log In</h1>
                     <hr>
                     <label for="username"><b>Username</b></label>
-                    <input type="text" placeholder="Username" id="username" required>
+                    <input type="text" placeholder="Username" id="username" >
+                    <p class="empty-login-user" style="display: none; color: red;">The username is empty</p>
 
                     <label for="pass"><b>Password</b></label>
-                    <input type="password" placeholder="Password" id="pass" required>
+                    <input type="password" placeholder="Password" id="pass" >
+                    <p class="empty-login-pass" style="display: none; color: red;">The password is empty</p>
+
                 </div>
-                <input type="checkbox" checked="checked" id="rememberMeBox">
                 <p class="login-warning-text" style="display: none; color: red;">Username or password did not match</p>
-                <p id="rememberMe">Remember me</p>
 
                 <a id="forgot" href="#">Forgot Password?</a>
 
@@ -108,15 +109,17 @@
                     <h1>Create an account</h1>
                     <hr>
                     <label for="newUsername"><b>Username</b></label>
-                    <input type="text" placeholder="Username" id="newUsername" required>
-
+                    <input type="text" placeholder="Username" id="newUsername" >
+                    <p class="empty-reg-user" style="display: none; color: red;">The username is empty</p>
                     <label for="newPass"><b>Password</b></label>
-                    <input type="password" placeholder="Password" id="newPass" required>
-
+                    <input type="password" placeholder="Password" id="newPass" >
+                    <p class="reg-pass-warning-text" style="display: none; color: red;">The password has to be 8 characters or more/p>
+                    <p class="empty-reg-pass" style="display: none; color: red;">The password is empty</p>
                     <label for="newPassRepeat"><b>Confirm Password</b></label>
-                    <input type="password" placeholder="Confirm Password" id="newPassRepeat" required>
+                    <input type="password" placeholder="Confirm Password" id="newPassRepeat" >
+                    <p class="empty-reg-confirmpass" style="display: none; color: red;">The confirm password is empty</p>
                 </div>
-
+                    <p class="reg-warning-text" style="display: none; color: red;">The password and confirm password don't match/p>
                 <p>
                     By creating an account you agree to our
                     <a href="#" style="color:dodgerblue"> Terms and Conditions</a>

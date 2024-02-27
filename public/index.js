@@ -4,6 +4,13 @@ async function createUserAccount() {
   const uName = document.getElementById('newUsername').value;
   const newPass = document.getElementById('newPass').value;
   const repPass = document.getElementById('newPassRepeat').value;
+  console.log(uName);
+  console.log(newPass);
+  console.log(repPass);
+  
+  if(!validateRegisterFormInput(uName,newPass,repPass)){
+    return;
+  }
 
   if (newPass !== repPass) {
     console.log("Passwords don't match");
@@ -37,14 +44,49 @@ async function createUserAccount() {
   }
 }
 
+function validateRegisterFormInput(uName, newPass, repPass){
+  var emptyFields = [];
+  var shortFields = [];
+  document.querySelector('.empty-reg-user').style.display = 'none';
+  document.querySelector('.empty-reg-pass').style.display = 'none';
+  document.querySelector('.empty-reg-confirmpass').style.display = 'none';
+  document.querySelector('.reg-pass-warning-text').style.display = 'none';
+  if(!uName || !newPass || !repPass){
+
+    if (uName === '') {
+        emptyFields.push('Username');
+        document.querySelector('.empty-reg-user').style.display = 'block';
+    }
+    if (newPass === '') {
+        emptyFields.push('Password');
+        document.querySelector('.empty-reg-pass').style.display = 'block';
+    }
+    if (repPass === '') {
+        emptyFields.push('Email');
+        document.querySelector('.empty-reg-confirmpass').style.display = 'block';
+    }
+
+    if (emptyFields.length > 0) {
+      //var message = 'Please fill in the following fields:\n' + emptyFields.join(', ');
+      //alert(message); 
+      return false;
+    }
+  }
+  else if(newPass.length < 8){
+    document.querySelector('.reg-pass-warning-text').style.display = 'block';
+    return false;
+  }
+  return true;
+}
+
 async function userLogin () {
   event.preventDefault();
 
   const uName = document.getElementById('username').value;
   const pass = document.getElementById('pass').value;
 
-  if (!uName || !pass) {
-    return
+  if (!validateLoginFormInput(uName, pass)) {
+    return;
   }
 
   try {
@@ -71,6 +113,31 @@ async function userLogin () {
     console.log(error);
     
   }
+}
+
+function validateLoginFormInput(uName, pass){
+  var emptyFields = [];
+  document.querySelector('.empty-login-user').style.display = 'none';
+  document.querySelector('.empty-login-pass').style.display = 'none';
+  if(!uName || !pass){
+
+    if (uName === '') {
+        emptyFields.push('Username');
+        document.querySelector('.empty-login-user').style.display = 'block';
+    }
+    if (pass === '') {
+        emptyFields.push('Password');
+        document.querySelector('.empty-login-pass').style.display = 'block';
+    }
+   
+
+    if (emptyFields.length > 0) {
+      //var message = 'Please fill in the following fields:\n' + emptyFields.join(', ');
+      //alert(message); 
+      return false;
+    }
+  }
+  return true;
 }
 
 async function submitDocument(event) {
@@ -214,11 +281,3 @@ document.getElementById('documentUploadForm').addEventListener('submit', submitD
 document.getElementById('signUpBtn').addEventListener('click', createUserAccount);
 document.getElementById('loginBtn').addEventListener('click', userLogin);
 // document.getElementById('accountFolderCreation').addEventListener("click", createAccountFolder);
-
-function onLoad(){
-
-
-
-}
-
-onLoad();

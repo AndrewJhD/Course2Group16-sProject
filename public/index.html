@@ -19,113 +19,125 @@
     <header>
         <nav>
             <ul>
-                <li><a class="menu" href="#">Home</a></li>
-                <!-- <li><a class="menu" href="./topAudio.html">Top Audio</a></li> -->
-                <li><a class="menu" href="./browse.html">Browse</a></li>
-                <li><a class="menu" href="./aboutUs.html">About Us</a></li>
+                <li><button type="button" class="homeBtn" id="homeFocusBtn">Home</button></li>
+                <li><button type="button" class="aboutUsBtn" id="aboutUsFocusBtn">AboutUs</button></li>
+                <li id="Hiddenbrowse" style="display: none;"><button type="button" class="browsebtn" id="browseFocusBtn">Browse</button></li>
                 <section id="interactionButtons">
-                    <button class="logIn" onclick="document.getElementById('loginContainer').style.display='block'" style="width:auto;">Sign In</button>
-                    <button class="register" onclick="document.getElementById('registrationContainer').style.display='block'" style="width:auto;">Register</button>
+                    <button type="button" class="logIn" id="logIn">Sign In</button>
+                    <button type="button" class="register" id="register">Register</button>
                 </section>
             </ul>
         </nav>
     </header>
     <br>
     <main>
-        <div class="wrapper" id="bentoBox">
-            <div class="text" id="one">    
-                <h1>Create your first audio recording!</h1>
-                <form id="documentUploadForm" enctype="multipart/form-data">
+        <div class="home">
+            <div class="wrapper" id="bentoBox">
+                <div class="text" id="one">
+                    <div class="converterDiv" style="display: none;">    
+                        <h1>Create your first audio recording!</h1>
+                        <form id="documentUploadForm" enctype="multipart/form-data">
+                        <label for="fileInput">Select a file:</label>
+                        <input type="file" id="fileInput" name="file" accept=".pdf, .doc, .docx" required>
+                        <button type="submit">Upload and Convert</button>
+                        </form>
+                        <div id="audiobook"></div>
+                    </div> 
+                    <div class="preconvertDiv">
+                        <p> Login to get started!</p>
+                    </div>
+                </div>
+                <div class="text" id="two">
+                    <p style="font-size: 20px;">
+                        Easier than learning how to read. Just choose the file that appeals to your senses make it AudioFile.
+                    </p>
+                </div>
+                <div class="text" id="three">
+                    <p style="font-size: 20px;">
+                        Who we are and what inspires us. Get to know our story (link to AboutUs placeholder)
+                    </p>
+                </div>
+                <div class="text" id="four">
+                    <p style="font-size: 30px;">
+                        Sign Up now to create your first transcription (This will hold the transcription button once the user is signed in)
+                    </p>
+                </div>
+            </div>
+            <div id="taglineOne">
+                <ul>Find it, Upload it,</ul>
+                <ul>Create your AudioFile.</ul>
+            </div>
+            
+            <!-- <div>
+            <form id="documentUploadForm" enctype="multipart/form-data">
                 <label for="fileInput">Select a file:</label>
                 <input type="file" id="fileInput" name="file" accept=".pdf, .doc, .docx" required>
                 <button type="submit">Upload and Convert</button>
-                </form>
-                <div id="audiobook"></div>
+            </form>
+            </div> -->
+
+            <br></br>
+            <!-- <div id="audiobook"></div>
+            <button id="accountFolderCreation"> Create Account</button>
+            <button id="accountFolderDeletion"> Delete Account</button>
+            -->
+            <br></br>
+
+            <div id="loginContainer">
+                <form id="loginForm">
+                    <button id="closeLogin" class="close">&times;</button>
+                    <div class="userCredentials">
+                        <h1>Log In</h1>
+                        <hr>
+                        <label for="username"><b>Username</b></label>
+                        <input type="text" placeholder="Username" id="username" >
+                        <p class="empty-login-user" style="display: none; color: red;">The username is empty</p>
+
+                        <label for="pass"><b>Password</b></label>
+                        <input type="password" placeholder="Password" id="pass" >
+                        <p class="empty-login-pass" style="display: none; color: red;">The password is empty</p>
+
+                    </div>
+                    <p class="login-warning-text" style="display: none; color: red;">Username or password did not match</p>
+
+                    <a id="forgot" href="#">Forgot Password?</a>
+
+                    <button id="loginBtn" type="submit">Login</button>
+                </form>        
             </div>
-            <div class="text" id="two">
-                <p style="font-size: 20px;">
-                    Easier than learning how to read. Just choose the file that appeals to your senses make it AudioFile.
-                </p>
-            </div>
-            <div class="text" id="three">
-                <p style="font-size: 20px;">
-                    Who we are and what inspires us. Get to know our story (link to AboutUs placeholder)
-                </p>
-            </div>
-            <div class="text" id="four">
-                <p style="font-size: 30px;">
-                    Sign Up now to create your first transcription (This will hold the transcription button once the user is signed in)
-                </p>
+            
+
+            <div id="registrationContainer">
+                <form id="registrationForm">
+                    <button id="closeRegister" class="close">&times;</button>
+                    <div class="userCredentials">
+                        <h1>Create an account</h1>
+                        <hr>
+                        <label for="newUsername"><b>Username</b></label>
+                        <input type="text" placeholder="Username" id="newUsername" >
+                        <p class="empty-reg-user" style="display: none; color: red;">The username is empty</p>
+                        <label for="newPass"><b>Password</b></label>
+                        <input type="password" placeholder="Password" id="newPass" >
+                        <p class="reg-pass-warning-text" style="display: none; color: red;">The password has to be 8 characters or more/p>
+                        <p class="empty-reg-pass" style="display: none; color: red;">The password is empty</p>
+                        <label for="newPassRepeat"><b>Confirm Password</b></label>
+                        <input type="password" placeholder="Confirm Password" id="newPassRepeat" >
+                        <p class="empty-reg-confirmpass" style="display: none; color: red;">The confirm password is empty</p>
+                    </div>
+                        <p class="reg-warning-text" style="display: none; color: red;">The password and confirm password don't match</p>
+                    <p>
+                        By creating an account you agree to our
+                        <a href="#" style="color:dodgerblue"> Terms and Conditions</a>
+                    </p>
+                    <button type="submit" id="signUpBtn">Register</button>
+                </form> 
             </div>
         </div>
-        <div id="taglineOne">
-            <ul>Find it, upload it,</ul>
-            <ul>create your AudioFile.</ul>
+        <div class="aboutUs" style="display: none;">
+
         </div>
-        
-        <!-- <div>
-        <form id="documentUploadForm" enctype="multipart/form-data">
-            <label for="fileInput">Select a file:</label>
-            <input type="file" id="fileInput" name="file" accept=".pdf, .doc, .docx" required>
-            <button type="submit">Upload and Convert</button>
-        </form>
-        </div> -->
+        <div class="browse" style="display: none;">
 
-        <br></br>
-        <!-- <div id="audiobook"></div>
-        <button id="accountFolderCreation"> Create Account</button>
-        <button id="accountFolderDeletion"> Delete Account</button>
-        -->
-        <br></br>
-
-        <div id="loginContainer">
-            <form id="loginForm">
-                <button onclick="closeForm('loginContainer')" class="close">&times;</button>
-                <div class="userCredentials">
-                    <h1>Log In</h1>
-                    <hr>
-                    <label for="username"><b>Username</b></label>
-                    <input type="text" placeholder="Username" id="username" >
-                    <p class="empty-login-user" style="display: none; color: red;">The username is empty</p>
-
-                    <label for="pass"><b>Password</b></label>
-                    <input type="password" placeholder="Password" id="pass" >
-                    <p class="empty-login-pass" style="display: none; color: red;">The password is empty</p>
-
-                </div>
-                <p class="login-warning-text" style="display: none; color: red;">Username or password did not match</p>
-
-                <a id="forgot" href="#">Forgot Password?</a>
-
-                <button id="loginBtn" type="submit">Login</button>
-            </form>        
-        </div>
-        
-
-        <div id="registrationContainer">
-            <form id="registrationForm">
-                <button onclick="closeForm('registrationContainer')" class="close">&times;</button>
-                <div class="userCredentials">
-                    <h1>Create an account</h1>
-                    <hr>
-                    <label for="newUsername"><b>Username</b></label>
-                    <input type="text" placeholder="Username" id="newUsername" >
-                    <p class="empty-reg-user" style="display: none; color: red;">The username is empty</p>
-                    <label for="newPass"><b>Password</b></label>
-                    <input type="password" placeholder="Password" id="newPass" >
-                    <p class="reg-pass-warning-text" style="display: none; color: red;">The password has to be 8 characters or more/p>
-                    <p class="empty-reg-pass" style="display: none; color: red;">The password is empty</p>
-                    <label for="newPassRepeat"><b>Confirm Password</b></label>
-                    <input type="password" placeholder="Confirm Password" id="newPassRepeat" >
-                    <p class="empty-reg-confirmpass" style="display: none; color: red;">The confirm password is empty</p>
-                </div>
-                    <p class="reg-warning-text" style="display: none; color: red;">The password and confirm password don't match/p>
-                <p>
-                    By creating an account you agree to our
-                    <a href="#" style="color:dodgerblue"> Terms and Conditions</a>
-                </p>
-                <button type="submit" id="signUpBtn">Register</button>
-            </form> 
         </div>
     </main>
 

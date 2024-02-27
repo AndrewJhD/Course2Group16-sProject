@@ -115,6 +115,7 @@ async function userLogin () {
       document.getElementById('Hiddenbrowse').style.display = 'block';
       document.querySelector('.converterDiv').style.display = 'block';
       document.querySelector('.signOut').style.display = 'block';
+    }
   } catch (error) {
       console.error(error);
   }
@@ -380,4 +381,4 @@ document.getElementById('loginBtn').addEventListener('click', userLogin);
 document.addEventListener('keypress', function() {submitRForm(event)}, false);
 document.addEventListener('keypress', function() {submitLForm(event)}, false);
 //log out 
-document.getElementById('logout').addEventListener('click', userLogout);
+document.getElementById('signOut').addEventListener('click', userLogout);

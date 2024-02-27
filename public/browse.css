@@ -14,7 +14,7 @@
     margin: 10px auto;
     width: 60%;
     background-color: #37667e;
-    border-radius: 50px;
+    border-radius: 5em;
     padding: 0 40px;
     /* left: 50%; */
 }
@@ -27,11 +27,11 @@ h1 {
     display: inline;
     margin-right: 15%;
     color: white;
-    width: 50%;
+    width: 42%;
 }
 .bookAudio {
     position: absolute;
-    right: 18%;
+    right: 22%;
     width: 30%;
 }
 

@@ -302,6 +302,11 @@ function focusHome(){
     document.querySelector('.home').style.display = 'block';
     document.querySelector('.aboutUs').style.display = 'none';
     document.querySelector('.browse').style.display = 'none';
+    
+  // focus the current page's button
+    document.getElementById('homeFocusBtn').classList.add('special');
+    document.getElementById('aboutUsFocusBtn').classList.remove('special');
+    document.getElementById('browseFocusBtn').classList.remove('special');
 }
 
 function focusAbout(){
@@ -309,12 +314,20 @@ function focusAbout(){
   document.querySelector('.home').style.display = 'none';
   document.querySelector('.aboutUs').style.display = 'block';
   document.querySelector('.browse').style.display = 'none';
+
+  document.getElementById('homeFocusBtn').classList.remove('special');
+  document.getElementById('aboutUsFocusBtn').classList.add('special');
+  document.getElementById('browseFocusBtn').classList.remove('special');
 }
 function focusBrowse(){
   //console.log("focusing browse");
   document.querySelector('.home').style.display = 'none';
   document.querySelector('.aboutUs').style.display = 'none';
   document.querySelector('.browse').style.display = 'block';
+
+  document.getElementById('homeFocusBtn').classList.remove('special');
+  document.getElementById('aboutUsFocusBtn').classList.remove('special');
+  document.getElementById('browseFocusBtn').classList.add('special');
 }
 
 //form focus buttons

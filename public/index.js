@@ -55,11 +55,21 @@ async function userLogin () {
       },
       body: JSON.stringify({ username: uName, password: pass }),
     }); 
+    console.log(response);
     if (response.ok) {
+      currentUser = uName;
       console.log(`${currentUser} is now logged in!`);
+      document.getElementById('loginContainer').style.display = 'none'; //closes menu on valid login
+      document.getElementById('interactionButtons').style.display = 'none';
+      document.querySelector('.login-warning-text').style.display = 'none';
+    }
+    else{
+      console.error('Username or password did not match.');
+      document.querySelector('.login-warning-text').style.display = 'block';
     }
   } catch (error) {
-    console.error('Username or password did not match.');
+    console.log(error);
+    
   }
 }
 
@@ -109,11 +119,11 @@ async function submitDocument(event) {
         }
       }
       else{
-        audioContainer.innerHTML = 'Error a file with the same name as the submitted documents name already exists';
+        audioContainer.innerHTML = 'Uh oh! A file with the same name as the submitted documents name already exists';
       }
     }
     else{
-      audioContainer.innerHTML = 'Error the submitted document is empty';
+      audioContainer.innerHTML = 'Oops! The submitted document was found to be empty!';
     }
   } catch (error) {
     console.error('Error submitting document:', error);
@@ -201,7 +211,14 @@ function closeForm(container) {
 }
 
 document.getElementById('documentUploadForm').addEventListener('submit', submitDocument);
-document.getElementById('accountFolderDeletion').addEventListener("click", deleteAccountFolder);
-document.getElementById('registrationContainer').addEventListener('submit', createUserAccount);
-document.getElementById('loginContainer').addEventListener('click', userLogin);
+document.getElementById('signUpBtn').addEventListener('click', createUserAccount);
+document.getElementById('loginBtn').addEventListener('click', userLogin);
 // document.getElementById('accountFolderCreation').addEventListener("click", createAccountFolder);
+
+function onLoad(){
+
+
+
+}
+
+onLoad();

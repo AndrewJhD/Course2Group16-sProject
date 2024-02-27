@@ -24,12 +24,12 @@
             <ul>
                 <li><button type="button" class="tab special" id="homeFocusBtn">Home</button></li>
                 <li><button type="button" class="tab" id="aboutUsFocusBtn">About Us</button></li>
-                <!-- <li id="Hiddenbrowse" style="display: none;"><button type="button" class="browsebtn" id="browseFocusBtn">Browse</button></li> -->
-                <li id="Hiddenbrowse" ><button type="button" class="tab" id="browseFocusBtn">My Audios</button></li>
+                <li id="Hiddenbrowse" style="display: none;"><button type="button" class="tab" id="browseFocusBtn">My Audios</button></li>
                 <section id="interactionButtons">
                     <button type="button" class="logIn" id="logIn">Sign In</button>
                     <button type="button" class="register" id="register">Register</button>
                 </section>
+                <button type="button" class="signOut" id="signOut" style="display: none;">Sign Out</button>
             </ul>
         </nav>
     </header>
@@ -45,6 +45,7 @@
                         <input type="file" id="fileInput" name="file" accept=".pdf, .doc, .docx" required>
                         <button type="submit">Upload and Convert</button>
                         </form>
+                        <br><br>
                         <div id="audiobook"></div>
                     </div> 
                     <div class="preconvertDiv">

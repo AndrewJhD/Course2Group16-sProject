@@ -134,6 +134,7 @@ async function userLogin () {
       document.getElementById('Hiddenbrowse').style.display = 'block';
       document.querySelector('.converterDiv').style.display = 'block';
       document.querySelector('.signOut').style.display = 'block';
+      createAudioLibrary();
     }
   } catch (error) {
       console.error(error);
@@ -327,6 +328,58 @@ async function deleteSingleAudio(){ // most likely include a call to either get 
     console.error('Error deleting audio', error);
   }
 }
+async function getAudioNames(){ // get entries heres
+  const response = await fetch('/api/allentry', {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+  });
+  
+  const files = await response.json();
+  console.log("printing array")
+  console.log(files);
+  console.log("finished array")
+  return files;
+}
+
+function refreshBrowse(){
+  var browseDiv = document.getElementById('audioLibrary');
+  browseDiv.innerHTML = '';
+  createAudioLibrary();
+}
+async function createAudioLibrary() {
+  const data = await getAudioNames();
+  console.log("printing data:");
+  console.log(data[0].fileName);
+  for (let i in data){
+    //here is where you can get the filename and ownername
+      let title = data[i].fileName;
+      let audioSource = data[i].fileName;
+      
+      // Create div element
+      var div = document.createElement('div');
+      
+      var h2 = document.createElement('h2');
+      h2.textContent = title;
+      h2.classList.add('bookTitle')
+
+      // Create audio element
+      var audio = document.createElement('audio');
+      audio.controls = true;
+      var source = document.createElement('source');
+      source.src = audioSource;
+      audio.appendChild(source);
+      audio.classList.add('bookAudio')
+
+      // Append h2 and audio elements to the div
+      div.appendChild(h2);
+      div.appendChild(audio);
+      div.classList.add('bookItem');
+      document.getElementById('audioLibrary').appendChild(div);
+  }
+}
+
 
 function closeForm(container) {
   if (container === 'loginContainer') {

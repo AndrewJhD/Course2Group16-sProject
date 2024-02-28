@@ -210,6 +210,18 @@ async function submitDocument(event) {
         } catch (error) {
           console.error('Error saving audio:', error);
         }
+        //add entry stuff here
+        try{
+          const response = await fetch('/api/newentry', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({username: currentUser, fileName: String(fileName)})
+          });
+        }catch (error) {
+          console.error('Error saving audio:', error);
+        }
       }
       else{
         audioContainer.innerHTML = 'Uh oh! A file with the same name as the submitted documents name already exists';

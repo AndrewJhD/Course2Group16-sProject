@@ -1,9 +1,10 @@
 import { SECRET_ACCESS_TOKEN } from '../config/index.js';
-import User from '../models/user.js';
+import User from '../models/User.js';
 import jwt from 'jsonwebtoken';
 import Blacklist from '../models/Blacklist.js';
 
 export async function Verify(req, res, next) {
+    console.log('Verification in progress');
     const authHeader = req.headers['cookie'];
 
     if (!authHeader) return res.sendStatus(401);
@@ -14,14 +15,13 @@ export async function Verify(req, res, next) {
         return res
             .status(401)
             .json({ message: 'This session has expired. Please login' });
-
     jwt.verify(accessToken, SECRET_ACCESS_TOKEN, async (err, decoded) => {
         if (err) {
             return res
                 .status(401)
                 .json({ message: 'This session has expired. Please loign' });
         }
-
+        console.log('We are verifying you!');
         const { id } = decoded;
         const user = await User.findById(id);
         const { password, ...data } = user._doc;

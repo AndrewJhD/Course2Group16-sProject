@@ -22,7 +22,7 @@ app.get('/AudioFile.v1', (req, res) => {
   }
 });
 
-app.get('/user', Verify, (req, res) => {
+app.get('/verify', Verify, (req, res) => {
     res.status(200).json({
       status: 'success',
       message: 'Welcome to your Dashboard!',

@@ -1,4 +1,4 @@
-import User from '../models/user.js';
+import User from '../models/User.js';
 import bcrypt from 'bcryptjs';
 import Blacklist from '../models/Blacklist.js';
 
@@ -60,10 +60,8 @@ export async function Login(req, res) {
             })
         
         let options = {
-            maxAge: 60 * 60 * 1000, // The token will expire after 60 minutes
-            httpOnly: true,
-            secure: true,
-            sameSite: 'None',
+            maxAge: 3600000, // The token will expire after 60 minutes
+            secure: false,
         };
         const token = user.generateAccessJWT();
         res.cookie('SessionID', token, options);

@@ -41,9 +41,9 @@
                     <div class="converterDiv" style="display: none;">    
                         <h1>Create your first audio recording!</h1>
                         <form id="documentUploadForm" enctype="multipart/form-data">
-                        <label for="fileInput">Select a file:</label>
-                        <input type="file" id="fileInput" name="file" accept=".pdf, .doc, .docx" required>
-                        <button type="submit">Upload and Convert</button>
+                            <label for="fileInput">Select a file:</label>
+                            <input type="file" id="fileInput" name="file" accept=".pdf, .doc, .docx" required>
+                            <button type="submit">Upload and Convert</button>
                         </form>
                         <br><br>
                         <div id="audiobook"></div>
@@ -157,14 +157,14 @@
                     <hr>
                     <label for="username"><b>Username</b></label>
                     <input type="text" placeholder="Username" id="username" autocomplete="on">
-                    <p class="empty-login-user" style="display: none; color: red;">The username is empty</p>
+                    <p id="login-error-text" class="empty-login-user" style="display: none; color: red;">The username is empty</p>
 
                     <label for="pass"><b>Password</b></label>
                     <input type="password" placeholder="Password" id="pass" autocomplete="on">
-                    <p class="empty-login-pass" style="display: none; color: red;">The password is empty</p>
+                    <p id="login"  class="empty-login-pass" style="display: none; color: red;">The password is empty</p>
 
                 </div>
-                <p class="login-warning-text" style="display: none; color: red;">Username or password did not match</p>
+                <p id="login-error-text" class="login-warning-text" style="display: none; color: red;">Username or password did not match</p>
 
                 <a id="forgot" href="#">Forgot Password?</a>
 

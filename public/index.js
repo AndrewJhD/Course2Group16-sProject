@@ -5,7 +5,6 @@ fetch('/verify', {
   if (response.ok) {
     document.getElementById('loginContainer').style.display = 'none'; //closes menu on valid login
     document.getElementById('interactionButtons').style.display = 'none';
-    document.querySelector('.login-warning-text').style.display = 'none';
     document.querySelector('.preconvertDiv').style.display = 'none';
     document.getElementById('Hiddenbrowse').style.display = 'block';
     document.querySelector('.converterDiv').style.display = 'block';
@@ -52,7 +51,7 @@ async function createUserAccount() {
       createAccountFolder(uName);
       document.getElementById('registrationContainer').style.display = 'none';
       document.getElementById('loginContainer').style.display = 'block';
-      document.getElementById('registrationForm').reset();
+      resetRegisterForm();
 
     } else {
         // Handle server errors or user creation issues
@@ -71,11 +70,20 @@ function validateRegisterFormInput(uName, newPass, repPass){
   document.querySelector('.empty-reg-user').style.display = 'none';
   document.querySelector('.empty-reg-pass').style.display = 'none';
   document.querySelector('.empty-reg-confirmpass').style.display = 'none';
-  document.querySelector('.reg-pass-warning-text').style.display = 'none';
+  document.querySelector('.reg-pass-warning-short-text').style.display = 'none';
+  document.querySelector('.reg-pass-warning-long-text').style.display = 'none';
   if (newPass !== repPass) {
     //console.log("Passwords don't match");
     document.querySelector('.reg-warning-text').style.display = 'block';
-    return;
+    if(newPass.length < 8){
+      document.querySelector('.reg-pass-warning-short-text').style.display = 'block';
+      return false;
+    }
+    else if(newPass.length > 25){
+      document.querySelector('.reg-pass-warning-long-text').style.display = 'block';
+      return false;
+    }
+    return false;
   }
   else{
     if(!uName || !newPass || !repPass){
@@ -141,8 +149,11 @@ async function userLogin () {
       document.getElementById('Hiddenbrowse').style.display = 'block';
       document.querySelector('.converterDiv').style.display = 'block';
       document.querySelector('.signOut').style.display = 'block';
-      document.getElementById('loginForm').reset();
+      resetLoginForm();
       createAudioLibrary();
+    }
+    else{
+      document.querySelector('#login-warning-text').style.display = 'block';
     }
   } catch (error) {
       console.error(error);
@@ -181,13 +192,6 @@ async function userLogout() {
     });
     console.log(response);
     if (response.ok) {
-      console.log('You have been logged out.');
-      document.getElementById('interactionButtons').style.display = 'block';
-      document.querySelector('.login-warning-text').style.display = 'block';
-      document.getElementById('Hiddenbrowse').style.display = 'none';
-      document.querySelector('.converterDiv').style.display = 'none';
-      document.querySelector('.preconvertDiv').style.display = 'block';
-      document.getElementById('signOut').style.display = 'none';
       localStorage.clear();
       if(isBrowseDisplayed){
         focusHome();
@@ -196,6 +200,13 @@ async function userLogout() {
   } catch (error) {
     console.error('Something went wrong. Please try again.');
   }
+      document.getElementById('interactionButtons').style.display = 'block';
+      //document.querySelectorAll('#login-error-text').style.display = 'none';
+      //document.querySelectorAll('#register-error-text').style.display = 'none';
+      document.getElementById('Hiddenbrowse').style.display = 'none';
+      document.querySelector('.converterDiv').style.display = 'none';
+      document.querySelector('.preconvertDiv').style.display = 'block';
+      document.getElementById('signOut').style.display = 'none';
 }
 
 async function submitDocument(event) {
@@ -240,6 +251,8 @@ async function submitDocument(event) {
             body: JSON.stringify({ text: String(data), username: currentUser, fileName: String(fileName)})
           });
           displayAudio(fileName);
+          document.getElementById('documentUploadForm').reset();
+          console.log("doc finished converting");
         } catch (error) {
           console.error('Error saving audio:', error);
         }
@@ -259,6 +272,7 @@ async function submitDocument(event) {
       else{
         audioContainer.innerHTML = 'Uh oh! A file with the same name as the submitted documents name already exists';
       }
+ 
     }
     else{
       audioContainer.innerHTML = 'Oops! The submitted document was found to be empty!';
@@ -266,7 +280,7 @@ async function submitDocument(event) {
   } catch (error) {
     console.error('Error submitting document:', error);
   }
-  document.getElementById('documentUploadForm').reset();
+
 }
 
 function displayAudio(fileName) {
@@ -390,15 +404,14 @@ async function createAudioLibrary() {
 }
 
 
-function closeForm(container) {
-  if (container === 'loginContainer') {
+function closeLoginForm() {
     document.getElementById('loginContainer').style.display = 'none';
-    document.getElementById('loginForm').reset();
-    
-  } else if (container === 'registrationContainer') {
+    document.querySelector('#login-error-text').style.display = 'none';
+}
+
+function closeRegisterForm(){
+    document.querySelector('.register-error-text').style.display = 'none';
     document.getElementById('registrationContainer').style.display = 'none';
-    document.getElementById('registrationForm').reset();
-  }
 }
 
 function submitRForm(e) {
@@ -461,6 +474,17 @@ function isBrowseDisplayed() {
   return computedStyle.display === "block";
 }
 
+function resetLoginForm() {
+  document.getElementById('username').value = "";
+  document.getElementById('pass').value = "";
+}
+
+function resetRegisterForm() {
+  document.getElementById('newUsername').value = "";
+  document.getElementById('newPass').value = "";
+  document.getElementById('newPassRepeat').value = "";
+}
+
 //sign out button
 document.getElementById('signOut').addEventListener('click', userLogout);
 //form focus buttons
@@ -468,8 +492,14 @@ document.getElementById('homeFocusBtn').addEventListener('click', focusHome);
 document.getElementById('aboutUsFocusBtn').addEventListener('click', focusAbout);
 document.getElementById('browseFocusBtn').addEventListener('click', focusBrowse);
 //close form buttons
-document.getElementById('closeLogin').addEventListener('click', closeForm('loginContainer'));
-document.getElementById('closeRegister').addEventListener('click', closeForm('registrationContainer'));
+document.getElementById("closeLogin").addEventListener("click", function() {
+  resetLoginForm();
+  closeLoginForm();
+});
+document.getElementById("closeRegister").addEventListener("click", function() {
+  resetRegisterForm();
+  closeRegisterForm();
+});
 //open form buttons
 document.getElementById('logIn').addEventListener('click', loginOpen);
 document.getElementById('register').addEventListener('click', registrationOpen);

@@ -1,3 +1,21 @@
+// Assuming you are using fetch in your frontend
+fetch('/verify', {
+  method: 'GET',
+}).then(response => {
+  if (response.ok) {
+    document.getElementById('loginContainer').style.display = 'none'; //closes menu on valid login
+    document.getElementById('interactionButtons').style.display = 'none';
+    document.querySelector('.login-warning-text').style.display = 'none';
+    document.querySelector('.preconvertDiv').style.display = 'none';
+    document.getElementById('Hiddenbrowse').style.display = 'block';
+    document.querySelector('.converterDiv').style.display = 'block';
+    document.querySelector('.signOut').style.display = 'block';
+    currentUser = localStorage.getItem(username);
+  } else {
+      return;
+  }
+});
+
 async function createUserAccount() {
   event.preventDefault();
 
@@ -106,7 +124,8 @@ async function userLogin () {
     }); 
     console.log(response);
     if (response.ok) {
-      currentUser = uName;
+      localStorage.setItem(username, uName);
+      currentUser = localStorage.getItem(username);
       console.log(`${currentUser} is now logged in!`);
       document.getElementById('loginContainer').style.display = 'none'; //closes menu on valid login
       document.getElementById('interactionButtons').style.display = 'none';
@@ -134,6 +153,8 @@ async function userLogout() {
       document.getElementById('Hiddenbrowse').style.display = 'none';
       document.querySelector('.converterDiv').style.display = 'none';
       document.querySelector('.preconvertDiv').style.display = 'block';
+      document.getElementById('signOut').style.display = 'none';
+      localStorage.clear();
     }
   } catch (error) {
     console.error('Something went wrong. Please try again.');

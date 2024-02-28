@@ -8,6 +8,7 @@ const upload = multer();
 import gTTS from 'gtts';
 const rapidAPIKey = process.env.RAPIDAPI_KEY;
 const rapidAPIHost = process.env.RAPIDAPI_HOST;
+import Entry from '../models/entry.js';
 
 apiRouter.post('/rapidapi', upload.single('document'), async (request, res) => {
 try {

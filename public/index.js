@@ -11,6 +11,7 @@ fetch('/verify', {
     document.querySelector('.converterDiv').style.display = 'block';
     document.querySelector('.signOut').style.display = 'block';
     currentUser = localStorage.getItem(username);
+    createAudioLibrary();
   } else {
       return;
   }
@@ -51,6 +52,8 @@ async function createUserAccount() {
       createAccountFolder(uName);
       document.getElementById('registrationContainer').style.display = 'none';
       document.getElementById('loginContainer').style.display = 'block';
+      document.getElementById('registrationForm').reset();
+
     } else {
         // Handle server errors or user creation issues
         console.error('Error creating user: Server responded with status', response.status);
@@ -97,7 +100,11 @@ function validateRegisterFormInput(uName, newPass, repPass){
       }
     }
     else if(newPass.length < 8){
-      document.querySelector('.reg-pass-warning-text').style.display = 'block';
+      document.querySelector('.reg-pass-warning-short-text').style.display = 'block';
+      return false;
+    }
+    else if(newPass.length > 25){
+      document.querySelector('.reg-pass-warning-long-text').style.display = 'block';
       return false;
     }
   }
@@ -134,31 +141,11 @@ async function userLogin () {
       document.getElementById('Hiddenbrowse').style.display = 'block';
       document.querySelector('.converterDiv').style.display = 'block';
       document.querySelector('.signOut').style.display = 'block';
+      document.getElementById('loginForm').reset();
       createAudioLibrary();
     }
   } catch (error) {
       console.error(error);
-  }
-}
-
-async function userLogout() {
-  try {
-    const response = await fetch('/auth/logout', {
-      method: 'GET',
-    });
-    console.log(response);
-    if (response.ok) {
-      console.log('You have been logged out.');
-      document.getElementById('interactionButtons').style.display = 'block';
-      document.querySelector('.login-warning-text').style.display = 'block';
-      document.getElementById('Hiddenbrowse').style.display = 'none';
-      document.querySelector('.converterDiv').style.display = 'none';
-      document.querySelector('.preconvertDiv').style.display = 'block';
-      document.getElementById('signOut').style.display = 'none';
-      localStorage.clear();
-    }
-  } catch (error) {
-    console.error('Something went wrong. Please try again.');
   }
 }
 
@@ -185,6 +172,30 @@ function validateLoginFormInput(uName, pass){
     }
   }
   return true;
+}
+
+async function userLogout() {
+  try {
+    const response = await fetch('/auth/logout', {
+      method: 'GET',
+    });
+    console.log(response);
+    if (response.ok) {
+      console.log('You have been logged out.');
+      document.getElementById('interactionButtons').style.display = 'block';
+      document.querySelector('.login-warning-text').style.display = 'block';
+      document.getElementById('Hiddenbrowse').style.display = 'none';
+      document.querySelector('.converterDiv').style.display = 'none';
+      document.querySelector('.preconvertDiv').style.display = 'block';
+      document.getElementById('signOut').style.display = 'none';
+      localStorage.clear();
+      if(isBrowseDisplayed){
+        focusHome();
+      }
+    }
+  } catch (error) {
+    console.error('Something went wrong. Please try again.');
+  }
 }
 
 async function submitDocument(event) {
@@ -269,6 +280,8 @@ function displayAudio(fileName) {
   audioContainer.innerHTML = '';
   
   audioContainer.appendChild(audio);
+
+  AddEntry(fileName);
 }
 
 function grabNameUntilPeriod(input) {
@@ -337,46 +350,42 @@ async function getAudioNames(){ // get entries heres
   });
   
   const files = await response.json();
-  console.log("printing array")
-  console.log(files);
-  console.log("finished array")
+  //console.log("printing array")
+  //console.log(files);
+  //console.log("finished array")
   return files;
 }
 
-function refreshBrowse(){
-  var browseDiv = document.getElementById('audioLibrary');
-  browseDiv.innerHTML = '';
-  createAudioLibrary();
+function AddEntry(fileName){
+  var div = document.createElement('div');
+  // Create title
+  var h2 = document.createElement('h2');
+  h2.textContent = fileName;
+  h2.classList.add('bookTitle');
+
+  // Create audio element
+  var audio = document.createElement('audio');
+  audio.controls = true;
+  var source = document.createElement('source');
+  source.src = `./uploads/${currentUser}/audio/${fileName}.mp3`;
+  audio.appendChild(source);
+  audio.classList.add('bookAudio');
+
+  // Append h2 and audio elements to the div
+  div.appendChild(h2);
+  div.appendChild(audio);
+  div.classList.add('bookItem');
+  document.getElementById('audioLibrary').appendChild(div);
 }
+
 async function createAudioLibrary() {
   const data = await getAudioNames();
-  console.log("printing data:");
-  console.log(data[0].fileName);
+  //console.log("printing data:");
+  //console.log(data[0].fileName);
   for (let i in data){
     //here is where you can get the filename and ownername
-      let title = data[i].fileName;
-      let audioSource = data[i].fileName;
-      
-      // Create div element
-      var div = document.createElement('div');
-      
-      var h2 = document.createElement('h2');
-      h2.textContent = title;
-      h2.classList.add('bookTitle')
-
-      // Create audio element
-      var audio = document.createElement('audio');
-      audio.controls = true;
-      var source = document.createElement('source');
-      source.src = audioSource;
-      audio.appendChild(source);
-      audio.classList.add('bookAudio')
-
-      // Append h2 and audio elements to the div
-      div.appendChild(h2);
-      div.appendChild(audio);
-      div.classList.add('bookItem');
-      document.getElementById('audioLibrary').appendChild(div);
+      let fileName = data[i].fileName;
+      AddEntry(fileName);      
   }
 }
 
@@ -384,8 +393,11 @@ async function createAudioLibrary() {
 function closeForm(container) {
   if (container === 'loginContainer') {
     document.getElementById('loginContainer').style.display = 'none';
+    document.getElementById('loginForm').reset();
+    
   } else if (container === 'registrationContainer') {
     document.getElementById('registrationContainer').style.display = 'none';
+    document.getElementById('registrationForm').reset();
   }
 }
 
@@ -443,12 +455,14 @@ function focusBrowse(){
   document.getElementById('browseFocusBtn').classList.add('special');
 }
 
-function callSignOut(){
-
+function isBrowseDisplayed() {
+  var browseElement = document.querySelector('.browse');
+  var computedStyle = window.getComputedStyle(browseElement);
+  return computedStyle.display === "block";
 }
 
 //sign out button
-document.getElementById('signOut').addEventListener('click', callSignOut);
+document.getElementById('signOut').addEventListener('click', userLogout);
 //form focus buttons
 document.getElementById('homeFocusBtn').addEventListener('click', focusHome);
 document.getElementById('aboutUsFocusBtn').addEventListener('click', focusAbout);
@@ -466,5 +480,3 @@ document.getElementById('loginBtn').addEventListener('click', userLogin);
 //submit forms using return 
 document.addEventListener('keypress', function() {submitRForm(event)}, false);
 document.addEventListener('keypress', function() {submitLForm(event)}, false);
-//log out 
-document.getElementById('signOut').addEventListener('click', userLogout);

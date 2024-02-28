@@ -81,6 +81,16 @@ apiRouter.post('/newentry', async (req, res) => {
         res.status(500).json({ error: 'Internal server error' });
     }
 });
+apiRouter.get("/allentry", async (req, res) => {
+    try {
+        //const entrys = Entry.collection("Entry");
+        const allEntries = await Entry.find({});
+        res.json(allEntries);
+    } catch (err) {
+        console.error(err);
+        res.sendStatus(500);
+    }
+});
 // //causes the program to wait until the generation is completed entirely
 function generateAudio(text, username, fileName) {
 return new Promise((resolve, reject) => {
@@ -97,6 +107,7 @@ return new Promise((resolve, reject) => {
     });
 });
 }
+
 
 apiRouter.post('/saveAudio', async (req, res) => {
     console.log("Entering Audio Maker");

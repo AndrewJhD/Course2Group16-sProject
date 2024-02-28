@@ -1,3 +1,4 @@
+
 let dataEx = { // move this into getAudio once entries work is finished
     0: {
         title: "Percy Jackson and the Lightning Theif",
@@ -50,8 +51,14 @@ let dataEx = { // move this into getAudio once entries work is finished
 };
 
 
-function getAudioNames(){ // get entries here
-
+function getAudioNames(){ // get entries heres
+    const response =  fetch('/api/getAudio', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+    });
+    const files = response.text()
 }
 
 function refreshBrowse(){
@@ -70,8 +77,7 @@ function createAudioLibrary() {
         
         // Create div element
         var div = document.createElement('div');
-
-        // Create h2 book title element
+        
         var h2 = document.createElement('h2');
         h2.textContent = title;
         h2.classList.add('bookTitle')

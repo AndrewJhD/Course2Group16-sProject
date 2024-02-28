@@ -17,6 +17,22 @@
   }
 }
 
+/* .register {
+  position: relative;
+  left: 20%;
+  font-family: "Quicksand", sans-serif;
+  font-size: 18px;
+  margin-left: 10px;
+  border-radius: 30px;
+  border: 1px solid white;
+  background: linear-gradient(to left, white 50%, #218B8280 50%)right;
+  transition: 750ms ease-in-out;
+  background-size: 200%;
+  width: 28mm; 
+  height: 12mm;
+
+} */
+
 .explain, #explained {
     animation: ease-out 1500ms 0s 1 fromTop;
     padding-top: 8%; 

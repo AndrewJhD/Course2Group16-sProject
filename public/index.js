@@ -9,6 +9,7 @@ fetch('/verify', {
     document.getElementById('Hiddenbrowse').style.display = 'block';
     document.querySelector('.converterDiv').style.display = 'block';
     document.querySelector('.signOut').style.display = 'block';
+    document.getElementById('registerBento').style.display = 'none';
     currentUser = localStorage.getItem(username);
     createAudioLibrary();
   } else {
@@ -149,6 +150,7 @@ async function userLogin () {
       document.getElementById('Hiddenbrowse').style.display = 'block';
       document.querySelector('.converterDiv').style.display = 'block';
       document.querySelector('.signOut').style.display = 'block';
+      document.getElementById('registerBento').style.display = 'none';
       resetLoginForm();
       createAudioLibrary();
     }
@@ -207,6 +209,7 @@ async function userLogout() {
       document.querySelector('.converterDiv').style.display = 'none';
       document.querySelector('.preconvertDiv').style.display = 'block';
       document.getElementById('signOut').style.display = 'none';
+      document.getElementById('registerBento').style.display = 'block';
 }
 
 async function submitDocument(event) {
@@ -453,6 +456,7 @@ function focusAbout(){
   document.querySelector('.aboutUs').style.display = 'block';
   document.querySelector('.browse').style.display = 'none';
 
+  document.getElementById('register').style.display = 'block';
   document.getElementById('homeFocusBtn').classList.remove('special');
   document.getElementById('aboutUsFocusBtn').classList.add('special');
   document.getElementById('browseFocusBtn').classList.remove('special');

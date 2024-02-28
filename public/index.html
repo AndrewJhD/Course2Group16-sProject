@@ -19,7 +19,7 @@
 
 <body>
     <header>
-        
+        <h1 id="logo">AudioFile</h1>
         <nav>
             <ul>
                 <li><button type="button" class="tab special" id="homeFocusBtn">Home</button></li>
@@ -27,7 +27,7 @@
                 <li id="Hiddenbrowse" style="display: none;"><button type="button" class="tab" id="browseFocusBtn">My Audios</button></li>
                 <section id="interactionButtons">
                     <button type="button" class="logIn" id="logIn">Sign In</button>
-                    <button type="button" class="register" id="register">Register</button>
+                    <button type="button" class="register" id="register" style="display: none">Register</button>
                 </section>
                 <button type="button" class="signOut" id="signOut" style="display: none;">Sign Out</button>
             </ul>
@@ -49,38 +49,30 @@
                         <div id="audiobook"></div>
                     </div> 
                     <div class="preconvertDiv">
-                        <p> Login to get started!</p>
+                        <h1 style="font-size: 50px;"> Login to get started!</h1>
                     </div>
                 </div>
                 <div class="text" id="bento-two">
-                    <p style="font-size: 20px;">
+                    <p style="font-size: 25px;">
                         Easier than learning how to read. Just choose the file that appeals to your senses make it AudioFile.
                     </p>
                 </div>
                 <div class="text" id="bento-three">
-                    <p style="font-size: 20px;">
-                        Who we are and what inspires us. Get to know our story (link to AboutUs placeholder)
+                    <p style="font-size: 30px;">
+                        Who we are and what inspires us. Get to know our story. 
                     </p>
                 </div>
                 <div class="text" id="bento-four">
                     <p style="font-size: 30px;">
-                        Sign Up now to create your first transcription (This will hold the transcription button once the user is signed in)
+                        Register now and create your first AudioFile!
                     </p>
+                    <button type="button" class="registerBento" id="registerBento">Register</button>
                 </div>
             </div>
             <div id="taglineOne">
                 <ul>Find it, Upload it,</ul>
                 <ul>Create your AudioFile.</ul>
             </div>
-            
-            <!-- <div>
-            <form id="documentUploadForm" enctype="multipart/form-data">
-                <label for="fileInput">Select a file:</label>
-                <input type="file" id="fileInput" name="file" accept=".pdf, .doc, .docx" required>
-                <button type="submit">Upload and Convert</button>
-            </form>
-            </div> -->
-
             <br></br>
             <!-- <div id="audiobook"></div>
             <button id="accountFolderCreation"> Create Account</button>
@@ -203,6 +195,7 @@
 
     <script src="./index.js"></script>
     <!-- <script src="./browse.js"></script> -->
+
 </body>
 <footer>Copyright &copy; AudioFile 2024</footer>
 

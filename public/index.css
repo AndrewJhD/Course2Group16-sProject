@@ -45,8 +45,8 @@ html {
   grid-row: 1 / 3;
   background-color: #B6D8F280;
   text-align: center;
-
 }
+
 #bento-two {
   grid-column: 1;
   grid-row: 3 / 5;

@@ -1,13 +1,18 @@
-const mongoose = require("mongoose");
+import mongoose from 'mongoose';
+const entrySchema = new mongoose.Schema( 
+    {
+        fileName: {
+            type: String,
+            required: 'entryname Required',
+        },
+        username: {
+            type: String, 
+            required: 'username required',
+        },
+    },
+    { timestamps: true }
+);
 
-const entrySchema = new mongoose.Schema({
-    name: {type: String, required: true},
-    time: {type: Number, required: true},
-    date_made:{type: Date, required: true}
-});
-
-const Entry = mongoose.model("Entry", entrySchema);
-
-module.exports = Entry;
+export default mongoose.model('Entry', entrySchema);
 
 

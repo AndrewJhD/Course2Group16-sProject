@@ -11,7 +11,8 @@ const rapidAPIHost = process.env.RAPIDAPI_HOST;
 const audioPath = process.env.AUDIO_PATH;
 import express from 'express';
 import text from 'body-parser';
-import User from '../models/user.js';
+import Entry from '../models/entry.js';
+
 const userRouter = express.Router();
 
 apiRouter.post('/rapidapi', upload.single('document'), async (request, res) => {
@@ -65,7 +66,21 @@ try {
 }
 
 });
-  
+apiRouter.post('/newentry', async (req, res) => {
+    try{
+        const { username } = req.body;
+        const fileName = req.body.fileName;
+        const newEntry = new Entry({ 
+            username: username, 
+            fileName: fileName 
+        });        
+        await newEntry.save();
+        res.status(201);
+    }catch (error) {
+        console.error('Error creating entry:', error);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+});
 // //causes the program to wait until the generation is completed entirely
 function generateAudio(text, username, fileName) {
 return new Promise((resolve, reject) => {

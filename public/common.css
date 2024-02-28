@@ -80,6 +80,26 @@ nav li {
     color: white;
 }
 
+.signOut {
+    align-items: center;
+    font-family: "Quicksand", sans-serif;
+    font-size: 28px;
+    margin-left: 10px;
+    border-radius: 30px;
+    border: 1px solid white;
+    background: linear-gradient(to left, white 50%, #37667E80 50%)right;
+    transition: 750ms ease-in-out;
+    background-size: 210%;
+    width: 35mm; 
+    height: 19mm;
+}
+
+.signOut:hover {
+    cursor: pointer;
+    background-position: left;
+    color: white; 
+}
+
 .menu:link {
     color: black;
     transition: 800ms;

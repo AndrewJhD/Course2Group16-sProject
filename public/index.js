@@ -448,6 +448,7 @@ function focusHome(){
     document.getElementById('homeFocusBtn').classList.add('special');
     document.getElementById('aboutUsFocusBtn').classList.remove('special');
     document.getElementById('browseFocusBtn').classList.remove('special');
+    document.getElementById('register').style.display = 'none';
 }
 
 function focusAbout(){

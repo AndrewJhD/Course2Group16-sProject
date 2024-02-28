@@ -281,7 +281,7 @@ function displayAudio(fileName) {
   
   audioContainer.appendChild(audio);
 
-  refreshBrowse();
+  AddEntry(fileName);
 }
 
 function grabNameUntilPeriod(input) {
@@ -350,9 +350,9 @@ async function getAudioNames(){ // get entries heres
   });
   
   const files = await response.json();
-  console.log("printing array")
-  console.log(files);
-  console.log("finished array")
+  //console.log("printing array")
+  //console.log(files);
+  //console.log("finished array")
   return files;
 }
 
@@ -361,7 +361,7 @@ function AddEntry(fileName){
   // Create title
   var h2 = document.createElement('h2');
   h2.textContent = fileName;
-  h2.classList.add('bookTitle')
+  h2.classList.add('bookTitle');
 
   // Create audio element
   var audio = document.createElement('audio');
@@ -369,7 +369,7 @@ function AddEntry(fileName){
   var source = document.createElement('source');
   source.src = `./uploads/${currentUser}/audio/${fileName}.mp3`;
   audio.appendChild(source);
-  audio.classList.add('bookAudio')
+  audio.classList.add('bookAudio');
 
   // Append h2 and audio elements to the div
   div.appendChild(h2);
@@ -380,8 +380,8 @@ function AddEntry(fileName){
 
 async function createAudioLibrary() {
   const data = await getAudioNames();
-  console.log("printing data:");
-  console.log(data[0].fileName);
+  //console.log("printing data:");
+  //console.log(data[0].fileName);
   for (let i in data){
     //here is where you can get the filename and ownername
       let fileName = data[i].fileName;

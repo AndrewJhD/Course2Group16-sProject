@@ -507,6 +507,7 @@ document.getElementById("closeRegister").addEventListener("click", function() {
 //open form buttons
 document.getElementById('logIn').addEventListener('click', loginOpen);
 document.getElementById('register').addEventListener('click', registrationOpen);
+document.getElementById('registerBento').addEventListener('click', registrationOpen);
 //form submit buttons
 document.getElementById('documentUploadForm').addEventListener('submit', submitDocument);
 document.getElementById('signUpBtn').addEventListener('click', createUserAccount);

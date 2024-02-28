@@ -2,6 +2,7 @@ import express from 'express';
 import { Register } from '../controllers/auth.js';
 import { Login } from '../controllers/auth.js';
 import { Logout } from '../controllers/auth.js';
+import { Verify } from '../middleware/verify.js';
 import Validate from '../middleware/validate.js';
 import { check } from 'express-validator';
 
@@ -32,6 +33,8 @@ router.post(
     Validate,
     Login
 );
+
+router.get('/user', Verify);
 
 router.get('/logout', Logout);
 
